@@ -1118,7 +1118,7 @@ public final class Menu extends javax.swing.JFrame {
                                 .addGap(36, 36, 36)
                                 .addComponent(jLabel25)
                                 .addGap(47, 47, 47)
-                                .addComponent(txtPrecioPro, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtPrecioPro, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtIdproducto, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
@@ -1327,12 +1327,16 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
              Statement stmt2 = con.createStatement();
              ResultSet rs = stmt.executeQuery(sqlDuplicate);
              ResultSet rs2 = stmt2.executeQuery(sqlDuplicate2);
+             int precio = Integer.parseInt(txtPrecioPro.getText());
                if(rs.next()==true){
                    JOptionPane.showMessageDialog(null, "Codigo ya en uso.");
                }else{
                if(rs2.next()==true){
                    JOptionPane.showMessageDialog(null, "Nombre ya en uso.");
                }else{
+         if(precio == 0){
+             JOptionPane.showMessageDialog(null, "El Precio debe ser mayor a 0.");
+         }else{
                
         if (!"".equals(txtCodigoProducto.getText()) || !"".equals(txtNombreProducto.getText()) || !"".equals(cbxProveedorPro.getSelectedItem()) || !"".equals(txtCantPro.getText()) || !"".equals(txtPrecioPro.getText())) {
             pro.setCodigo(txtCodigoProducto.getText());
@@ -1358,13 +1362,14 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
         } else {
             JOptionPane.showMessageDialog(null, "Los campos estan vacios");
         }
-               }
+               }}
                }
                    } catch (ClassNotFoundException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
+    
     }//GEN-LAST:event_bt_GuardarActionPerformed
 
     private void txtIdCVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdCVActionPerformed

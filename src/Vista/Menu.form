@@ -1081,8 +1081,8 @@
                                       <Component id="cbxProveedorPro" min="-2" pref="143" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                                       <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="47" pref="47" max="-2" attributes="0"/>
-                                      <Component id="txtPrecioPro" min="-2" pref="109" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                                      <Component id="txtPrecioPro" min="-2" pref="97" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="txtIdproducto" min="-2" pref="89" max="-2" attributes="0"/>
                               </Group>
