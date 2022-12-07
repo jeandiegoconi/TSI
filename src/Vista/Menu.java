@@ -1319,15 +1319,21 @@ public final class Menu extends javax.swing.JFrame {
 
     private void bt_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_GuardarActionPerformed
 String sqlDuplicate = "select codigo from productos where codigo = "+txtCodigoProducto.getText()+" ";
-
+String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNombreProducto.getText()+"' ";
                    try {
             Class.forName("com.mysql.jdbc.Driver");
              con = cn.getConnection();
              Statement stmt = con.createStatement();
+             Statement stmt2 = con.createStatement();
              ResultSet rs = stmt.executeQuery(sqlDuplicate);
+             ResultSet rs2 = stmt2.executeQuery(sqlDuplicate2);
                if(rs.next()==true){
                    JOptionPane.showMessageDialog(null, "Codigo ya en uso.");
                }else{
+               if(rs2.next()==true){
+                   JOptionPane.showMessageDialog(null, "Nombre ya en uso.");
+               }else{
+               
         if (!"".equals(txtCodigoProducto.getText()) || !"".equals(txtNombreProducto.getText()) || !"".equals(cbxProveedorPro.getSelectedItem()) || !"".equals(txtCantPro.getText()) || !"".equals(txtPrecioPro.getText())) {
             pro.setCodigo(txtCodigoProducto.getText());
             pro.setNombre(txtNombreProducto.getText());
@@ -1353,7 +1359,10 @@ String sqlDuplicate = "select codigo from productos where codigo = "+txtCodigoPr
             JOptionPane.showMessageDialog(null, "Los campos estan vacios");
         }
                }
-                   } catch (ClassNotFoundException | SQLException ex) {
+               }
+                   } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_bt_GuardarActionPerformed
