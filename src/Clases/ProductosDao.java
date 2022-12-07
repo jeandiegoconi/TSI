@@ -170,6 +170,29 @@ InputStream empty = new InputStream() {
         }
         return producto;
     }
+    
+    
+        public Productos BuscarProNombre(String nom){
+        Productos producto = new Productos();
+        String sql = "SELECT * FROM productos WHERE nombre = ?";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, nom);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                producto.setId(rs.getInt("id"));
+                producto.setCodigo(rs.getString("codigo"));
+                producto.setNombre(rs.getString("nombre"));
+                producto.setPrecio(rs.getInt("precio"));
+                producto.setStock(rs.getInt("stock"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return producto;
+    }
+        
     public Productos BuscarId(int id){
         Productos pro = new Productos();
         String sql = "SELECT pr.id AS id_proveedor, pr.nombre AS nombre_proveedor, p.* FROM proveedor pr INNER JOIN productos p ON p.proveedor = pr.id WHERE p.id = ?";
