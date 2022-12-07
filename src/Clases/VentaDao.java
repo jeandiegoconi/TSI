@@ -77,6 +77,30 @@ public class VentaDao {
         return r;
     }
     
+    public int RegistrarVentaRapida(Venta v){
+        String sql = "INSERT INTO ventas (cliente, vendedor, total, fecha) VALUES (?,?,?,?)";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, 0);
+            ps.setString(2, v.getVendedor());
+            ps.setInt(3, v.getTotal());
+            ps.setString(4, v.getFecha());
+            ps.execute();
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }finally{
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            }
+        }
+        return r;
+    }
+    
+    
+    
     public int RegistrarDetalle(Detalle Dv){
        String sql = "INSERT INTO detalle (id_pro, cantidad, precio, id_venta) VALUES (?,?,?,?)";
         try {

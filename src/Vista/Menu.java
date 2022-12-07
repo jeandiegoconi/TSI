@@ -52,6 +52,7 @@ public final class Menu extends javax.swing.JFrame {
     PreparedStatement ps;
     ResultSet rs;
 
+
     
     
     
@@ -87,7 +88,7 @@ public final class Menu extends javax.swing.JFrame {
         List<Cliente> ListarCl = client.ListarCliente();
         modelo = (DefaultTableModel) TablaCliente.getModel();
         Object[] ob = new Object[6];
-        for (int i = 0; i < ListarCl.size(); i++) {
+        for (int i = 1; i < ListarCl.size(); i++) {
             ob[0] = ListarCl.get(i).getId();
             ob[1] = ListarCl.get(i).getRut();
             ob[2] = ListarCl.get(i).getNombre();
@@ -1601,10 +1602,15 @@ String sqlDuplicate = "select codigo from productos where codigo = "+txtCodigoPr
                 LimpiarTablaVenta();
                 LimpiarClienteventa();
             } else {
-                JOptionPane.showMessageDialog(null, "Debes buscar un cliente");
+                txtNombreClienteventa.setText("Venta Rapida");
+                RegistrarVentaRapida();
+                RegistrarDetalle();
+                ActualizarStock();
+                LimpiarTablaVenta();
+                LimpiarClienteventa();
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Noy productos en la venta");
+            JOptionPane.showMessageDialog(null, "No hay productos en la venta");
         }        // TODO add your handling code here:
     }//GEN-LAST:event_btnGenerarVentaActionPerformed
 
@@ -1954,6 +1960,15 @@ private void LimpiarCliente() {
         v.setFecha(fechaActual);
         Vdao.RegistrarVenta(v);
     }
+    private void RegistrarVentaRapida() {
+        String vendedor = LabelVendedor.getText();
+        int monto = Totalpagar;
+        v.setCliente(0);
+        v.setVendedor(vendedor);
+        v.setTotal(monto);
+        v.setFecha(fechaActual);
+        Vdao.RegistrarVenta(v);
+    }
 
     private void RegistrarDetalle() {
         int id = Vdao.IdVenta();
@@ -1968,8 +1983,7 @@ private void LimpiarCliente() {
             Vdao.RegistrarDetalle(Dv);
 
         }
-        int cliente = Integer.parseInt(txtIdCV.getText());
-        Vdao.pdfV(id, cliente, Totalpagar, LabelVendedor.getText());
+        Vdao.pdfV(id, 0, Totalpagar, LabelVendedor.getText());
     }
 
     private void ActualizarStock() {
