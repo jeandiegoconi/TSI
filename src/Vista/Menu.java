@@ -158,6 +158,7 @@ public final class Menu extends javax.swing.JFrame {
         Midate.setDate(fechaVenta);
         txtIdCliente.setVisible(false);
         txtIdPro.setVisible(false);
+        LabelVendedor.setVisible(false);
         txtIdproducto.setVisible(false);
         txtIdProveedor.setVisible(false);
         txtIdCV.setVisible(false);
@@ -337,7 +338,7 @@ public final class Menu extends javax.swing.JFrame {
         jScrollPane6 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel28 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtCodProveedor = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Inventario");
@@ -358,10 +359,21 @@ public final class Menu extends javax.swing.JFrame {
                 TxtRutClienteActionPerformed(evt);
             }
         });
+        TxtRutCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtRutClienteKeyTyped(evt);
+            }
+        });
 
         jLabel11.setText("Nombre :");
 
         jLabel12.setText("Telefono :");
+
+        TxtTelefonoCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtTelefonoClienteKeyTyped(evt);
+            }
+        });
 
         jLabel13.setText("Direccion :");
 
@@ -527,10 +539,21 @@ public final class Menu extends javax.swing.JFrame {
                 txtRutProveedorActionPerformed(evt);
             }
         });
+        txtRutProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRutProveedorKeyTyped(evt);
+            }
+        });
 
         jLabel16.setText("Nombre:");
 
         jLabel17.setText("Telefono:");
+
+        txtTelefonoProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoProveedorKeyTyped(evt);
+            }
+        });
 
         jLabel18.setText("Direccion:");
 
@@ -925,18 +948,18 @@ public final class Menu extends javax.swing.JFrame {
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtNombreVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtCodigoVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCodigoVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtIdPro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                        .addComponent(Midate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Midate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
@@ -1005,6 +1028,12 @@ public final class Menu extends javax.swing.JFrame {
         });
 
         lblCodProd.setText("Codigo Producto");
+
+        txtCodigoProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodigoProductoKeyTyped(evt);
+            }
+        });
 
         TablaProducto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1085,6 +1114,12 @@ public final class Menu extends javax.swing.JFrame {
         });
 
         jLabel25.setText("Precio:");
+
+        txtCantPro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantProKeyTyped(evt);
+            }
+        });
 
         jLabel24.setText("Cantidad:");
 
@@ -1220,6 +1255,12 @@ public final class Menu extends javax.swing.JFrame {
 
         jLabel28.setText(" Cod Proveedor:");
 
+        txtCodProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodProveedorKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -1244,7 +1285,7 @@ public final class Menu extends javax.swing.JFrame {
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtCodProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(79, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -1257,7 +1298,7 @@ public final class Menu extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCodProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel27)
@@ -1724,11 +1765,11 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
     }//GEN-LAST:event_txtCodigoVentaKeyPressed
 
     private void txtCodigoVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoVentaKeyTyped
-event.numberKeyPress(evt);        // TODO add your handling code here:
+event.numberDecimalKeyPress(evt, txtCodigoVenta);        // TODO add your handling code here:
     }//GEN-LAST:event_txtCodigoVentaKeyTyped
 
     private void txtCantidadVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadVentaKeyTyped
-        event.numberKeyPress(evt);        // TODO add your handling code here:
+event.numberDecimalKeyPress(evt, txtCantidadVenta);         // TODO add your handling code here:
     }//GEN-LAST:event_txtCantidadVentaKeyTyped
 
     private void bt_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_EliminarActionPerformed
@@ -1892,6 +1933,34 @@ event.numberKeyPress(evt);        // TODO add your handling code here:
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodigoVentaMostrarKeyTyped
 
+    private void txtCodigoProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoProductoKeyTyped
+event.numberDecimalKeyPress(evt, txtCodigoProducto);        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodigoProductoKeyTyped
+
+    private void txtCantProKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantProKeyTyped
+event.numberDecimalKeyPress(evt, txtCantPro);        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCantProKeyTyped
+
+    private void TxtRutClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtRutClienteKeyTyped
+event.numberDecimalKeyPress(evt, TxtRutCliente);           // TODO add your handling code here:
+    }//GEN-LAST:event_TxtRutClienteKeyTyped
+
+    private void TxtTelefonoClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtTelefonoClienteKeyTyped
+event.numberDecimalKeyPress(evt, TxtTelefonoCliente);           // TODO add your handling code here:
+    }//GEN-LAST:event_TxtTelefonoClienteKeyTyped
+
+    private void txtRutProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRutProveedorKeyTyped
+event.numberDecimalKeyPress(evt, txtRutProveedor);           // TODO add your handling code here:
+    }//GEN-LAST:event_txtRutProveedorKeyTyped
+
+    private void txtTelefonoProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoProveedorKeyTyped
+event.numberDecimalKeyPress(evt, txtTelefonoProveedor);           // TODO add your handling code here:
+    }//GEN-LAST:event_txtTelefonoProveedorKeyTyped
+
+    private void txtCodProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodProveedorKeyTyped
+event.numberDecimalKeyPress(evt, txtCodProveedor);          // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodProveedorKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -1994,12 +2063,12 @@ event.numberKeyPress(evt);        // TODO add your handling code here:
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lblCodProd;
     private javax.swing.JLabel lblFoto;
     private javax.swing.JLabel lblFotoVenta;
     private javax.swing.JTextField txtCantPro;
     private javax.swing.JTextField txtCantidadVenta;
+    private javax.swing.JTextField txtCodProveedor;
     private javax.swing.JTextField txtCodigoProducto;
     private javax.swing.JTextField txtCodigoVenta;
     private javax.swing.JTextField txtCodigoVentaMostrar;
