@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.filechooser.FileSystemView;
+import Vista.*;
 
 public class VentaDao {
     Connection con;
@@ -178,7 +179,7 @@ public class VentaDao {
         }
         return cl;
     }
-    public void pdfV(int idventa, int Cliente, int total, String usuario) {
+    public void pdfV(int idventa, int Cliente, int total,int pago, int vuelto, String usuario) {
         try {
             Date date = new Date();
             FileOutputStream archivo;
@@ -302,7 +303,9 @@ public class VentaDao {
             doc.add(tabla);
             Paragraph info = new Paragraph();
             info.add(Chunk.NEWLINE);
-            info.add("Total : $" + total);
+            info.add("Pagado : $"+ pago +"\n");
+            info.add("Total : $" + total+"\n");
+            info.add("Vuelto : $"+ vuelto );
             info.setAlignment(Element.ALIGN_RIGHT);
             doc.add(info);
             Paragraph firma = new Paragraph();

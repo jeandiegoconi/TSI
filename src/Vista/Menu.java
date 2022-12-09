@@ -940,7 +940,6 @@ public final class Menu extends javax.swing.JFrame {
                         .addComponent(txtCantidadVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnEliminarVenta)
                         .addGap(59, 59, 59))))
             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -1742,7 +1741,11 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
 
     private void btnGenerarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarVentaActionPerformed
         if (TablaVenta.getRowCount() > 0) {
+            int TmpTotal = Integer.parseInt(LabelTotal.getText());
+        int TmpPago = Integer.parseInt(txtPagoCliente.getText());
+        if(TmpPago >= TmpTotal){
             if (!"".equals(txtNombreClienteventa.getText())) {
+                VueltoTotalBotonVenta();
                 RegistrarVenta();
                 RegistrarDetalle();
                 ActualizarStock();
@@ -1753,6 +1756,7 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
                 txtCantidadVenta.setEnabled(false);
             } else {
                 txtNombreClienteventa.setText("Venta Rapida");
+                VueltoTotalBotonVenta();
                 RegistrarVentaRapida();
                 RegistrarDetalle();
                 ActualizarStock();
@@ -1760,11 +1764,16 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
                 LimpiarClienteventa();
                 LimpiarTablaProductos();
                 ListarProductos();
+                LabelTotal.setText("----");
+                LabelVuelto.setText("----");
+                txtPagoCliente.setText("");
                 txtCantidadVenta.setEnabled(false);
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "No hay productos en la venta");
-        }        // TODO add your handling code here:
+        }else{
+            JOptionPane.showMessageDialog(null, "El Valor es menor que el total.");
+
+        }
+        }
     }//GEN-LAST:event_btnGenerarVentaActionPerformed
 
     private void btnEliminarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarVentaActionPerformed
@@ -1999,7 +2008,12 @@ event.numberDecimalKeyPress(evt, txtCantPro);        // TODO add your handling c
     }//GEN-LAST:event_TxtRutClienteKeyTyped
 
     private void TxtTelefonoClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtTelefonoClienteKeyTyped
-event.numberDecimalKeyPress(evt, TxtTelefonoCliente);           // TODO add your handling code here:
+event.numberDecimalKeyPress(evt, TxtTelefonoCliente);
+
+            if (TxtTelefonoCliente.getText().length() >= 9 ){ // limit to 3 characters
+                evt.consume();
+        }
+// TODO add your handling code here:
     }//GEN-LAST:event_TxtTelefonoClienteKeyTyped
 
     private void txtRutProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRutProveedorKeyTyped
@@ -2007,7 +2021,10 @@ event.numberDecimalKeyPress(evt, TxtTelefonoCliente);           // TODO add your
     }//GEN-LAST:event_txtRutProveedorKeyTyped
 
     private void txtTelefonoProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoProveedorKeyTyped
-event.numberDecimalKeyPress(evt, txtTelefonoProveedor);           // TODO add your handling code here:
+event.numberDecimalKeyPress(evt, txtTelefonoProveedor);  
+            if (txtTelefonoProveedor.getText().length() >= 9 ){ // limit to 3 characters
+                evt.consume();
+        }// TODO add your handling code here:
     }//GEN-LAST:event_txtTelefonoProveedorKeyTyped
 
     private void txtCodProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodProveedorKeyTyped
@@ -2220,6 +2237,23 @@ private void LimpiarCliente() {
         
         
     }
+    
+    
+    private void VueltoTotalBotonVenta() {
+ if (TablaVenta.getRowCount() > 0) {
+        int TmpTotal = Integer.parseInt(LabelTotal.getText());
+        int TmpPago = Integer.parseInt(txtPagoCliente.getText());
+        if(TmpPago >= TmpTotal){
+            VueltoTotal();
+        }else{
+            JOptionPane.showMessageDialog(null, "El Valor es menor que el total.");
+        }
+            
+        }else{
+     JOptionPane.showMessageDialog(null, "No hay productos en la venta");
+ }
+        
+    }
     private void LimpiarVenta() {
         txtCodigoVenta.setText("");
         txtDescripcionVenta.setText("");
@@ -2263,8 +2297,9 @@ private void LimpiarCliente() {
             Dv.setId(id);
             Vdao.RegistrarDetalle(Dv);
 
+
         }
-        Vdao.pdfV(id, 0, Totalpagar, LabelVendedor.getText());
+        Vdao.pdfV(id, 0, Totalpagar, Integer.parseInt(txtPagoCliente.getText()),Integer.parseInt(LabelVuelto.getText()),LabelVendedor.getText());
     }
 
     private void ActualizarStock() {

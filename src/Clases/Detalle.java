@@ -66,4 +66,6 @@ public class Detalle {
     public void setId_venta(int id_venta) {
         this.id_venta = id_venta;
     }
+    
+        
 }
