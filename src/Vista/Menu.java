@@ -165,6 +165,7 @@ public final class Menu extends javax.swing.JFrame {
         bt_Actualizar.setEnabled(false);
         bt_Eliminar.setEnabled(false);
         bt_Guardar.setEnabled(true);
+        txtCantidadVenta.setEnabled(false);
         cbxProveedorPro.removeAllItems();
         llenarProveedor();
         LimpiarTabla();
@@ -308,6 +309,10 @@ public final class Menu extends javax.swing.JFrame {
         txtNombreVenta = new javax.swing.JTextField();
         txtCodigoVentaMostrar = new javax.swing.JTextField();
         jLabel30 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        txtPagoCliente = new javax.swing.JTextField();
+        jLabel31 = new javax.swing.JLabel();
+        LabelVuelto = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtIdproducto = new javax.swing.JTextField();
@@ -731,9 +736,9 @@ public final class Menu extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("TOTAL A PAGAR :");
 
-        jLabel8.setText("NOMBRE");
+        jLabel8.setText("NOMBRE:");
 
-        jLabel7.setText("RUT CLIENTE");
+        jLabel7.setText("RUT CLIENTE:");
 
         TablaVenta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -847,31 +852,27 @@ public final class Menu extends javax.swing.JFrame {
 
         jLabel30.setText("Buscar por Codigo:");
 
+        jLabel32.setText("PAGO CLIENTE:");
+
+        txtPagoCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPagoClienteKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPagoClienteKeyTyped(evt);
+            }
+        });
+
+        jLabel31.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel31.setText("VUELTO:");
+
+        LabelVuelto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        LabelVuelto.setText("----");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3)
-                        .addGap(18, 18, 18))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtRutVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNombreClienteventa, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(74, 74, 74)
-                        .addComponent(btnGenerarVenta)
-                        .addGap(50, 50, 50)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(LabelTotal)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(288, 288, 288)
                 .addComponent(jLabel9)
@@ -937,6 +938,33 @@ public final class Menu extends javax.swing.JFrame {
                         .addGap(659, 659, 659)
                         .addComponent(btnEliminarVenta)
                         .addGap(59, 59, 59))))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 922, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtRutVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNombreClienteventa, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel32)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtPagoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(74, 74, 74)
+                        .addComponent(btnGenerarVenta)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel31))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LabelVuelto)
+                            .addComponent(LabelTotal))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -964,9 +992,9 @@ public final class Menu extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(txtIdCV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 151, Short.MAX_VALUE)
+                        .addGap(0, 157, Short.MAX_VALUE)
                         .addComponent(btnEliminarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                        .addGap(297, 297, 297))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -997,18 +1025,23 @@ public final class Menu extends javax.swing.JFrame {
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addGap(20, 20, 20)
                                         .addComponent(lblFotoVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)))
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtRutVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNombreClienteventa, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
                     .addComponent(jLabel8)
                     .addComponent(jLabel7)
                     .addComponent(LabelTotal)
-                    .addComponent(btnGenerarVenta))
-                .addContainerGap())
+                    .addComponent(btnGenerarVenta)
+                    .addComponent(jLabel32)
+                    .addComponent(txtPagoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel31)
+                    .addComponent(LabelVuelto)))
         );
 
         jTabbedPane1.addTab("Ventas", jPanel3);
@@ -1736,6 +1769,7 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
                     txtDescripcionVenta.setText("" + pro.getNombre());
                     txtPrecioVenta.setText("" + pro.getPrecio());
                     txtStockDisponible.setText("" + pro.getStock());
+                    txtCantidadVenta.setEnabled(true);
                     txtCantidadVenta.requestFocus();
                             try {
             // TODO add your handling code here:
@@ -1961,6 +1995,21 @@ event.numberDecimalKeyPress(evt, txtTelefonoProveedor);           // TODO add yo
 event.numberDecimalKeyPress(evt, txtCodProveedor);          // TODO add your handling code here:
     }//GEN-LAST:event_txtCodProveedorKeyTyped
 
+    private void txtPagoClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPagoClienteKeyTyped
+event.numberDecimalKeyPress(evt, txtPagoCliente);                 // TODO add your handling code here:
+    }//GEN-LAST:event_txtPagoClienteKeyTyped
+
+    private void txtPagoClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPagoClienteKeyPressed
+if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+    if (TablaVenta.getRowCount() > 0) {
+        VueltoTotal();
+    }else{
+        JOptionPane.showMessageDialog(null, "No hay productos en la venta");
+    }
+            
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPagoClienteKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -1991,6 +2040,7 @@ event.numberDecimalKeyPress(evt, txtCodProveedor);          // TODO add your han
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelTotal;
     private javax.swing.JLabel LabelVendedor;
+    private javax.swing.JLabel LabelVuelto;
     private com.toedter.calendar.JDateChooser Midate;
     private javax.swing.JTable TablaCliente;
     private javax.swing.JTable TablaProducto;
@@ -2041,6 +2091,8 @@ event.numberDecimalKeyPress(evt, txtCodProveedor);          // TODO add your han
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -2084,6 +2136,7 @@ event.numberDecimalKeyPress(evt, txtCodProveedor);          // TODO add your han
     private javax.swing.JTextField txtNombreProducto;
     private javax.swing.JTextField txtNombreProveedor;
     private javax.swing.JTextField txtNombreVenta;
+    private javax.swing.JTextField txtPagoCliente;
     private javax.swing.JTextField txtPrecioPro;
     private javax.swing.JTextField txtPrecioVenta;
     private javax.swing.JTextField txtRutProveedor;
@@ -2127,13 +2180,24 @@ private void LimpiarCliente() {
         }
         LabelTotal.setText(Integer.toString(Totalpagar));
     }
+    private void VueltoTotal() {
+        int Vueltototal = 0;
+        int PagoCliente = Integer.parseInt(txtPagoCliente.getText());
+        int aPagar = Integer.parseInt(LabelTotal.getText());
+        Vueltototal = PagoCliente - aPagar;
+        
+        LabelVuelto.setText(Integer.toString(Vueltototal));
 
+        
+        
+    }
     private void LimpiarVenta() {
         txtCodigoVenta.setText("");
         txtDescripcionVenta.setText("");
         txtCantidadVenta.setText("");
         txtStockDisponible.setText("");
         txtPrecioVenta.setText("");
+        txtCodigoVentaMostrar.setText("");
     }
 
     private void RegistrarVenta() {
