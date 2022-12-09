@@ -941,7 +941,7 @@ public final class Menu extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 922, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 913, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1187,28 +1187,29 @@ public final class Menu extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel24)
+                                .addGap(29, 29, 29)
+                                .addComponent(txtCantPro, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(72, 72, 72))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(lblCodProd)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtCodigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel1))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel24)
-                                .addGap(29, 29, 29)
-                                .addComponent(txtCantPro, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(27, 27, 27)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(txtNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
+                                .addGap(35, 35, 35)
                                 .addComponent(jLabel26)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cbxProveedorPro, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(36, 36, 36)
+                                .addGap(65, 65, 65)
                                 .addComponent(jLabel25)
-                                .addGap(47, 47, 47)
+                                .addGap(18, 18, 18)
                                 .addComponent(txtPrecioPro, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtIdproducto, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -1234,11 +1235,9 @@ public final class Menu extends javax.swing.JFrame {
                         .addComponent(txtCodigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel26)
                         .addComponent(cbxProveedorPro, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGap(4, 4, 4)
-                            .addComponent(jLabel25))
-                        .addComponent(txtPrecioPro, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtPrecioPro, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel25)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -1318,7 +1317,7 @@ public final class Menu extends javax.swing.JFrame {
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCodProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtCodProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(79, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -1686,6 +1685,7 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
     private void txtCantidadVentaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadVentaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!"".equals(txtCantidadVenta.getText())) {
+                if(!"0".equals(txtCantidadVenta.getText())){
                 int id = Integer.parseInt(txtIdPro.getText());
                 String descripcion = txtDescripcionVenta.getText();
                 int cant = Integer.parseInt(txtCantidadVenta.getText());
@@ -1723,9 +1723,13 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
                     JOptionPane.showMessageDialog(null, "Stock no disponible");
                 }
             } else {
+                JOptionPane.showMessageDialog(null, "Ingrese Cantidad mayor a 0.");
+            }
+        }else{
                 JOptionPane.showMessageDialog(null, "Ingrese Cantidad");
             }
-        }        // TODO add your handling code here:
+        }
+                // TODO add your handling code here:
     }//GEN-LAST:event_txtCantidadVentaKeyPressed
 
     private void btnGenerarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarVentaActionPerformed
@@ -1736,6 +1740,9 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
                 ActualizarStock();
                 LimpiarTablaVenta();
                 LimpiarClienteventa();
+                LimpiarTablaProductos();
+                ListarProductos();
+                txtCantidadVenta.setEnabled(false);
             } else {
                 txtNombreClienteventa.setText("Venta Rapida");
                 RegistrarVentaRapida();
@@ -1743,6 +1750,9 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
                 ActualizarStock();
                 LimpiarTablaVenta();
                 LimpiarClienteventa();
+                LimpiarTablaProductos();
+                ListarProductos();
+                txtCantidadVenta.setEnabled(false);
             }
         } else {
             JOptionPane.showMessageDialog(null, "No hay productos en la venta");
@@ -1923,10 +1933,11 @@ event.numberDecimalKeyPress(evt, txtCantidadVenta);         // TODO add your han
                 pro = proDao.BuscarProNombre(nom);
                 if (pro.getNombre() != null) {
                     txtIdPro.setText("" + pro.getId());
-                    txtCodigoVenta.setText("" + pro.getCodigo());
+                    txtCodigoVentaMostrar.setText("" + pro.getCodigo());
                     txtDescripcionVenta.setText("" + pro.getNombre());
                     txtPrecioVenta.setText("" + pro.getPrecio());
                     txtStockDisponible.setText("" + pro.getStock());
+                    txtCantidadVenta.setEnabled(true);
                     txtCantidadVenta.requestFocus();
                             try {
             // TODO add your handling code here:
@@ -1976,7 +1987,7 @@ event.numberDecimalKeyPress(evt, txtCantPro);        // TODO add your handling c
     }//GEN-LAST:event_txtCantProKeyTyped
 
     private void TxtRutClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtRutClienteKeyTyped
-event.numberDecimalKeyPress(evt, TxtRutCliente);           // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_TxtRutClienteKeyTyped
 
     private void TxtTelefonoClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtTelefonoClienteKeyTyped
@@ -1984,7 +1995,7 @@ event.numberDecimalKeyPress(evt, TxtTelefonoCliente);           // TODO add your
     }//GEN-LAST:event_TxtTelefonoClienteKeyTyped
 
     private void txtRutProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRutProveedorKeyTyped
-event.numberDecimalKeyPress(evt, txtRutProveedor);           // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_txtRutProveedorKeyTyped
 
     private void txtTelefonoProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoProveedorKeyTyped
@@ -2002,6 +2013,8 @@ event.numberDecimalKeyPress(evt, txtPagoCliente);                 // TODO add yo
     private void txtPagoClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPagoClienteKeyPressed
 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
     if (TablaVenta.getRowCount() > 0) {
+        int TmpTotal = Integer.parseInt(LabelVendedor.getText());
+       
         VueltoTotal();
     }else{
         JOptionPane.showMessageDialog(null, "No hay productos en la venta");
