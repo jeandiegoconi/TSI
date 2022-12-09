@@ -166,7 +166,8 @@ public final class Menu extends javax.swing.JFrame {
         bt_Eliminar.setEnabled(false);
         bt_Guardar.setEnabled(true);
         txtCantidadVenta.setEnabled(false);
-        cbxProveedorPro.removeAllItems();
+        cbxProveedorPro.removeAllItems();     
+        TablaVenta.setDefaultEditor(Object.class, null);
         llenarProveedor();
         LimpiarTabla();
         LimpiarTablaProductos();
@@ -497,6 +498,7 @@ public final class Menu extends javax.swing.JFrame {
                 "ID", "RUT", "Nombre", "Telefono", "Direccion"
             }
         ));
+        TablaCliente.getTableHeader().setReorderingAllowed(false);
         TablaCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TablaClienteMouseClicked(evt);
@@ -688,6 +690,7 @@ public final class Menu extends javax.swing.JFrame {
                 "COD", "RUT", "NOMBRE", "TELEFONO", "DIRECCION"
             }
         ));
+        TablaProveedor.getTableHeader().setReorderingAllowed(false);
         TablaProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TablaProveedorMouseClicked(evt);
@@ -748,6 +751,7 @@ public final class Menu extends javax.swing.JFrame {
                 "COD", "DESCRIPCION", "CANTIDAD", "PRECIO U.", "PRECIO TOTAL"
             }
         ));
+        TablaVenta.getTableHeader().setReorderingAllowed(false);
         TablaVenta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TablaVentaMouseClicked(evt);
@@ -822,6 +826,8 @@ public final class Menu extends javax.swing.JFrame {
         txtPrecioVenta.setEditable(false);
 
         jLabel20.setText("Precio:");
+
+        Midate.setEnabled(false);
 
         jLabel21.setText("Fecha:");
 
@@ -914,34 +920,33 @@ public final class Menu extends javax.swing.JFrame {
                         .addComponent(txtDescripcionVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(115, 115, 115)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addGap(21, 21, 21)
-                                    .addComponent(jLabel21)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(Midate, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(lblFotoVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtIdCV, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(72, 72, 72))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtCantidadVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(jLabel21)
+                                .addGap(18, 18, 18)
+                                .addComponent(Midate, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblFotoVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtIdCV, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(72, 72, 72))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtCantidadVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(659, 659, 659)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnEliminarVenta)
                         .addGap(59, 59, 59))))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 913, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -963,8 +968,9 @@ public final class Menu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(LabelVuelto)
-                            .addComponent(LabelTotal))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(LabelTotal))
+                        .addGap(0, 12, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1087,6 +1093,7 @@ public final class Menu extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        TablaProducto.getTableHeader().setReorderingAllowed(false);
         TablaProducto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TablaProductoMouseClicked(evt);
@@ -1283,6 +1290,7 @@ public final class Menu extends javax.swing.JFrame {
                 "Cod  Compra", "Cod Producto", "Cantidad", "Precio"
             }
         ));
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane6.setViewportView(jTable1);
 
         jLabel28.setText(" Cod Proveedor:");
@@ -2013,14 +2021,22 @@ event.numberDecimalKeyPress(evt, txtPagoCliente);                 // TODO add yo
     private void txtPagoClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPagoClienteKeyPressed
 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
     if (TablaVenta.getRowCount() > 0) {
-        int TmpTotal = Integer.parseInt(LabelVendedor.getText());
+        int TmpTotal = Integer.parseInt(LabelTotal.getText());
+        int TmpPago = Integer.parseInt(txtPagoCliente.getText());
+        if(TmpPago >= TmpTotal){
        
         VueltoTotal();
-    }else{
+        }else{
+                    JOptionPane.showMessageDialog(null, "El Valor es menor que el total.");
+
+        }
+
+            
+        }else{
         JOptionPane.showMessageDialog(null, "No hay productos en la venta");
     }
-            
-        }        // TODO add your handling code here:
+}
+        // TODO add your handling code here:
     }//GEN-LAST:event_txtPagoClienteKeyPressed
 
     /**
@@ -2211,6 +2227,8 @@ private void LimpiarCliente() {
         txtStockDisponible.setText("");
         txtPrecioVenta.setText("");
         txtCodigoVentaMostrar.setText("");
+        lblFotoVenta.setIcon(null);
+        txtNombreVenta.setText("");
     }
 
     private void RegistrarVenta() {
