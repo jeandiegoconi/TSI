@@ -10,19 +10,23 @@ public class Venta {
     private int cliente;
     private String nombre_cli;
     private String vendedor;
+    private int pago;
     private int total;
+    private int vuelto;
     private String fecha;
     
     public Venta(){
         
     }
 
-    public Venta(int id, int cliente, String nombre_cli, String vendedor, int total, String fecha) {
+    public Venta(int id, int cliente, String nombre_cli, String vendedor,int pago, int total,int vuelto, String fecha) {
         this.id = id;
         this.cliente = cliente;
         this.nombre_cli = nombre_cli;
         this.vendedor = vendedor;
+        this.pago = pago;
         this.total = total;
+        this.vuelto = vuelto;
         this.fecha = fecha;
     }
 
@@ -65,6 +69,22 @@ public class Venta {
     public void setTotal(int total) {
         this.total = total;
     }
+    public int getPago() {
+        return pago;
+    }
+
+    public void setPago(int pago) {
+        this.pago = pago;
+    }
+    
+    public int getVuelto() {
+        return vuelto;
+    }
+
+    public void setVuelto(int vuelto) {
+        this.vuelto = vuelto;
+    }
+    
 
     public String getFecha() {
         return fecha;

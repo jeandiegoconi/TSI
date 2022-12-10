@@ -56,14 +56,16 @@ public class VentaDao {
     }
     
     public int RegistrarVenta(Venta v){
-        String sql = "INSERT INTO ventas (cliente, vendedor, total, fecha) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO ventas (cliente, vendedor,pagado, total,vuelto, fecha) VALUES (?,?,?,?,?,?)";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1, v.getCliente());
             ps.setString(2, v.getVendedor());
-            ps.setInt(3, v.getTotal());
-            ps.setString(4, v.getFecha());
+            ps.setInt(3, v.getPago());
+            ps.setInt(4, v.getTotal());
+            ps.setInt(5, v.getVuelto());
+            ps.setString(6, v.getFecha());
             ps.execute();
         } catch (SQLException e) {
             System.out.println(e.toString());
@@ -78,14 +80,16 @@ public class VentaDao {
     }
     
     public int RegistrarVentaRapida(Venta v){
-        String sql = "INSERT INTO ventas (cliente, vendedor, total, fecha) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO ventas (cliente, vendedor,pagado, total,vuelto, fecha) VALUES (?,?,?,?,?,?)";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1, 0);
             ps.setString(2, v.getVendedor());
-            ps.setInt(3, v.getTotal());
-            ps.setString(4, v.getFecha());
+            ps.setInt(3, v.getPago());
+            ps.setInt(4, v.getTotal());
+            ps.setInt(5, v.getVuelto());
+            ps.setString(6, v.getFecha());
             ps.execute();
         } catch (SQLException e) {
             System.out.println(e.toString());
@@ -158,6 +162,7 @@ public class VentaDao {
        }
        return ListaVenta;
    }
+    
     public Venta BuscarVenta(int id){
         Venta cl = new Venta();
         String sql = "SELECT * FROM ventas WHERE id = ?";
@@ -169,7 +174,9 @@ public class VentaDao {
             if (rs.next()) {
                 cl.setId(rs.getInt("id"));
                 cl.setCliente(rs.getInt("cliente"));
+                cl.setPago(rs.getInt("pagado"));
                 cl.setTotal(rs.getInt("total"));
+                cl.setVuelto(rs.getInt("vuelto"));
                 cl.setVendedor(rs.getString("vendedor"));
                 cl.setFecha(rs.getString("fecha"));
             }
@@ -178,7 +185,7 @@ public class VentaDao {
         }
         return cl;
     }
-    public void pdfV(int idventa, int Cliente, int total,int pago, int vuelto, String usuario) {
+    public void pdfV(int idventa, int Cliente,int pago,int total, int vuelto, String usuario) {
         try {
             Date date = new Date();
             FileOutputStream archivo;
