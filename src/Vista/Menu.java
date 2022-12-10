@@ -1586,7 +1586,9 @@ public final class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPrecioProKeyTyped
 
     private void btnNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoProductoActionPerformed
-        LimpiarProductos();        // TODO add your handling code here:
+        LimpiarProductos();
+        bt_Guardar.setEnabled(true);   
+        TablaProducto.getSelectionModel().clearSelection();// TODO add your handling code here:
     }//GEN-LAST:event_btnNuevoProductoActionPerformed
 
     private void bt_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_GuardarActionPerformed
@@ -1698,7 +1700,7 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
     private void TablaProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaProductoMouseClicked
         bt_Actualizar.setEnabled(true);
         bt_Eliminar.setEnabled(true);
-        bt_Guardar.setEnabled(true);
+        bt_Guardar.setEnabled(false);
         int fila = TablaProducto.rowAtPoint(evt.getPoint());
         txtIdproducto.setText(TablaProducto.getValueAt(fila, 0).toString());
         pro = proDao.BuscarId(Integer.parseInt(txtIdproducto.getText()));
@@ -2405,7 +2407,7 @@ private void LimpiarCliente() {
     private void LimpiarProductos() {
         txtIdPro.setText("");
         txtCodigoProducto.setText("");
-        cbxProveedorPro.setSelectedItem(null);
+        cbxProveedorPro.setSelectedItem(0);
         lblFoto.setIcon(null);
         txtNombreProducto.setText("");
         txtCantPro.setText("");
