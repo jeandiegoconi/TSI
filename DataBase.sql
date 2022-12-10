@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-12-2022 a las 20:10:02
+-- Tiempo de generación: 10-12-2022 a las 20:45:20
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 7.4.30
 
@@ -87,7 +87,7 @@ CREATE TABLE `compras` (
   `id_proveedor` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
   `precio_compra` int(11) NOT NULL,
-  `fecha_compra` varchar(20) NOT NULL
+  `fecha_compra` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -95,7 +95,8 @@ CREATE TABLE `compras` (
 --
 
 INSERT INTO `compras` (`codigo_compra`, `codigo_producto`, `id_proveedor`, `cantidad`, `precio_compra`, `fecha_compra`) VALUES
-(1, 1984, 1, 2, 3000, '08/12/2022');
+(1, 1984, 1, 2, 3000, '08/12/2022'),
+(2, 1984, 1, 2, 3, '10/12/2022');
 
 -- --------------------------------------------------------
 
@@ -281,7 +282,7 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT de la tabla `compras`
 --
 ALTER TABLE `compras`
-  MODIFY `codigo_compra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `codigo_compra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle`
