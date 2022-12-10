@@ -31,7 +31,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.filechooser.FileSystemView;
-import Vista.*;
 
 public class VentaDao {
     Connection con;

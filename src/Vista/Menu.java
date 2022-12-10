@@ -39,6 +39,7 @@ public final class Menu extends javax.swing.JFrame {
     ProveedorDao PrDao = new ProveedorDao();
     Productos pro = new Productos();
     ProductosDao proDao = new ProductosDao();
+    ComprasDao comDao = new ComprasDao();
     Eventos event = new Eventos();
     Venta v = new Venta();
     VentaDao Vdao = new VentaDao();
@@ -133,6 +134,24 @@ public final class Menu extends javax.swing.JFrame {
         TablaProducto.setModel(modelo);
 
     }
+    
+        public void ListarCompras() {
+        List<Compra> ListarPro = comDao.ListarCompras();
+        modelo = (DefaultTableModel) TablaCompra.getModel();
+        Object[] ob = new Object[6];
+        for (int i = 0; i < ListarPro.size(); i++) {
+            ob[0] = ListarPro.get(i).getCodigoCompra();
+            ob[1] = ListarPro.get(i).getCodigoProducto();
+            ob[2] = ListarPro.get(i).getCantidad();
+            ob[3] = ListarPro.get(i).getPrecioCompra();
+            ob[4] = ListarPro.get(i).getFechaCompra();
+            
+            modelo.addRow(ob);
+        }
+        TablaCompra.setModel(modelo);
+
+    }
+
 
     
     
@@ -171,7 +190,9 @@ public final class Menu extends javax.swing.JFrame {
         TablaVenta.setDefaultEditor(Object.class, null);
         llenarProveedor();
         LimpiarTabla();
+        LimpiarTablaCompras();
         LimpiarTablaProductos();
+        ListarCompras();
         ListarProductos();
         LimpiarProveedor();
         LimpiarTablaCliente();
@@ -342,7 +363,7 @@ public final class Menu extends javax.swing.JFrame {
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel27 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TablaCompra = new javax.swing.JTable();
         cbxProveedorCom = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1277,19 +1298,27 @@ public final class Menu extends javax.swing.JFrame {
 
         jLabel27.setText("Fecha:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TablaCompra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Cod  Compra", "Cod Producto", "Cantidad", "Precio"
+                "Cod  Compra", "Cod Producto", "Cantidad", "Precio", "Fecha"
             }
-        ));
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane6.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TablaCompra.getTableHeader().setReorderingAllowed(false);
+        jScrollPane6.setViewportView(TablaCompra);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -1299,9 +1328,6 @@ public final class Menu extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
                         .addComponent(jLabel27)
                         .addGap(50, 50, 50)
                         .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1309,8 +1335,11 @@ public final class Menu extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbxProveedorCom, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(79, Short.MAX_VALUE))
+                        .addComponent(cbxProveedorCom, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 857, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2066,6 +2095,7 @@ if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
     private javax.swing.JLabel LabelVuelto;
     private com.toedter.calendar.JDateChooser Midate;
     private javax.swing.JTable TablaCliente;
+    private javax.swing.JTable TablaCompra;
     private javax.swing.JTable TablaProducto;
     private javax.swing.JTable TablaProveedor;
     private javax.swing.JTable TablaVenta;
@@ -2136,7 +2166,6 @@ if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblCodProd;
     private javax.swing.JLabel lblFoto;
     private javax.swing.JLabel lblFotoVenta;
@@ -2290,6 +2319,14 @@ private void LimpiarCliente() {
     private void LimpiarTablaProductos() {
         tmp = (DefaultTableModel) TablaProducto.getModel();
         int fila = TablaProducto.getRowCount();
+        for (int i = 0; i < fila; i++) {
+            tmp.removeRow(0);
+        }
+    }
+    
+    private void LimpiarTablaCompras() {
+        tmp = (DefaultTableModel) TablaCompra.getModel();
+        int fila = TablaCompra.getRowCount();
         for (int i = 0; i < fila; i++) {
             tmp.removeRow(0);
         }
