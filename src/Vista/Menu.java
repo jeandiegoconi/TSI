@@ -33,8 +33,9 @@ public final class Menu extends javax.swing.JFrame {
     TableColumnModel columnModel;
     int num = 0;
     Date fechaVenta = new Date();
+    Date fechaCompra = new Date();
     String fechaActual = new SimpleDateFormat("dd/MM/yyyy").format(fechaVenta);
-    
+    String fechaCompraActual = new SimpleDateFormat("dd/MM/yyyy").format(fechaCompra);
     Cliente cl = new Cliente();
     ClienteDao client = new ClienteDao();
     Proveedor pr = new Proveedor();
@@ -252,7 +253,7 @@ public final class Menu extends javax.swing.JFrame {
 
         initComponents();
         this.setLocationRelativeTo(null);
-        DateCompra.setDate(fechaVenta);
+        DateCompra.setDate(fechaCompra);
         Midate.setDate(fechaVenta);
         txtIdCliente.setVisible(false);
         txtIdPro.setVisible(false);
@@ -269,6 +270,7 @@ public final class Menu extends javax.swing.JFrame {
         cbxProveedorCom.removeAllItems();
         TablaVenta.setDefaultEditor(Object.class, null);
         DateCompra.getJCalendar().setMinSelectableDate(new Date());
+        
         llenarProveedor();
         LimpiarTabla();
         LimpiarTablaCompras();
@@ -2340,24 +2342,20 @@ String sqlFind = "select codigo from productos where codigo = "+txtCodProdCompra
              con = cn.getConnection();
              Statement stmt = con.createStatement();
              ResultSet rs = stmt.executeQuery(sqlFind);
-             int precio = Integer.parseInt(txtPrecioPro.getText());
                if(rs.next()==true){
                    
-                //com.setCodigoProducto(txtCodProdCompra.getText());
-                pro.setNombre(txtNombreProducto.getText());
-                Combo itemP = (Combo) cbxProveedorPro.getSelectedItem();
-                pro.setProveedor(itemP.getId());
-                pro.setStock(Integer.parseInt(txtCantPro.getText()));
-                pro.setPrecio(Integer.parseInt(txtPrecioPro.getText()));
-                pro.setNomimagen(txtNomImagen.getText());
-                   
+                com.setCodigoProducto(Integer.parseInt(txtCodProdCompra.getText()));
+                com.setCantidad(Integer.parseInt(txtCantidadCompra.getText()));
+                Combo itemP = (Combo) cbxProveedorCom.getSelectedItem();
+                com.setIdProveedor(itemP.getId());
+                com.setPrecioCompra(Integer.parseInt(txtPrecioCompra.getText()));
+                com.setFechaCompra(fechaCompraActual);
+                comDao.RegistrarCompra(com);
                }
-               } catch (ClassNotFoundException | SQLException ex) {
+                   } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
-        // TODO add your handling code here:
-        
-       // TODO add your handling code here:
+    
     }//GEN-LAST:event_btnAddCompraActionPerformed
 
     /**

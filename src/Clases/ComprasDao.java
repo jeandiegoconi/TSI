@@ -26,14 +26,15 @@ InputStream empty = new InputStream() {
 };
 
     public int RegistrarCompra(Compra c){
-        String sql = "INSERT INTO compras (codigo_producto ,cantidad ,precio_compra,fecha_compra) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO compras (codigo_producto ,id_proveedor,cantidad ,precio_compra,fecha_compra) VALUES (?,?,?,?,?)";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1, c.getCodigoProducto());
-            ps.setInt(2, c.getCantidad());
-            ps.setInt(3,c.getPrecioCompra());
-            ps.setString(4,c.getFechaCompra());
+            ps.setInt(2,c.getIdProveedor());
+            ps.setInt(3, c.getCantidad());
+            ps.setInt(4,c.getPrecioCompra());
+            ps.setString(5,c.getFechaCompra());
             ps.execute();
         } catch (SQLException e) {
             System.out.println(e.toString());
