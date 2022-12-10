@@ -25,8 +25,8 @@ public class Compra {
         this.codigo_compra = codigo_compra;
         this.codigo_producto = codigo_producto;
         this.precio_compra = precio_compra;
-        this.fecha_compra = fecha_compra;
         this.cantidad = cantidad;
+        this.fecha_compra = fecha_compra;
     }
     
     public int getCodigoCompra(){
@@ -66,7 +66,7 @@ public class Compra {
         return fecha_compra;
     }
     
-    public void setFechaCompra(String precio_compra){
+    public void setFechaCompra(String fecha_compra) {
         this.fecha_compra = fecha_compra;
     }
     
