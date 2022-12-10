@@ -633,7 +633,7 @@ public final class Menu extends javax.swing.JFrame {
 
         jLabel14.setText("Nuevo Proveedor");
 
-        jLabel15.setText("Rut:");
+        jLabel15.setText("RUT:");
 
         txtRutProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1751,6 +1751,7 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
 
     private void btnguardarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarProveedorActionPerformed
         if (!"".equals(txtRutProveedor.getText()) || !"".equals(txtNombreProveedor.getText()) || !"".equals(txtTelefonoProveedor.getText()) || !"".equals(txtDireccionProveedor.getText())) {
+            if(validarRutProveedores()){
             pr.setRut(txtRutProveedor.getText());
             pr.setNombre(txtNombreProveedor.getText());
             pr.setTelefono(txtTelefonoProveedor.getText());
@@ -1764,7 +1765,7 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
             llenarProveedor();
             btnEditarProveedor.setEnabled(false);
             btnEliminarProveedor.setEnabled(false);
-            btnguardarProveedor.setEnabled(true);
+            btnguardarProveedor.setEnabled(true);}
         } else {
             JOptionPane.showMessageDialog(null, "Los campos esta vacios");
         }        // TODO add your handling code here:
