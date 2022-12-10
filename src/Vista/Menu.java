@@ -41,6 +41,7 @@ public final class Menu extends javax.swing.JFrame {
     ProveedorDao PrDao = new ProveedorDao();
     Productos pro = new Productos();
     ProductosDao proDao = new ProductosDao();
+    Compra com = new Compra();
     ComprasDao comDao = new ComprasDao();
     Eventos event = new Eventos();
     Venta v = new Venta();
@@ -146,9 +147,10 @@ public final class Menu extends javax.swing.JFrame {
         for (int i = 0; i < ListarPro.size(); i++) {
             ob[0] = ListarPro.get(i).getCodigoCompra();
             ob[1] = ListarPro.get(i).getCodigoProducto();
-            ob[2] = ListarPro.get(i).getCantidad();
-            ob[3] = ListarPro.get(i).getPrecioCompra();
-            ob[4] = ListarPro.get(i).getFechaCompra();
+            ob[2] = ListarPro.get(i).getProveedor();
+            ob[3] = ListarPro.get(i).getCantidad();
+            ob[4] = ListarPro.get(i).getPrecioCompra();
+            ob[5] = ListarPro.get(i).getFechaCompra();
             
             modelo.addRow(ob);
         }
@@ -453,7 +455,7 @@ public final class Menu extends javax.swing.JFrame {
         jScrollPane6 = new javax.swing.JScrollPane();
         TablaCompra = new javax.swing.JTable();
         cbxProveedorCom = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        btnAddCompra = new javax.swing.JButton();
         jLabel34 = new javax.swing.JLabel();
         txtCodProdCompra = new javax.swing.JTextField();
         jLabel35 = new javax.swing.JLabel();
@@ -1473,17 +1475,17 @@ public final class Menu extends javax.swing.JFrame {
 
         TablaCompra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Cod  Compra", "Cod Producto", "Cantidad", "Precio", "Fecha"
+                "Cod  Compra", "Cod Producto", "Proveedor", "Cantidad", "Precio", "Fecha"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1493,7 +1495,12 @@ public final class Menu extends javax.swing.JFrame {
         TablaCompra.getTableHeader().setReorderingAllowed(false);
         jScrollPane6.setViewportView(TablaCompra);
 
-        jButton1.setText("Añadir Compra");
+        btnAddCompra.setText("Añadir Compra");
+        btnAddCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddCompraActionPerformed(evt);
+            }
+        });
 
         jLabel34.setText("Codigo Producto:");
 
@@ -1534,7 +1541,7 @@ public final class Menu extends javax.swing.JFrame {
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addComponent(jLabel27)
                                 .addGap(712, 712, 712)
-                                .addComponent(jButton1))
+                                .addComponent(btnAddCompra))
                             .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 857, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addContainerGap()
@@ -1576,7 +1583,7 @@ public final class Menu extends javax.swing.JFrame {
                     .addComponent(jLabel27)
                     .addComponent(DateCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
-                .addComponent(jButton1)
+                .addComponent(btnAddCompra)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(106, Short.MAX_VALUE))
@@ -2326,6 +2333,33 @@ event.numberDecimalKeyPress(evt, txtCantidadCompra);           // TODO add your 
        event.numberDecimalKeyPress(evt, txtPrecioCompra);           // TODO add your handling code here:
     }//GEN-LAST:event_txtPrecioCompraKeyTyped
 
+    private void btnAddCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCompraActionPerformed
+String sqlFind = "select codigo from productos where codigo = "+txtCodProdCompra.getText()+" ";
+                   try {
+            Class.forName("com.mysql.jdbc.Driver");
+             con = cn.getConnection();
+             Statement stmt = con.createStatement();
+             ResultSet rs = stmt.executeQuery(sqlFind);
+             int precio = Integer.parseInt(txtPrecioPro.getText());
+               if(rs.next()==true){
+                   
+                //com.setCodigoProducto(txtCodProdCompra.getText());
+                pro.setNombre(txtNombreProducto.getText());
+                Combo itemP = (Combo) cbxProveedorPro.getSelectedItem();
+                pro.setProveedor(itemP.getId());
+                pro.setStock(Integer.parseInt(txtCantPro.getText()));
+                pro.setPrecio(Integer.parseInt(txtPrecioPro.getText()));
+                pro.setNomimagen(txtNomImagen.getText());
+                   
+               }
+               } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // TODO add your handling code here:
+        
+       // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddCompraActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2372,6 +2406,7 @@ event.numberDecimalKeyPress(evt, txtCantidadCompra);           // TODO add your 
     private javax.swing.JButton bt_Actualizar;
     private javax.swing.JButton bt_Eliminar;
     private javax.swing.JButton bt_Guardar;
+    private javax.swing.JButton btnAddCompra;
     private javax.swing.JButton btnEditarCliente;
     private javax.swing.JButton btnEditarProveedor;
     private javax.swing.JButton btnEliminarCliente;
@@ -2387,7 +2422,6 @@ event.numberDecimalKeyPress(evt, txtCantidadCompra);           // TODO add your 
     private javax.swing.JButton btnguardarProveedor;
     private javax.swing.JComboBox<Object> cbxProveedorCom;
     private javax.swing.JComboBox<Object> cbxProveedorPro;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

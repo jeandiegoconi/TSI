@@ -50,7 +50,7 @@ InputStream empty = new InputStream() {
     
         public List ListarCompras(){
        List<Compra> Listarcom = new ArrayList();
-       String sql = "select * from compras";
+       String sql = "SELECT pr.id AS id_proveedor, pr.nombre AS nombre_proveedor, p.* FROM proveedor pr INNER JOIN compras p ON pr.id = p.id_proveedor ORDER BY p.id_proveedor DESC;";
        try {
            con = cn.getConnection();
            ps = con.prepareStatement(sql);
@@ -59,6 +59,8 @@ InputStream empty = new InputStream() {
                Compra com = new Compra();
                com.setCodigoCompra(rs.getInt("codigo_compra"));
                com.setCodigoProducto(rs.getInt("codigo_producto"));
+               com.setIdProveedor(rs.getInt("id_proveedor"));
+               com.setProveedor(rs.getString("nombre_proveedor"));
                com.setCantidad(rs.getInt("cantidad"));
                com.setPrecioCompra(rs.getInt("precio_compra"));
                com.setFechaCompra(rs.getString("fecha_compra"));
