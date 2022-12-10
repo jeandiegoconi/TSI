@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -151,6 +152,79 @@ public final class Menu extends javax.swing.JFrame {
         TablaCompra.setModel(modelo);
 
     }
+        
+    public boolean validarRutCliente(){
+        if(!Pattern.matches("^[0-9]+-[0-9kK]{1}$", TxtRutCliente.getText().strip()) || !(TxtRutCliente.getText().strip().length() >= 9)){
+            if (!(TxtRutCliente.getText().strip().equals(""))) {
+                JOptionPane.showMessageDialog(null, "Ingrese el RUT sin puntos y con guion.");
+            }
+            return false;
+        }
+        String rut = TxtRutCliente.getText().strip().toUpperCase();
+        int suma = 0;
+        char digitoV = 0;
+        int i = 2;
+        for (char digito : new StringBuilder(rut).reverse().substring(2).toString().toCharArray()) {
+            suma += i * (digito - '0');
+            i++;
+            if (i == 8) {
+                i = 2;
+            }
+        }
+        digitoV = (char) (11 - (suma - suma / 11 * 11));
+        switch (digitoV) {
+            case 10:
+                digitoV = 'K';
+            break;
+            case 11:
+                digitoV = '0';
+            break;
+            default:
+                digitoV += '0';
+        }
+        if(rut.charAt(rut.length()-1) != digitoV){
+            JOptionPane.showMessageDialog(null, "Rut no valido.");
+            return false;
+        }
+        return true;
+    }
+    
+        public boolean validarRutProveedores(){
+        if(!Pattern.matches("^[0-9]+-[0-9kK]{1}$", txtRutProveedor.getText().strip()) || !(txtRutProveedor.getText().strip().length() >= 9)){
+            if (!(txtRutProveedor.getText().strip().equals(""))) {
+                JOptionPane.showMessageDialog(null, "Ingrese el RUT sin puntos y con guion.");
+            }
+            return false;
+        }
+        String rut = txtRutProveedor.getText().strip().toUpperCase();
+        int suma = 0;
+        char digitoV = 0;
+        int i = 2;
+        for (char digito : new StringBuilder(rut).reverse().substring(2).toString().toCharArray()) {
+            suma += i * (digito - '0');
+            i++;
+            if (i == 8) {
+                i = 2;
+            }
+        }
+        digitoV = (char) (11 - (suma - suma / 11 * 11));
+        switch (digitoV) {
+            case 10:
+                digitoV = 'K';
+            break;
+            case 11:
+                digitoV = '0';
+            break;
+            default:
+                digitoV += '0';
+        }
+        if(rut.charAt(rut.length()-1) != digitoV){
+            JOptionPane.showMessageDialog(null, "Rut no valido.");
+            return false;
+        }
+        return true;
+    }
+    
 
 
     
@@ -443,24 +517,6 @@ public final class Menu extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addComponent(jLabel11)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(TxtNombreCliente))
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jLabel10)
-                            .addGap(18, 18, 18)
-                            .addComponent(TxtRutCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addComponent(jLabel12)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(TxtTelefonoCliente))
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addComponent(jLabel13)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(TxtDirecionCliente)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -472,7 +528,25 @@ public final class Menu extends javax.swing.JFrame {
                             .addComponent(btnNuevoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(80, 80, 80)
-                        .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jLabel10)
+                            .addGap(23, 23, 23)
+                            .addComponent(TxtRutCliente))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                            .addComponent(jLabel11)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(TxtNombreCliente))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                            .addComponent(jLabel12)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(TxtTelefonoCliente))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                            .addComponent(jLabel13)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(TxtDirecionCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE))))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -540,7 +614,7 @@ public final class Menu extends javax.swing.JFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 595, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1587,7 +1661,9 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
     }//GEN-LAST:event_jPanel2MouseEntered
 
     private void btnGuardarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarClienteActionPerformed
+
         if (!"".equals(TxtRutCliente.getText()) || !"".equals(TxtNombreCliente.getText()) || !"".equals(TxtTelefonoCliente.getText()) || !"".equals(TxtDirecionCliente.getText())) {
+            if(validarRutCliente()){
             cl.setRut(TxtRutCliente.getText());
             cl.setNombre(TxtNombreCliente.getText());
             cl.setTelefono(TxtTelefonoCliente.getText());
@@ -1595,10 +1671,11 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
             client.RegistrarCliente(cl);
             JOptionPane.showMessageDialog(null, "Cliente Registrado");
             LimpiarCliente();
+            LimpiarTablaCliente();
             ListarCliente();
             btnEditarCliente.setEnabled(false);
             btnEliminarCliente.setEnabled(false);
-            btnGuardarCliente.setEnabled(true);
+            btnGuardarCliente.setEnabled(true);}
         } else {
             JOptionPane.showMessageDialog(null, "Los campos estan vacios");
         }        // TODO add your handling code here:
@@ -1618,6 +1695,7 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
                 client.ModificarCliente(cl);
                 JOptionPane.showMessageDialog(null, "Cliente Modificado");
                 LimpiarCliente();
+                LimpiarTablaCliente();
                 ListarCliente();
             } else {
                 JOptionPane.showMessageDialog(null, "Los campos estan vacios");
