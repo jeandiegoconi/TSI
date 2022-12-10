@@ -34,6 +34,7 @@ public final class Menu extends javax.swing.JFrame {
     int num = 0;
     Date fechaVenta = new Date();
     String fechaActual = new SimpleDateFormat("dd/MM/yyyy").format(fechaVenta);
+    
     Cliente cl = new Cliente();
     ClienteDao client = new ClienteDao();
     Proveedor pr = new Proveedor();
@@ -249,6 +250,7 @@ public final class Menu extends javax.swing.JFrame {
 
         initComponents();
         this.setLocationRelativeTo(null);
+        DateCompra.setDate(fechaVenta);
         Midate.setDate(fechaVenta);
         txtIdCliente.setVisible(false);
         txtIdPro.setVisible(false);
@@ -264,6 +266,7 @@ public final class Menu extends javax.swing.JFrame {
         cbxProveedorPro.removeAllItems();
         cbxProveedorCom.removeAllItems();
         TablaVenta.setDefaultEditor(Object.class, null);
+        DateCompra.getJCalendar().setMinSelectableDate(new Date());
         llenarProveedor();
         LimpiarTabla();
         LimpiarTablaCompras();
@@ -445,11 +448,18 @@ public final class Menu extends javax.swing.JFrame {
         TablaProveedor = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        DateCompra = new com.toedter.calendar.JDateChooser();
         jLabel27 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         TablaCompra = new javax.swing.JTable();
         cbxProveedorCom = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        jLabel34 = new javax.swing.JLabel();
+        txtCodProdCompra = new javax.swing.JTextField();
+        jLabel35 = new javax.swing.JLabel();
+        txtCantidadCompra = new javax.swing.JTextField();
+        jLabel36 = new javax.swing.JLabel();
+        txtPrecioCompra = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Inventario");
@@ -1483,6 +1493,35 @@ public final class Menu extends javax.swing.JFrame {
         TablaCompra.getTableHeader().setReorderingAllowed(false);
         jScrollPane6.setViewportView(TablaCompra);
 
+        jButton1.setText("Añadir Compra");
+
+        jLabel34.setText("Codigo Producto:");
+
+        txtCodProdCompra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodProdCompraKeyTyped(evt);
+            }
+        });
+
+        jLabel35.setText("Cantidad:");
+
+        txtCantidadCompra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantidadCompraKeyTyped(evt);
+            }
+        });
+
+        jLabel36.setText("Precio:");
+
+        txtPrecioCompra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPrecioCompraKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioCompraKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -1491,17 +1530,32 @@ public final class Menu extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
-                        .addComponent(jLabel27)
-                        .addGap(50, 50, 50)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(jLabel27)
+                                .addGap(712, 712, 712)
+                                .addComponent(jButton1))
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 857, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbxProveedorCom, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 857, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(cbxProveedorCom, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31)
+                                .addComponent(jLabel34)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCodProdCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39)
+                                .addComponent(jLabel35)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCantidadCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(jLabel36)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtPrecioCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(DateCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -1510,12 +1564,20 @@ public final class Menu extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel23)
-                    .addComponent(cbxProveedorCom, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(62, 62, 62)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cbxProveedorCom, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel34)
+                    .addComponent(txtCodProdCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel35)
+                    .addComponent(txtCantidadCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel36)
+                    .addComponent(txtPrecioCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel27)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                    .addComponent(DateCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(106, Short.MAX_VALUE))
         );
@@ -2248,6 +2310,22 @@ if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
         txtIdVentaPdf.setText(TablaHistorialVenta.getValueAt(fila, 0).toString());        // TODO add your handling code here:
     }//GEN-LAST:event_TablaHistorialVentaMouseClicked
 
+    private void txtCodProdCompraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodProdCompraKeyTyped
+event.numberDecimalKeyPress(evt, txtCodProdCompra);            // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodProdCompraKeyTyped
+
+    private void txtCantidadCompraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadCompraKeyTyped
+event.numberDecimalKeyPress(evt, txtCantidadCompra);           // TODO add your handling code here:
+    }//GEN-LAST:event_txtCantidadCompraKeyTyped
+
+    private void txtPrecioCompraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioCompraKeyPressed
+  // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecioCompraKeyPressed
+
+    private void txtPrecioCompraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioCompraKeyTyped
+       event.numberDecimalKeyPress(evt, txtPrecioCompra);           // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecioCompraKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -2276,6 +2354,7 @@ if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JDateChooser DateCompra;
     private javax.swing.JLabel LabelTotal;
     private javax.swing.JLabel LabelVendedor;
     private javax.swing.JLabel LabelVuelto;
@@ -2308,7 +2387,7 @@ if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
     private javax.swing.JButton btnguardarProveedor;
     private javax.swing.JComboBox<Object> cbxProveedorCom;
     private javax.swing.JComboBox<Object> cbxProveedorPro;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2336,6 +2415,9 @@ if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -2362,7 +2444,9 @@ if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
     private javax.swing.JLabel lblFoto;
     private javax.swing.JLabel lblFotoVenta;
     private javax.swing.JTextField txtCantPro;
+    private javax.swing.JTextField txtCantidadCompra;
     private javax.swing.JTextField txtCantidadVenta;
+    private javax.swing.JTextField txtCodProdCompra;
     private javax.swing.JTextField txtCodigoProducto;
     private javax.swing.JTextField txtCodigoVenta;
     private javax.swing.JTextField txtCodigoVentaMostrar;
@@ -2380,6 +2464,7 @@ if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
     private javax.swing.JTextField txtNombreProveedor;
     private javax.swing.JTextField txtNombreVenta;
     private javax.swing.JTextField txtPagoCliente;
+    private javax.swing.JTextField txtPrecioCompra;
     private javax.swing.JTextField txtPrecioPro;
     private javax.swing.JTextField txtPrecioVenta;
     private javax.swing.JTextField txtRutProveedor;
