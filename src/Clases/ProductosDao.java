@@ -91,6 +91,33 @@ InputStream empty = new InputStream() {
        return Listapro;
    }
     
+    
+        public List BuscarProductos(String Texto){
+       List<Productos> Listapro = new ArrayList();
+       String sql = "SELECT pr.id AS id_proveedor, pr.nombre AS nombre_proveedor, p.* FROM proveedor pr INNER JOIN productos p ON pr.id = p.proveedor WHERE p.nombre like '%"+ Texto +"%' ORDER BY p.id DESC;";
+       try {
+           con = cn.getConnection();
+           ps = con.prepareStatement(sql);
+           rs = ps.executeQuery();
+           while (rs.next()) {               
+               Productos pro = new Productos();
+               pro.setId(rs.getInt("id"));
+               pro.setCodigo(rs.getString("codigo"));
+               pro.setNombre(rs.getString("nombre"));
+               pro.setProveedor(rs.getInt("id_proveedor"));
+               pro.setProveedorPro(rs.getString("nombre_proveedor"));
+               pro.setStock(rs.getInt("stock"));
+               pro.setPrecio(rs.getInt("precio"));
+               pro.setNomimagen(rs.getString("nomimagen"));
+               Listapro.add(pro);
+           }
+       } catch (SQLException e) {
+           System.out.println(e.toString());
+       }
+       return Listapro;
+   }
+    
+    
     public boolean EliminarProductos(int id){
        String sql = "DELETE FROM productos WHERE id = ?";
        try {
