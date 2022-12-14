@@ -1674,6 +1674,7 @@ public final class Menu extends javax.swing.JFrame {
     private void bt_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_GuardarActionPerformed
 String sqlDuplicate = "select codigo from productos where codigo = "+txtCodigoProducto.getText()+" ";
 String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNombreProducto.getText().trim()+"' ";
+if (!"".equals(txtCodigoProducto.getText().trim()) && !"".equals(txtNombreProducto.getText().trim()) && !"".equals(cbxProveedorPro.getSelectedItem()) && !"".equals(txtCantPro.getText().trim()) && !"".equals(txtPrecioPro.getText().trim())) {
                    try {
             Class.forName("com.mysql.jdbc.Driver");
              con = cn.getConnection();
@@ -1692,7 +1693,7 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
              JOptionPane.showMessageDialog(null, "El Precio debe ser mayor a 0.");
          }else{
                
-        if (!"".equals(txtCodigoProducto.getText().trim()) || !"".equals(txtNombreProducto.getText().trim()) || !"".equals(cbxProveedorPro.getSelectedItem()) || !"".equals(txtCantPro.getText().trim()) || !"".equals(txtPrecioPro.getText().trim())) {
+        
             pro.setCodigo(txtCodigoProducto.getText().trim());
             pro.setNombre(txtNombreProducto.getText().trim());
             Combo itemP = (Combo) cbxProveedorPro.getSelectedItem();
@@ -1713,17 +1714,15 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
             bt_Actualizar.setEnabled(false);
             bt_Eliminar.setEnabled(false);
             bt_Guardar.setEnabled(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "Los campos estan vacios");
-        }
+
                }}
                }
-                   } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+                   } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
+            } else {
+            JOptionPane.showMessageDialog(null, "Algunos campos estan vacios");
+        }
     }//GEN-LAST:event_bt_GuardarActionPerformed
 
     private void txtIdCVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdCVActionPerformed
@@ -1891,7 +1890,19 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
     }//GEN-LAST:event_btnEditarProveedorActionPerformed
 
     private void btnguardarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarProveedorActionPerformed
-        if (!"".equals(txtRutProveedor.getText()) || !"".equals(txtNombreProveedor.getText().trim()) || !"".equals(txtTelefonoProveedor.getText().trim()) || !"".equals(txtDireccionProveedor.getText().trim())) {
+        
+        String sqlDuplicate = "select rut from proveedor where rut = '"+txtRutProveedor.getText().trim()+"' ";
+
+                           try {
+            Class.forName("com.mysql.jdbc.Driver");
+             con = cn.getConnection();
+             Statement stmt = con.createStatement();
+             ResultSet rs = stmt.executeQuery(sqlDuplicate);
+               if(rs.next()==true){
+                   JOptionPane.showMessageDialog(null, "El RUT ya esta registrado.");
+               }else{
+        
+        if (!"".equals(txtRutProveedor.getText()) && !"".equals(txtNombreProveedor.getText().trim()) && !"".equals(txtTelefonoProveedor.getText().trim()) && !"".equals(txtDireccionProveedor.getText().trim())) {
             if(validarRutProveedores()){
             pr.setRut(txtRutProveedor.getText().trim());
             pr.setNombre(txtNombreProveedor.getText().trim());
@@ -1903,12 +1914,17 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
             ListarProveedor();
             LimpiarProveedor();
             cbxProveedorPro.removeAllItems();
+            cbxProveedorCom.removeAllItems();
             llenarProveedor();
             btnEditarProveedor.setEnabled(false);
             btnEliminarProveedor.setEnabled(false);
             btnguardarProveedor.setEnabled(true);}
         } else {
-            JOptionPane.showMessageDialog(null, "Los campos esta vacios");
+            JOptionPane.showMessageDialog(null, "Algunos campos esta vacios.");
+        }
+               }
+                   } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }        // TODO add your handling code here:
     }//GEN-LAST:event_btnguardarProveedorActionPerformed
 
@@ -2009,6 +2025,8 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
 
         }
         }
+        }else{
+            JOptionPane.showMessageDialog(null, "La venta esta vacia.");
         }
     }//GEN-LAST:event_btnGenerarVentaActionPerformed
 
@@ -2096,8 +2114,8 @@ event.numberDecimalKeyPress(evt, txtCantidadVenta);         // TODO add your han
     private void txtRutVentaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRutVentaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!"".equals(txtRutVenta.getText().trim())) {
-                int dni = Integer.parseInt(txtRutVenta.getText().trim());
-                cl = client.Buscarcliente(dni);
+                String rut = txtRutVenta.getText().trim();
+                cl = client.Buscarcliente(rut);
                 if (cl.getNombre() != null) {
                     txtNombreClienteventa.setText("" + cl.getNombre());
                     txtIdCV.setText("" + cl.getId());
@@ -2112,8 +2130,8 @@ event.numberDecimalKeyPress(evt, txtCantidadVenta);         // TODO add your han
     private void txtRutVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRutVentaKeyTyped
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!"".equals(txtRutVenta.getText().trim())) {
-                int dni = Integer.parseInt(txtRutVenta.getText().trim());
-                cl = client.Buscarcliente(dni);
+                String rut = txtRutVenta.getText().trim();
+                cl = client.Buscarcliente(rut);
                 if (cl.getNombre() != null) {
                     txtNombreClienteventa.setText("" + cl.getNombre());
                     txtIdCV.setText("" + cl.getId());
@@ -2297,6 +2315,7 @@ if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
                 int id = Integer.parseInt(txtIdCliente.getText());
                 client.EliminarCliente(id);
                 LimpiarCliente();
+                LimpiarTablaCliente();
                 ListarCliente();
             }
         }    // TODO add your handling code here:
@@ -2325,8 +2344,19 @@ if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
     }//GEN-LAST:event_btnEditarClienteActionPerformed
 
     private void btnGuardarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarClienteActionPerformed
+String sqlDuplicate = "select rut from clientes where rut = '"+TxtRutCliente.getText().trim()+"' ";
 
-        if (!"".equals(TxtRutCliente.getText().trim()) || !"".equals(TxtNombreCliente.getText().trim()) || !"".equals(TxtTelefonoCliente.getText().trim()) || !"".equals(TxtDirecionCliente.getText().trim())) {
+                           try {
+            Class.forName("com.mysql.jdbc.Driver");
+             con = cn.getConnection();
+             Statement stmt = con.createStatement();
+             ResultSet rs = stmt.executeQuery(sqlDuplicate);
+               if(rs.next()==true){
+                   JOptionPane.showMessageDialog(null, "El RUT ya esta registrado.");
+               }else{
+        
+        
+        if (!"".equals(TxtRutCliente.getText()) && !"".equals(TxtNombreCliente.getText()) && !"".equals(TxtTelefonoCliente.getText()) && !"".equals(TxtDirecionCliente.getText())) {
             if(validarRutCliente()){
                 cl.setRut(TxtRutCliente.getText().trim());
                 cl.setNombre(TxtNombreCliente.getText().trim());
@@ -2341,8 +2371,12 @@ if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
                 btnEliminarCliente.setEnabled(false);
                 btnGuardarCliente.setEnabled(true);}
         } else {
-            JOptionPane.showMessageDialog(null, "Los campos estan vacios");
-        }        // TODO add your handling code here:
+            JOptionPane.showMessageDialog(null, "Algunos campos estan vacios");
+        }     
+               }
+                   } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        } // TODO add your handling code here:
     }//GEN-LAST:event_btnGuardarClienteActionPerformed
 
     private void TxtTelefonoClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtTelefonoClienteKeyTyped
