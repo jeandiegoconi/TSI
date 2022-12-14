@@ -313,62 +313,9 @@ public final class Menu extends javax.swing.JFrame {
         ListarHistorialVentas();
         CP = new Cls_productos();
         columnModel = TablaProducto.getColumnModel();
-       // listar();
-        //iniciar();
+
     }
-   // private void listar(){
-  //      TablaProducto.setModel(CP.getDatosProductos());
-  //      columnModel.getColumn(1).setPreferredWidth(600);
-  //  }
-    
-  //  private void iniciarPro(){
-   //     txtCodigoProducto.setEnabled(false);
-   //     txtNombreProducto.setEnabled(false);
-   // }
-    
-  //  private void activarPro(){
-   //     txt_codigo.setEnabled(true);
-   //     txt_descripcion.setEnabled(true);
-    //    txt_codigo.requestFocus();
-    //}
-    
-   // private void limpiarPro(){
-    //    txt_codigo.setText("");
-    //    txt_descripcion.setText("");
-    //    txt_codigo.requestFocus();
-    //    TableProducto.clearSelection();
-   // }
-    
-  //  private void guardarPro(){
-  //      String codigo = txt_codigo.getText();
-   //     String descripcion = txt_descripcion.getText();
-   //         int respuesta = CP.registrarProducto(codigo,descripcion);
-     //       if(respuesta > 0){
-    //            if(CP.verificarCodigoInventario(codigo) == 0){
-     //               CP.insertarProductoInventario(codigo);
-    //            }
-     //           
-      //          listar();
-    //            limpiar();
-     //           iniciar();
-     //          bt_Actualizar.setEnabled(false);
-        //    }
-      //  }
-        
-     //   else{
-      //      int row = TablaProducto.getSelectedRow();
-     //       String codigo_old = TablaProducto.getValueAt(row, 0).toString();
-            
-        //    int respuesta = CP.actualizarProducto(codigo, descripcion,codigo_old);
-      //      if(respuesta >0){
-        //        listar();
-      //          limpiarPro();
-      //          iniciarPro();
-       //         num=0;
-     //       }
-     //   }
-        
-  //  }
+
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -533,7 +480,7 @@ public final class Menu extends javax.swing.JFrame {
 
             },
             new String [] {
-                "COD", "DESCRIPCION", "CANTIDAD", "PRECIO U.", "PRECIO TOTAL"
+                "COD", "PRODUCTO", "CANTIDAD", "PRECIO U.", "PRECIO TOTAL"
             }
         ));
         TablaVenta.getTableHeader().setReorderingAllowed(false);
@@ -1717,13 +1664,16 @@ public final class Menu extends javax.swing.JFrame {
 
     private void btnNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoProductoActionPerformed
         LimpiarProductos();
+        
         bt_Guardar.setEnabled(true);   
-        TablaProducto.getSelectionModel().clearSelection();// TODO add your handling code here:
+        TablaProducto.getSelectionModel().clearSelection();
+        LimpiarTablaProductos();
+        ListarProductos();// TODO add your handling code here:
     }//GEN-LAST:event_btnNuevoProductoActionPerformed
 
     private void bt_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_GuardarActionPerformed
 String sqlDuplicate = "select codigo from productos where codigo = "+txtCodigoProducto.getText()+" ";
-String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNombreProducto.getText()+"' ";
+String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNombreProducto.getText().trim()+"' ";
                    try {
             Class.forName("com.mysql.jdbc.Driver");
              con = cn.getConnection();
@@ -1731,7 +1681,7 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
              Statement stmt2 = con.createStatement();
              ResultSet rs = stmt.executeQuery(sqlDuplicate);
              ResultSet rs2 = stmt2.executeQuery(sqlDuplicate2);
-             int precio = Integer.parseInt(txtPrecioPro.getText());
+             int precio = Integer.parseInt(txtPrecioPro.getText().trim());
                if(rs.next()==true){
                    JOptionPane.showMessageDialog(null, "Codigo ya en uso.");
                }else{
@@ -1742,13 +1692,13 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
              JOptionPane.showMessageDialog(null, "El Precio debe ser mayor a 0.");
          }else{
                
-        if (!"".equals(txtCodigoProducto.getText()) || !"".equals(txtNombreProducto.getText()) || !"".equals(cbxProveedorPro.getSelectedItem()) || !"".equals(txtCantPro.getText()) || !"".equals(txtPrecioPro.getText())) {
-            pro.setCodigo(txtCodigoProducto.getText());
-            pro.setNombre(txtNombreProducto.getText());
+        if (!"".equals(txtCodigoProducto.getText().trim()) || !"".equals(txtNombreProducto.getText().trim()) || !"".equals(cbxProveedorPro.getSelectedItem()) || !"".equals(txtCantPro.getText().trim()) || !"".equals(txtPrecioPro.getText().trim())) {
+            pro.setCodigo(txtCodigoProducto.getText().trim());
+            pro.setNombre(txtNombreProducto.getText().trim());
             Combo itemP = (Combo) cbxProveedorPro.getSelectedItem();
             pro.setProveedor(itemP.getId());
-            pro.setStock(Integer.parseInt(txtCantPro.getText()));
-            pro.setPrecio(Integer.parseInt(txtPrecioPro.getText()));
+            pro.setStock(Integer.parseInt(txtCantPro.getText().trim()));
+            pro.setPrecio(Integer.parseInt(txtPrecioPro.getText().trim()));
             pro.setNomimagen(txtNomImagen.getText());
             try {
                 proDao.RegistrarProductos(pro);
@@ -1781,13 +1731,13 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
     }//GEN-LAST:event_txtIdCVActionPerformed
 
     private void bt_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_ActualizarActionPerformed
-       String sqlDuplicate = "select codigo from productos where codigo = "+txtCodigoProducto.getText()+" and id <> "+Integer.parseInt(txtIdproducto.getText())+" ";
+       String sqlDuplicate = "select codigo from productos where codigo = "+txtCodigoProducto.getText().trim()+" and id <> "+Integer.parseInt(txtIdproducto.getText())+" ";
 
-
+        
         
         if ("".equals(txtIdproducto.getText())) {
             JOptionPane.showMessageDialog(null, "Seleccione una fila");
-        } else {
+        } else if("".equals(txtBuscarProducto.getText().trim())){
            try {
             Class.forName("com.mysql.jdbc.Driver");
              con = cn.getConnection();
@@ -1796,13 +1746,13 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
                if(rs.next()==true){
                    JOptionPane.showMessageDialog(null, "Codigo ya en uso.");
                }else{
-                   if (!"".equals(txtCodigoProducto.getText()) || !"".equals(txtNombreProducto.getText()) || !"".equals(txtCantPro.getText()) || !"".equals(txtPrecioPro.getText())) {
-                       pro.setCodigo(txtCodigoProducto.getText());
-                       pro.setNombre(txtNombreProducto.getText());
+                   if (!"".equals(txtCodigoProducto.getText().trim()) || !"".equals(txtNombreProducto.getText().trim()) || !"".equals(txtCantPro.getText().trim()) || !"".equals(txtPrecioPro.getText().trim())) {
+                       pro.setCodigo(txtCodigoProducto.getText().trim());
+                       pro.setNombre(txtNombreProducto.getText().trim());
                        Combo itemP = (Combo) cbxProveedorPro.getSelectedItem();
                        pro.setProveedor(itemP.getId());
-                       pro.setStock(Integer.parseInt(txtCantPro.getText()));
-                       pro.setPrecio(Integer.parseInt(txtPrecioPro.getText()));
+                       pro.setStock(Integer.parseInt(txtCantPro.getText().trim()));
+                       pro.setPrecio(Integer.parseInt(txtPrecioPro.getText().trim()));
                        pro.setNomimagen(txtNomImagen.getText());
                        pro.setId(Integer.parseInt(txtIdproducto.getText()));
                        try {
@@ -1824,7 +1774,47 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
            } catch (ClassNotFoundException | SQLException ex) {
                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
            }
-}       // TODO add your handling code here:
+}else{
+                       try {
+            Class.forName("com.mysql.jdbc.Driver");
+             con = cn.getConnection();
+             Statement stmt = con.createStatement();
+             ResultSet rs = stmt.executeQuery(sqlDuplicate);
+               if(rs.next()==true){
+                   JOptionPane.showMessageDialog(null, "Codigo ya en uso.");
+               }else{
+                   if (!"".equals(txtCodigoProducto.getText().trim()) || !"".equals(txtNombreProducto.getText().trim()) || !"".equals(txtCantPro.getText().trim()) || !"".equals(txtPrecioPro.getText().trim())) {
+                       pro.setCodigo(txtCodigoProducto.getText().trim());
+                       pro.setNombre(txtNombreProducto.getText().trim());
+                       Combo itemP = (Combo) cbxProveedorPro.getSelectedItem();
+                       pro.setProveedor(itemP.getId());
+                       pro.setStock(Integer.parseInt(txtCantPro.getText().trim()));
+                       pro.setPrecio(Integer.parseInt(txtPrecioPro.getText().trim()));
+                       pro.setNomimagen(txtNomImagen.getText());
+                       pro.setId(Integer.parseInt(txtIdproducto.getText()));
+                       try {
+                           proDao.ModificarProductos(pro);
+                       } catch (SQLException ex) {
+                           Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+                       }
+                       JOptionPane.showMessageDialog(null, "Producto Modificado");
+                       LimpiarTablaProductos();
+                       LimpiarProductos();
+                       ListarProductos();;
+                       cbxProveedorPro.removeAllItems();
+                       llenarProveedor();
+                       bt_Actualizar.setEnabled(false);
+                       bt_Eliminar.setEnabled(false);
+                       bt_Guardar.setEnabled(true);
+                   }
+               }
+           } catch (ClassNotFoundException | SQLException ex) {
+               Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+           }
+                LimpiarTablaProductos();
+        ListarProductos();
+        
+        }       // TODO add your handling code here:
     }//GEN-LAST:event_bt_ActualizarActionPerformed
 
     private void TablaProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaProductoMouseClicked
@@ -1881,11 +1871,11 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
         if ("".equals(txtIdProveedor.getText())) {
             JOptionPane.showMessageDialog(null, "Selecione una fila");
         } else {
-            if (!"".equals(txtRutProveedor.getText()) || !"".equals(txtNombreProveedor.getText()) || !"".equals(txtTelefonoProveedor.getText()) || !"".equals(txtDireccionProveedor.getText())) {
-                pr.setRut(txtRutProveedor.getText());
-                pr.setNombre(txtNombreProveedor.getText());
-                pr.setTelefono(txtTelefonoProveedor.getText());
-                pr.setDireccion(txtDireccionProveedor.getText());
+            if (!"".equals(txtRutProveedor.getText().trim()) || !"".equals(txtNombreProveedor.getText().trim()) || !"".equals(txtTelefonoProveedor.getText().trim()) || !"".equals(txtDireccionProveedor.getText().trim())) {
+                pr.setRut(txtRutProveedor.getText().trim());
+                pr.setNombre(txtNombreProveedor.getText().trim());
+                pr.setTelefono(txtTelefonoProveedor.getText().trim());
+                pr.setDireccion(txtDireccionProveedor.getText().trim());
                 pr.setId(Integer.parseInt(txtIdProveedor.getText()));
                 PrDao.ModificarProveedor(pr);
                 JOptionPane.showMessageDialog(null, "Proveedor Modificado");
@@ -1901,12 +1891,12 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
     }//GEN-LAST:event_btnEditarProveedorActionPerformed
 
     private void btnguardarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarProveedorActionPerformed
-        if (!"".equals(txtRutProveedor.getText()) || !"".equals(txtNombreProveedor.getText()) || !"".equals(txtTelefonoProveedor.getText()) || !"".equals(txtDireccionProveedor.getText())) {
+        if (!"".equals(txtRutProveedor.getText()) || !"".equals(txtNombreProveedor.getText().trim()) || !"".equals(txtTelefonoProveedor.getText().trim()) || !"".equals(txtDireccionProveedor.getText().trim())) {
             if(validarRutProveedores()){
-            pr.setRut(txtRutProveedor.getText());
-            pr.setNombre(txtNombreProveedor.getText());
-            pr.setTelefono(txtTelefonoProveedor.getText());
-            pr.setDireccion(txtDireccionProveedor.getText());
+            pr.setRut(txtRutProveedor.getText().trim());
+            pr.setNombre(txtNombreProveedor.getText().trim());
+            pr.setTelefono(txtTelefonoProveedor.getText().trim());
+            pr.setDireccion(txtDireccionProveedor.getText().trim());
             PrDao.RegistrarProveedor(pr);
             JOptionPane.showMessageDialog(null, "Proveedor Registrado");
             LimpiarTablaProveedores();
@@ -1931,19 +1921,19 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
 
     private void txtCantidadVentaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadVentaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (!"".equals(txtCantidadVenta.getText())) {
-                if(!"0".equals(txtCantidadVenta.getText())){
+            if (!"".equals(txtCantidadVenta.getText().trim())) {
+                if(!"0".equals(txtCantidadVenta.getText().trim())){
                 int id = Integer.parseInt(txtIdPro.getText());
-                String descripcion = txtDescripcionVenta.getText();
-                int cant = Integer.parseInt(txtCantidadVenta.getText());
-                int precio = Integer.parseInt(txtPrecioVenta.getText());
+                String descripcion = txtDescripcionVenta.getText().trim();
+                int cant = Integer.parseInt(txtCantidadVenta.getText().trim());
+                int precio = Integer.parseInt(txtPrecioVenta.getText().trim());
                 int total = cant * precio;
-                int stock = Integer.parseInt(txtStockDisponible.getText());
+                int stock = Integer.parseInt(txtStockDisponible.getText().trim());
                 if (stock >= cant) {
                     item = item + 1;
                     tmp = (DefaultTableModel) TablaVenta.getModel();
                     for (int i = 0; i < TablaVenta.getRowCount(); i++) {
-                        if (TablaVenta.getValueAt(i, 1).equals(txtDescripcionVenta.getText())) {
+                        if (TablaVenta.getValueAt(i, 1).equals(txtDescripcionVenta.getText().trim())) {
                             JOptionPane.showMessageDialog(null, "El producto ya esta registrado");
                             return;
                         }
@@ -1981,10 +1971,13 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
 
     private void btnGenerarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarVentaActionPerformed
         if (TablaVenta.getRowCount() > 0) {
-            int TmpTotal = Integer.parseInt(LabelTotal.getText());
-        int TmpPago = Integer.parseInt(txtPagoCliente.getText());
+        int TmpTotal = Integer.parseInt(LabelTotal.getText().trim());
+        if("".equals(txtPagoCliente.getText().trim())){
+            JOptionPane.showMessageDialog(null, "Pago del cliente esta vacio.");
+        }else{
+        int TmpPago = Integer.parseInt(txtPagoCliente.getText().trim());
         if(TmpPago >= TmpTotal){
-            if (!"".equals(txtNombreClienteventa.getText())) {
+            if (!"".equals(txtNombreClienteventa.getText().trim())) {
                 VueltoTotalBotonVenta();
                 RegistrarVenta();
                 RegistrarDetalle();
@@ -2016,6 +2009,7 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
 
         }
         }
+        }
     }//GEN-LAST:event_btnGenerarVentaActionPerformed
 
     private void btnEliminarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarVentaActionPerformed
@@ -2029,8 +2023,8 @@ String sqlDuplicate2 = "select nombre from productos where nombre = "+"'"+txtNom
 
     private void txtCodigoVentaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoVentaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (!"".equals(txtCodigoVenta.getText())) {
-                String cod = txtCodigoVenta.getText();
+            if (!"".equals(txtCodigoVenta.getText().trim())) {
+                String cod = txtCodigoVenta.getText().trim();
                 pro = proDao.BuscarPro(cod);
                 if (pro.getNombre() != null) {
                     txtIdPro.setText("" + pro.getId());
@@ -2076,13 +2070,15 @@ event.numberDecimalKeyPress(evt, txtCantidadVenta);         // TODO add your han
     }//GEN-LAST:event_txtCantidadVentaKeyTyped
 
     private void bt_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_EliminarActionPerformed
+        
         if (!"".equals(txtIdproducto.getText())) {
             int pregunta = JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar");
             if (pregunta == 0) {
-                int id = Integer.parseInt(txtIdproducto.getText());
+                int id = Integer.parseInt(txtIdproducto.getText().trim());
                 lblFoto.setIcon(null);
                 proDao.EliminarProductos(id);
                 LimpiarTablaProductos();
+                LimpiarProductos();
                 ListarProductos();
                 bt_Actualizar.setEnabled(false);
                 bt_Eliminar.setEnabled(false);
@@ -2099,8 +2095,8 @@ event.numberDecimalKeyPress(evt, txtCantidadVenta);         // TODO add your han
 
     private void txtRutVentaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRutVentaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (!"".equals(txtRutVenta.getText())) {
-                int dni = Integer.parseInt(txtRutVenta.getText());
+            if (!"".equals(txtRutVenta.getText().trim())) {
+                int dni = Integer.parseInt(txtRutVenta.getText().trim());
                 cl = client.Buscarcliente(dni);
                 if (cl.getNombre() != null) {
                     txtNombreClienteventa.setText("" + cl.getNombre());
@@ -2115,8 +2111,8 @@ event.numberDecimalKeyPress(evt, txtCantidadVenta);         // TODO add your han
 
     private void txtRutVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRutVentaKeyTyped
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (!"".equals(txtRutVenta.getText())) {
-                int dni = Integer.parseInt(txtRutVenta.getText());
+            if (!"".equals(txtRutVenta.getText().trim())) {
+                int dni = Integer.parseInt(txtRutVenta.getText().trim());
                 cl = client.Buscarcliente(dni);
                 if (cl.getNombre() != null) {
                     txtNombreClienteventa.setText("" + cl.getNombre());
@@ -2187,8 +2183,8 @@ event.numberDecimalKeyPress(evt, txtCantidadVenta);         // TODO add your han
 
     private void txtNombreVentaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreVentaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (!"".equals(txtNombreVenta.getText())) {
-                String nom = txtNombreVenta.getText();
+            if (!"".equals(txtNombreVenta.getText().trim())) {
+                String nom = txtNombreVenta.getText().trim();
                 pro = proDao.BuscarProNombre(nom);
                 if (pro.getNombre() != null) {
                     txtIdPro.setText("" + pro.getId());
@@ -2251,7 +2247,7 @@ event.numberDecimalKeyPress(evt, txtCantPro);        // TODO add your handling c
 
     private void txtTelefonoProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoProveedorKeyTyped
 event.numberDecimalKeyPress(evt, txtTelefonoProveedor);  
-            if (txtTelefonoProveedor.getText().length() >= 9 ){ // limit to 3 characters
+            if (txtTelefonoProveedor.getText().trim().length() >= 9 ){ // limit to 3 characters
                 evt.consume();
         }// TODO add your handling code here:
     }//GEN-LAST:event_txtTelefonoProveedorKeyTyped
@@ -2263,8 +2259,8 @@ event.numberDecimalKeyPress(evt, txtPagoCliente);                 // TODO add yo
     private void txtPagoClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPagoClienteKeyPressed
 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
     if (TablaVenta.getRowCount() > 0) {
-        int TmpTotal = Integer.parseInt(LabelTotal.getText());
-        int TmpPago = Integer.parseInt(txtPagoCliente.getText());
+        int TmpTotal = Integer.parseInt(LabelTotal.getText().trim());
+        int TmpPago = Integer.parseInt(txtPagoCliente.getText().trim());
         if(TmpPago >= TmpTotal){
        
         VueltoTotal();
@@ -2311,12 +2307,12 @@ if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             JOptionPane.showMessageDialog(null, "seleccione una fila");
         } else {
 
-            if (!"".equals(TxtRutCliente.getText()) || !"".equals(TxtNombreCliente.getText()) || !"".equals(TxtTelefonoCliente.getText())) {
-                cl.setRut(TxtRutCliente.getText());
-                cl.setNombre(TxtNombreCliente.getText());
-                cl.setTelefono(TxtTelefonoCliente.getText());
-                cl.setDireccion(TxtDirecionCliente.getText());
-                cl.setId(Integer.parseInt(txtIdCliente.getText()));
+            if (!"".equals(TxtRutCliente.getText().trim()) || !"".equals(TxtNombreCliente.getText().trim()) || !"".equals(TxtTelefonoCliente.getText().trim())) {
+                cl.setRut(TxtRutCliente.getText().trim());
+                cl.setNombre(TxtNombreCliente.getText().trim());
+                cl.setTelefono(TxtTelefonoCliente.getText().trim());
+                cl.setDireccion(TxtDirecionCliente.getText().trim());
+                cl.setId(Integer.parseInt(txtIdCliente.getText().trim()));
                 client.ModificarCliente(cl);
                 JOptionPane.showMessageDialog(null, "Cliente Modificado");
                 LimpiarCliente();
@@ -2330,12 +2326,12 @@ if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
     private void btnGuardarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarClienteActionPerformed
 
-        if (!"".equals(TxtRutCliente.getText()) || !"".equals(TxtNombreCliente.getText()) || !"".equals(TxtTelefonoCliente.getText()) || !"".equals(TxtDirecionCliente.getText())) {
+        if (!"".equals(TxtRutCliente.getText().trim()) || !"".equals(TxtNombreCliente.getText().trim()) || !"".equals(TxtTelefonoCliente.getText().trim()) || !"".equals(TxtDirecionCliente.getText().trim())) {
             if(validarRutCliente()){
-                cl.setRut(TxtRutCliente.getText());
-                cl.setNombre(TxtNombreCliente.getText());
-                cl.setTelefono(TxtTelefonoCliente.getText());
-                cl.setDireccion(TxtDirecionCliente.getText());
+                cl.setRut(TxtRutCliente.getText().trim());
+                cl.setNombre(TxtNombreCliente.getText().trim());
+                cl.setTelefono(TxtTelefonoCliente.getText().trim());
+                cl.setDireccion(TxtDirecionCliente.getText().trim());
                 client.RegistrarCliente(cl);
                 JOptionPane.showMessageDialog(null, "Cliente Registrado");
                 LimpiarCliente();
@@ -2352,7 +2348,7 @@ if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
     private void TxtTelefonoClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtTelefonoClienteKeyTyped
         event.numberDecimalKeyPress(evt, TxtTelefonoCliente);
 
-        if (TxtTelefonoCliente.getText().length() >= 9 ){ // limit to 3 characters
+        if (TxtTelefonoCliente.getText().trim().length() >= 9 ){ // limit to 3 characters
             evt.consume();
         }
         // TODO add your handling code here:
@@ -2397,7 +2393,7 @@ event.numberDecimalKeyPress(evt, txtCantidadCompra);           // TODO add your 
     }//GEN-LAST:event_txtPrecioCompraKeyTyped
 
     private void btnAddCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCompraActionPerformed
-String sqlFind = "select codigo from productos where codigo = "+txtCodProdCompra.getText()+" ";
+String sqlFind = "select codigo from productos where codigo = "+txtCodProdCompra.getText().trim()+" ";
                    try {
             Class.forName("com.mysql.jdbc.Driver");
              con = cn.getConnection();
@@ -2405,14 +2401,20 @@ String sqlFind = "select codigo from productos where codigo = "+txtCodProdCompra
              ResultSet rs = stmt.executeQuery(sqlFind);
                if(rs.next()==true){
                    
-                com.setCodigoProducto(Integer.parseInt(txtCodProdCompra.getText()));
-                com.setCantidad(Integer.parseInt(txtCantidadCompra.getText()));
+                com.setCodigoProducto(Integer.parseInt(txtCodProdCompra.getText().trim()));
+                com.setCantidad(Integer.parseInt(txtCantidadCompra.getText().trim()));
                 Combo itemP = (Combo) cbxProveedorCom.getSelectedItem();
                 com.setIdProveedor(itemP.getId());
-                com.setPrecioCompra(Integer.parseInt(txtPrecioCompra.getText()));
+                com.setPrecioCompra(Integer.parseInt(txtPrecioCompra.getText().trim()));
                 com.setFechaCompra(fechaCompraActual);
                 comDao.RegistrarCompra(com);
+                JOptionPane.showMessageDialog(null, "Productos Registrado");
+               }else{
+                   JOptionPane.showMessageDialog(null, "El codigo de producto no existe.");
                }
+               
+               LimpiarTablaCompras();
+               ListarCompras();
                    } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -2589,6 +2591,8 @@ private void LimpiarCliente() {
         TxtDirecionCliente.setText("");
     }
 
+
+
     private void LimpiarProveedor() {
         txtIdProveedor.setText("");
         txtRutProveedor.setText("");
@@ -2605,6 +2609,7 @@ private void LimpiarCliente() {
         txtNombreProducto.setText("");
         txtCantPro.setText("");
         txtPrecioPro.setText("");
+        txtBuscarProducto.setText("");
     }
 
     private void TotalPagar() {
@@ -2618,8 +2623,8 @@ private void LimpiarCliente() {
     }
     private void VueltoTotal() {
         Vueltototal = 0;
-        PagoCliente = Integer.parseInt(txtPagoCliente.getText());
-        int aPagar = Integer.parseInt(LabelTotal.getText());
+        PagoCliente = Integer.parseInt(txtPagoCliente.getText().trim());
+        int aPagar = Integer.parseInt(LabelTotal.getText().trim());
         Vueltototal = PagoCliente - aPagar;
         
         LabelVuelto.setText(Integer.toString(Vueltototal));
@@ -2631,8 +2636,8 @@ private void LimpiarCliente() {
     
     private void VueltoTotalBotonVenta() {
  if (TablaVenta.getRowCount() > 0) {
-        int TmpTotal = Integer.parseInt(LabelTotal.getText());
-        int TmpPago = Integer.parseInt(txtPagoCliente.getText());
+        int TmpTotal = Integer.parseInt(LabelTotal.getText().trim());
+        int TmpPago = Integer.parseInt(txtPagoCliente.getText().trim());
         if(TmpPago >= TmpTotal){
             VueltoTotal();
         }else{
@@ -2656,8 +2661,8 @@ private void LimpiarCliente() {
     }
 
     private void RegistrarVenta() {
-        int cliente = Integer.parseInt(txtIdCV.getText());
-        String vendedor = LabelVendedor.getText();
+        int cliente = Integer.parseInt(txtIdCV.getText().trim());
+        String vendedor = LabelVendedor.getText().trim();
         int monto = Totalpagar;
         int pago = PagoCliente;
         int vuelto = Vueltototal;
@@ -2670,7 +2675,7 @@ private void LimpiarCliente() {
         Vdao.RegistrarVenta(v);
     }
     private void RegistrarVentaRapida() {
-        String vendedor = LabelVendedor.getText();
+        String vendedor = LabelVendedor.getText().trim();
         int monto = Totalpagar;
         int pago = PagoCliente;
         int vuelto = Vueltototal;
@@ -2697,7 +2702,7 @@ private void LimpiarCliente() {
 
 
         }
-        Vdao.pdfV(id, 0, Integer.parseInt(txtPagoCliente.getText()),Totalpagar,Integer.parseInt(LabelVuelto.getText()),LabelVendedor.getText());
+        Vdao.pdfV(id, 0, Integer.parseInt(txtPagoCliente.getText().trim()),Totalpagar,Integer.parseInt(LabelVuelto.getText().trim()),LabelVendedor.getText().trim());
     }
     
         private void RegistrarDetalle() {
@@ -2715,7 +2720,7 @@ private void LimpiarCliente() {
 
         }
         int cliente = Integer.parseInt(txtIdCV.getText());
-        Vdao.pdfV(id, cliente, Integer.parseInt(txtPagoCliente.getText()),Totalpagar,Integer.parseInt(LabelVuelto.getText()),LabelVendedor.getText());
+        Vdao.pdfV(id, cliente, Integer.parseInt(txtPagoCliente.getText().trim()),Totalpagar,Integer.parseInt(LabelVuelto.getText().trim()),LabelVendedor.getText().trim());
     }
 
     private void ActualizarStock() {
@@ -2747,6 +2752,14 @@ private void LimpiarCliente() {
     private void LimpiarTablaHistorialVentas() {
         tmp = (DefaultTableModel) TablaHistorialVenta.getModel();
         int fila = TablaHistorialVenta.getRowCount();
+        for (int i = 0; i < fila; i++) {
+            tmp.removeRow(0);
+        }
+    }
+    
+    private void LimpiarCompras() {
+        tmp = (DefaultTableModel) TablaCompra.getModel();
+        int fila = TablaCompra.getRowCount();
         for (int i = 0; i < fila; i++) {
             tmp.removeRow(0);
         }

@@ -51,7 +51,7 @@ InputStream empty = new InputStream() {
     
         public List ListarCompras(){
        List<Compra> Listarcom = new ArrayList();
-       String sql = "SELECT pr.id AS id_proveedor, pr.nombre AS nombre_proveedor, p.* FROM proveedor pr INNER JOIN compras p ON pr.id = p.id_proveedor ORDER BY p.id_proveedor DESC;";
+       String sql = "SELECT pr.id AS id_proveedor, pr.nombre AS nombre_proveedor, p.* FROM proveedor pr INNER JOIN compras p ON pr.id = p.id_proveedor ORDER BY p.codigo_compra ASC;";
        try {
            con = cn.getConnection();
            ps = con.prepareStatement(sql);
