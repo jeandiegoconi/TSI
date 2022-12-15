@@ -483,7 +483,15 @@ public final class Menu extends javax.swing.JFrame {
             new String [] {
                 "COD", "PRODUCTO", "CANTIDAD", "PRECIO U.", "PRECIO TOTAL"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         TablaVenta.getTableHeader().setReorderingAllowed(false);
         TablaVenta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -491,6 +499,12 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jScrollPane3.setViewportView(TablaVenta);
+        if (TablaVenta.getColumnModel().getColumnCount() > 0) {
+            TablaVenta.getColumnModel().getColumn(1).setResizable(false);
+            TablaVenta.getColumnModel().getColumn(2).setResizable(false);
+            TablaVenta.getColumnModel().getColumn(3).setResizable(false);
+            TablaVenta.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         jLabel4.setText("Cantidad:");
 
@@ -803,12 +817,18 @@ public final class Menu extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        TablaHistorialVenta.getTableHeader().setReorderingAllowed(false);
         TablaHistorialVenta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TablaHistorialVentaMouseClicked(evt);
             }
         });
         jScrollPane7.setViewportView(TablaHistorialVenta);
+        if (TablaHistorialVenta.getColumnModel().getColumnCount() > 0) {
+            TablaHistorialVenta.getColumnModel().getColumn(0).setResizable(false);
+            TablaHistorialVenta.getColumnModel().getColumn(1).setResizable(false);
+            TablaHistorialVenta.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         btnPdfVenta.setText("Abrir PDF");
         btnPdfVenta.addActionListener(new java.awt.event.ActionListener() {
@@ -901,6 +921,11 @@ public final class Menu extends javax.swing.JFrame {
             TablaProducto.getColumnModel().getColumn(0).setMinWidth(0);
             TablaProducto.getColumnModel().getColumn(0).setPreferredWidth(0);
             TablaProducto.getColumnModel().getColumn(0).setMaxWidth(0);
+            TablaProducto.getColumnModel().getColumn(1).setResizable(false);
+            TablaProducto.getColumnModel().getColumn(2).setResizable(false);
+            TablaProducto.getColumnModel().getColumn(3).setResizable(false);
+            TablaProducto.getColumnModel().getColumn(4).setResizable(false);
+            TablaProducto.getColumnModel().getColumn(5).setResizable(false);
         }
 
         btnNuevoProducto.setText("Nuevo");
@@ -1238,7 +1263,15 @@ public final class Menu extends javax.swing.JFrame {
             new String [] {
                 "ID", "RUT", "Nombre", "Telefono", "Direccion"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         TablaCliente.getTableHeader().setReorderingAllowed(false);
         TablaCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1250,6 +1283,10 @@ public final class Menu extends javax.swing.JFrame {
             TablaCliente.getColumnModel().getColumn(0).setMinWidth(0);
             TablaCliente.getColumnModel().getColumn(0).setPreferredWidth(0);
             TablaCliente.getColumnModel().getColumn(0).setMaxWidth(0);
+            TablaCliente.getColumnModel().getColumn(1).setResizable(false);
+            TablaCliente.getColumnModel().getColumn(2).setResizable(false);
+            TablaCliente.getColumnModel().getColumn(3).setResizable(false);
+            TablaCliente.getColumnModel().getColumn(4).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -1454,6 +1491,13 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jScrollPane5.setViewportView(TablaProveedor);
+        if (TablaProveedor.getColumnModel().getColumnCount() > 0) {
+            TablaProveedor.getColumnModel().getColumn(0).setResizable(false);
+            TablaProveedor.getColumnModel().getColumn(1).setResizable(false);
+            TablaProveedor.getColumnModel().getColumn(2).setResizable(false);
+            TablaProveedor.getColumnModel().getColumn(3).setResizable(false);
+            TablaProveedor.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -1503,6 +1547,14 @@ public final class Menu extends javax.swing.JFrame {
         });
         TablaCompra.getTableHeader().setReorderingAllowed(false);
         jScrollPane6.setViewportView(TablaCompra);
+        if (TablaCompra.getColumnModel().getColumnCount() > 0) {
+            TablaCompra.getColumnModel().getColumn(0).setResizable(false);
+            TablaCompra.getColumnModel().getColumn(1).setResizable(false);
+            TablaCompra.getColumnModel().getColumn(2).setResizable(false);
+            TablaCompra.getColumnModel().getColumn(3).setResizable(false);
+            TablaCompra.getColumnModel().getColumn(4).setResizable(false);
+            TablaCompra.getColumnModel().getColumn(5).setResizable(false);
+        }
 
         btnAddCompra.setText("Añadir Compra");
         btnAddCompra.addActionListener(new java.awt.event.ActionListener() {
