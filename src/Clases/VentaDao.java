@@ -163,6 +163,31 @@ public class VentaDao {
        return ListaVenta;
    }
     
+    
+        public List  BuscarListaVenta(int id){
+       List<Venta> ListaVenta = new ArrayList();
+       String IDSTRING = Integer.toString(id);
+       String sql = "SELECT c.id AS id_cli, c.nombre, v.* FROM clientes c INNER JOIN ventas v ON c.id = v.cliente where cast(v.id as varchar(11)) LIKE '%"+IDSTRING+ "%'  order by  v.id desc;";
+       try {
+           con = cn.getConnection();
+           ps = con.prepareStatement(sql);
+           rs = ps.executeQuery();
+           while (rs.next()) {               
+               Venta vent = new Venta();
+               vent.setId(rs.getInt("id"));
+               vent.setNombre_cli(rs.getString("nombre"));
+               vent.setVendedor(rs.getString("vendedor"));
+               vent.setTotal(rs.getInt("total"));
+               ListaVenta.add(vent);
+           }
+       } catch (SQLException e) {
+           System.out.println(e.toString());
+       }
+       return ListaVenta;
+    }
+    
+    
+
     public Venta BuscarVenta(int id){
         Venta cl = new Venta();
         String sql = "SELECT * FROM ventas WHERE id = ?";

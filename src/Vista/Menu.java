@@ -6,6 +6,7 @@ package Vista;
  */
 
 
+import Clases.DetalleDao;
 import javax.swing.JOptionPane;
 import javax.swing.table.*;
 import Clases.*;
@@ -46,6 +47,7 @@ public final class Menu extends javax.swing.JFrame {
     Compra com = new Compra();
     ComprasDao comDao = new ComprasDao();
     Eventos event = new Eventos();
+    DetalleDao DeDao = new DetalleDao();
     Venta v = new Venta();
     VentaDao Vdao = new VentaDao();
     Detalle Dv = new Detalle();
@@ -108,6 +110,22 @@ public final class Menu extends javax.swing.JFrame {
 
     }
     
+    
+        public void ListarProductosHitorial() {
+        List<Detalle> ListarProdHis = DeDao.ListarProdHis(Integer.parseInt(txtIdVentaPdf.getText()));
+        modelo = (DefaultTableModel) TablaProductoHistorial.getModel();
+        for (int i = 0; i < ListarProdHis.size(); i++) {
+        Object[] ob = new Object[3];
+            ob[0] = ListarProdHis.get(i).getNombre();
+            ob[2] = ListarProdHis.get(i).getPrecio();
+            ob[1] = ListarProdHis.get(i).getCantidad();
+            modelo.addRow(ob);
+        }
+        TablaProductoHistorial.setModel(modelo);
+
+    }
+    
+    
     public void ListarProveedor() {
         List<Proveedor> ListarPr = PrDao.ListarProveedor();
         modelo = (DefaultTableModel) TablaProveedor.getModel();
@@ -140,6 +158,24 @@ public final class Menu extends javax.swing.JFrame {
         }
         TablaProducto.setModel(modelo);
 
+    }
+    
+        public void BuscarVentas() {
+        List<Venta> VentasPro = Vdao.BuscarListaVenta(Integer.parseInt(txtBuscarCodigoVenta.getText().trim()));
+        modelo = (DefaultTableModel) TablaHistorialVenta.getModel();
+        Object[] ob = new Object[3];
+        for (int i = 0; i < VentasPro.size(); i++) {
+            ob[0] = VentasPro.get(i).getId();
+            ob[1] = VentasPro.get(i).getNombre_cli();
+            ob[2] = VentasPro.get(i).getTotal();
+            
+            modelo.addRow(ob);
+        }
+        TablaHistorialVenta.setModel(modelo);
+
+        
+ 
+        
     }
     
     
@@ -303,6 +339,7 @@ public final class Menu extends javax.swing.JFrame {
         LimpiarTablaCompras();
         LimpiarTablaProductos();
         LimpiarTablaHistorialVentas();
+        LimpiarProductosHistorial();
         ListarCompras();
         ListarProductos();
         LimpiarProveedor();
@@ -364,6 +401,10 @@ public final class Menu extends javax.swing.JFrame {
         TablaHistorialVenta = new javax.swing.JTable();
         btnPdfVenta = new javax.swing.JButton();
         txtIdVentaPdf = new javax.swing.JTextField();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        TablaProductoHistorial = new javax.swing.JTable();
+        jLabel38 = new javax.swing.JLabel();
+        txtBuscarCodigoVenta = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtIdproducto = new javax.swing.JTextField();
@@ -806,7 +847,7 @@ public final class Menu extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "Cod Venta", "Cliente", "Total"
+                "CODIGO VENTA", "CLIENTE", "TOTAL"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -837,34 +878,91 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
 
+        TablaProductoHistorial.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "PRODUCTO", "CANTIDAD", "PAGADO"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TablaProductoHistorial.getTableHeader().setReorderingAllowed(false);
+        TablaProductoHistorial.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaProductoHistorialMouseClicked(evt);
+            }
+        });
+        jScrollPane8.setViewportView(TablaProductoHistorial);
+        if (TablaProductoHistorial.getColumnModel().getColumnCount() > 0) {
+            TablaProductoHistorial.getColumnModel().getColumn(0).setResizable(false);
+            TablaProductoHistorial.getColumnModel().getColumn(1).setResizable(false);
+            TablaProductoHistorial.getColumnModel().getColumn(2).setResizable(false);
+        }
+
+        jLabel38.setText("Buscar por Codigo Venta:");
+
+        txtBuscarCodigoVenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtBuscarCodigoVentaKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarCodigoVentaKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscarCodigoVentaKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 885, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                        .addComponent(btnPdfVenta)
-                        .addGap(30, 30, 30))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                        .addComponent(txtIdVentaPdf, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(187, 187, 187))))
+                .addComponent(btnPdfVenta)
+                .addGap(30, 30, 30))
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jLabel38)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtBuscarCodigoVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtIdVentaPdf, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(187, 187, 187))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(txtIdVentaPdf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtIdVentaPdf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel38)
+                        .addComponent(txtBuscarCodigoVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addComponent(btnPdfVenta)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(98, 98, 98))
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane7)
+                    .addComponent(jScrollPane8))
+                .addGap(90, 90, 90))
         );
 
         jTabbedPane1.addTab("Ventas", jPanel8);
@@ -2460,7 +2558,12 @@ String sqlDuplicate = "select rut from clientes where rut = '"+TxtRutCliente.get
 
     private void TablaHistorialVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaHistorialVentaMouseClicked
         int fila = TablaHistorialVenta.rowAtPoint(evt.getPoint());
-        txtIdVentaPdf.setText(TablaHistorialVenta.getValueAt(fila, 0).toString());        // TODO add your handling code here:
+        txtIdVentaPdf.setText(TablaHistorialVenta.getValueAt(fila, 0).toString());  
+        v = Vdao.BuscarVenta(Integer.parseInt(txtIdVentaPdf.getText()));
+        LimpiarProductosHistorial();
+        ListarProductosHitorial();
+        
+// TODO add your handling code here:
     }//GEN-LAST:event_TablaHistorialVentaMouseClicked
 
     private void txtCodProdCompraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodProdCompraKeyTyped
@@ -2521,6 +2624,32 @@ String sqlFind = "select codigo from productos where codigo = "+txtCodProdCompra
         ListarProductos();}        // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarProductoKeyReleased
 
+    private void TablaProductoHistorialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaProductoHistorialMouseClicked
+
+        
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TablaProductoHistorialMouseClicked
+
+    private void txtBuscarCodigoVentaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarCodigoVentaKeyPressed
+event.numberDecimalKeyPress(evt, txtBuscarCodigoVenta);        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscarCodigoVentaKeyPressed
+
+    private void txtBuscarCodigoVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarCodigoVentaKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscarCodigoVentaKeyTyped
+
+    private void txtBuscarCodigoVentaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarCodigoVentaKeyReleased
+
+        if (!"".equals(txtBuscarCodigoVenta.getText().trim())){
+            LimpiarTablaHistorialVentas();
+            LimpiarProductosHistorial();
+            BuscarVentas();
+        }else{
+        LimpiarTablaHistorialVentas();
+        ListarHistorialVentas();}        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscarCodigoVentaKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -2558,6 +2687,7 @@ String sqlFind = "select codigo from productos where codigo = "+txtCodProdCompra
     private javax.swing.JTable TablaCompra;
     private javax.swing.JTable TablaHistorialVenta;
     private javax.swing.JTable TablaProducto;
+    private javax.swing.JTable TablaProductoHistorial;
     private javax.swing.JTable TablaProveedor;
     private javax.swing.JTable TablaVenta;
     private javax.swing.JTextField TxtDirecionCliente;
@@ -2614,6 +2744,7 @@ String sqlFind = "select codigo from productos where codigo = "+txtCodProdCompra
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -2635,10 +2766,12 @@ String sqlFind = "select codigo from productos where codigo = "+txtCodProdCompra
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblCodProd;
     private javax.swing.JLabel lblFoto;
     private javax.swing.JLabel lblFotoVenta;
+    private javax.swing.JTextField txtBuscarCodigoVenta;
     private javax.swing.JTextField txtBuscarProducto;
     private javax.swing.JTextField txtCantPro;
     private javax.swing.JTextField txtCantidadCompra;
@@ -2708,6 +2841,8 @@ private void LimpiarCliente() {
         }
         LabelTotal.setText(Integer.toString(Totalpagar));
     }
+    
+    
     private void VueltoTotal() {
         Vueltototal = 0;
         PagoCliente = Integer.parseInt(txtPagoCliente.getText().trim());
@@ -2847,6 +2982,14 @@ private void LimpiarCliente() {
     private void LimpiarCompras() {
         tmp = (DefaultTableModel) TablaCompra.getModel();
         int fila = TablaCompra.getRowCount();
+        for (int i = 0; i < fila; i++) {
+            tmp.removeRow(0);
+        }
+    }
+    
+        private void LimpiarProductosHistorial() {
+        tmp = (DefaultTableModel) TablaProductoHistorial.getModel();
+        int fila = TablaProductoHistorial.getRowCount();
         for (int i = 0; i < fila; i++) {
             tmp.removeRow(0);
         }
