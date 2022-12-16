@@ -1626,6 +1626,9 @@ public final class Menu extends javax.swing.JFrame {
                 LimpiarTablaProveedores();
                 LimpiarProveedor();
                 ListarProveedor();
+                cbxProveedorPro.removeAllItems();
+                cbxProveedorCom.removeAllItems();
+                llenarProveedor();
             }
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione una fila");
@@ -1868,8 +1871,10 @@ if (!"".equals(txtCodigoProducto.getText().trim()) && !"".equals(txtNombreProduc
                 JOptionPane.showMessageDialog(null, "Proveedor Modificado");
                 LimpiarTablaProveedores();
                 cbxProveedorPro.removeAllItems();
+                cbxProveedorCom.removeAllItems();
                 ListarProveedor();
                 LimpiarProveedor();
+                llenarProveedor();
                 btnEditarProveedor.setEnabled(false);
                 btnEliminarProveedor.setEnabled(false);
                 btnguardarProveedor.setEnabled(true);
