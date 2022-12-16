@@ -26,10 +26,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.filechooser.FileSystemView;
 
 public class VentaDao {
@@ -149,7 +151,8 @@ public class VentaDao {
            con = cn.getConnection();
            ps = con.prepareStatement(sql);
            rs = ps.executeQuery();
-           while (rs.next()) {               
+           while (rs.next()) {  
+
                Venta vent = new Venta();
                vent.setId(rs.getInt("id"));
                vent.setNombre_cli(rs.getString("nombre"));
@@ -317,26 +320,34 @@ public class VentaDao {
             tabla.addCell(c4);
             String product = "SELECT d.id, d.id_pro,d.id_venta, d.precio, d.cantidad, p.id, p.nombre FROM detalle d INNER JOIN productos p ON d.id_pro = p.id WHERE d.id_venta = ?";
             try {
+
                 ps = con.prepareStatement(product);
                 ps.setInt(1, idventa);
                 rs = ps.executeQuery();
                 while (rs.next()) {
+                    Locale chileLocale = new Locale("es","CL");
+                    NumberFormat nf = NumberFormat.getNumberInstance(chileLocale);
+                    String FormattedPrecio ="$"+ nf.format(Integer.parseInt(rs.getString("precio")));
+        
                     int subTotal = rs.getInt("cantidad") * rs.getInt("precio");
                     tabla.addCell(rs.getString("cantidad"));
                     tabla.addCell(rs.getString("nombre"));
-                    tabla.addCell(rs.getString("precio"));
-                    tabla.addCell(String.valueOf(subTotal));
+                    tabla.addCell(FormattedPrecio);
+                    String FormattedSubTotal ="$"+ nf.format(subTotal);
+                    tabla.addCell(FormattedSubTotal);
                 }
 
             } catch (SQLException e) {
                 System.out.println(e.toString());
             }
+            Locale chileLocale = new Locale("es","CL");
+            NumberFormat nf = NumberFormat.getNumberInstance(chileLocale);
             doc.add(tabla);
             Paragraph info = new Paragraph();
             info.add(Chunk.NEWLINE);
-            info.add("Pagado : $"+ pago +"\n");
-            info.add("Total : $" + total+"\n");
-            info.add("Vuelto : $"+ vuelto );
+            info.add("Pagado : $"+ nf.format(pago) +"\n");
+            info.add("Total : $" + nf.format(total)+"\n");
+            info.add("Vuelto : $"+ nf.format(vuelto));
             info.setAlignment(Element.ALIGN_RIGHT);
             doc.add(info);
             Paragraph firma = new Paragraph();
