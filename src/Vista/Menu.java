@@ -324,6 +324,7 @@ public final class Menu extends javax.swing.JFrame {
         public Menu()  {
 
         initComponents();
+
         this.setLocationRelativeTo(null);
         DateCompra.setDate(fechaCompra);
         Midate.setDate(fechaVenta);
@@ -524,6 +525,7 @@ public final class Menu extends javax.swing.JFrame {
         setTitle("Sistema de Inventario");
         setResizable(false);
 
+        jTabbedPane1.setToolTipText("");
         jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTabbedPane1MouseClicked(evt);
@@ -544,7 +546,7 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jPanel3.add(txtRutVenta);
-        txtRutVenta.setBounds(90, 650, 135, 22);
+        txtRutVenta.setBounds(90, 630, 135, 22);
 
         txtNombreClienteventa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -552,20 +554,20 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jPanel3.add(txtNombreClienteventa);
-        txtNombreClienteventa.setBounds(300, 650, 137, 22);
+        txtNombreClienteventa.setBounds(300, 630, 137, 22);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("TOTAL A PAGAR :");
         jPanel3.add(jLabel5);
-        jLabel5.setBounds(750, 640, 97, 16);
+        jLabel5.setBounds(750, 620, 97, 16);
 
         jLabel8.setText("NOMBRE:");
         jPanel3.add(jLabel8);
-        jLabel8.setBounds(240, 650, 64, 16);
+        jLabel8.setBounds(240, 630, 64, 16);
 
         jLabel7.setText("RUT CLIENTE:");
         jPanel3.add(jLabel7);
-        jLabel7.setBounds(10, 650, 71, 16);
+        jLabel7.setBounds(10, 630, 71, 16);
 
         TablaVenta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -599,7 +601,7 @@ public final class Menu extends javax.swing.JFrame {
         }
 
         jPanel3.add(jScrollPane3);
-        jScrollPane3.setBounds(6, 356, 906, 279);
+        jScrollPane3.setBounds(6, 356, 906, 260);
 
         jLabel4.setText("Cantidad:");
         jPanel3.add(jLabel4);
@@ -680,7 +682,7 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jPanel3.add(btnGenerarVenta);
-        btnGenerarVenta.setBounds(600, 640, 140, 37);
+        btnGenerarVenta.setBounds(600, 620, 140, 37);
 
         txtIdCV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -761,7 +763,7 @@ public final class Menu extends javax.swing.JFrame {
 
         jLabel32.setText("PAGO CLIENTE:");
         jPanel3.add(jLabel32);
-        jLabel32.setBounds(450, 650, 82, 16);
+        jLabel32.setBounds(450, 630, 82, 16);
 
         txtPagoCliente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -772,12 +774,12 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jPanel3.add(txtPagoCliente);
-        txtPagoCliente.setBounds(540, 650, 50, 22);
+        txtPagoCliente.setBounds(540, 630, 50, 22);
 
         jLabel31.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel31.setText("VUELTO:");
         jPanel3.add(jLabel31);
-        jLabel31.setBounds(760, 670, 48, 16);
+        jLabel31.setBounds(760, 650, 48, 16);
 
         LabelVuelto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         LabelVuelto.setText("----");
@@ -787,7 +789,7 @@ public final class Menu extends javax.swing.JFrame {
         jLabel39.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel39.setText("(Ej: 123456789-9)");
         jPanel3.add(jLabel39);
-        jLabel39.setBounds(10, 670, 120, 15);
+        jLabel39.setBounds(10, 650, 120, 15);
 
         lblEnterNombre.setText("Presione Enter para aceptar.");
         jPanel3.add(lblEnterNombre);
@@ -810,14 +812,14 @@ public final class Menu extends javax.swing.JFrame {
         lblTotal.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTotal.setText("----");
         jPanel3.add(lblTotal);
-        lblTotal.setBounds(850, 640, 60, 16);
+        lblTotal.setBounds(850, 620, 60, 16);
 
         lblVuelto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblVuelto.setText("----");
         jPanel3.add(lblVuelto);
-        lblVuelto.setBounds(850, 670, 43, 16);
+        lblVuelto.setBounds(850, 650, 43, 16);
 
-        jTabbedPane1.addTab("Nueva Venta", jPanel3);
+        jTabbedPane1.addTab("Nueva Venta", new javax.swing.ImageIcon(getClass().getResource("/Img/nuevaventa.png")), jPanel3); // NOI18N
 
         jPanel8.setLayout(null);
 
@@ -926,7 +928,7 @@ public final class Menu extends javax.swing.JFrame {
         jPanel8.add(txtBuscarCodigoVenta);
         txtBuscarCodigoVenta.setBounds(160, 90, 91, 22);
 
-        jTabbedPane1.addTab("Ventas", jPanel8);
+        jTabbedPane1.addTab("Ventas", new javax.swing.ImageIcon(getClass().getResource("/Img/history.png")), jPanel8); // NOI18N
 
         jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -1121,7 +1123,7 @@ public final class Menu extends javax.swing.JFrame {
         jPanel2.add(lblAlerta);
         lblAlerta.setBounds(10, 130, 140, 20);
 
-        jTabbedPane1.addTab("Productos", jPanel2);
+        jTabbedPane1.addTab("Productos", new javax.swing.ImageIcon(getClass().getResource("/Img/products.png")), jPanel2); // NOI18N
 
         jPanel1.setLayout(null);
 
@@ -1257,7 +1259,7 @@ public final class Menu extends javax.swing.JFrame {
         jPanel1.add(TxtTelefonoCliente);
         TxtTelefonoCliente.setBounds(70, 170, 151, 22);
 
-        jTabbedPane1.addTab("Clientes", jPanel1);
+        jTabbedPane1.addTab("Clientes", new javax.swing.ImageIcon(getClass().getResource("/Img/clients.png")), jPanel1); // NOI18N
 
         jLabel15.setText("RUT:");
 
@@ -1459,10 +1461,10 @@ public final class Menu extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(199, Short.MAX_VALUE))
+                .addContainerGap(185, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Proveedores", jPanel5);
+        jTabbedPane1.addTab("Proveedores", new javax.swing.ImageIcon(getClass().getResource("/Img/supplier.png")), jPanel5); // NOI18N
 
         jPanel7.setLayout(null);
 
@@ -1585,7 +1587,7 @@ public final class Menu extends javax.swing.JFrame {
         jPanel7.add(jLabel41);
         jLabel41.setBounds(456, 54, 9, 16);
 
-        jTabbedPane1.addTab("Compras", jPanel7);
+        jTabbedPane1.addTab("Compras", new javax.swing.ImageIcon(getClass().getResource("/Img/purchases.png")), jPanel7); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1594,13 +1596,14 @@ public final class Menu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 918, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 717, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
