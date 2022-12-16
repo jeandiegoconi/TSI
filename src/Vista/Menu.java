@@ -1512,7 +1512,7 @@ public final class Menu extends javax.swing.JFrame {
         jScrollPane6.setBounds(19, 156, 857, 402);
 
         jPanel7.add(cbxProveedorCom);
-        cbxProveedorCom.setBounds(77, 23, 174, 25);
+        cbxProveedorCom.setBounds(80, 20, 174, 25);
 
         btnAddCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/save.png"))); // NOI18N
         btnAddCompra.setText("Añadir Compra");
@@ -1540,7 +1540,7 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jPanel7.add(txtCodProdCompra);
-        txtCodProdCompra.setBounds(382, 23, 37, 25);
+        txtCodProdCompra.setBounds(390, 20, 37, 25);
 
         jLabel35.setText("Cantidad:");
         jPanel7.add(jLabel35);
@@ -1552,11 +1552,11 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jPanel7.add(txtCantidadCompra);
-        txtCantidadCompra.setBounds(515, 24, 34, 22);
+        txtCantidadCompra.setBounds(520, 20, 34, 22);
 
-        jLabel36.setText("Precio:");
+        jLabel36.setText("Precio a pagar:");
         jPanel7.add(jLabel36);
-        jLabel36.setBounds(576, 27, 36, 16);
+        jLabel36.setBounds(576, 27, 78, 16);
 
         txtPrecioCompra.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1567,7 +1567,7 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jPanel7.add(txtPrecioCompra);
-        txtPrecioCompra.setBounds(618, 24, 40, 22);
+        txtPrecioCompra.setBounds(660, 20, 50, 22);
 
         lblNomProdCom.setText("Nombre Producto:");
         jPanel7.add(lblNomProdCom);
@@ -1578,12 +1578,17 @@ public final class Menu extends javax.swing.JFrame {
         txtNombreProductoCompra.setBounds(387, 88, 160, 22);
 
         txtIdProdCompra.setEditable(false);
+        txtIdProdCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdProdCompraActionPerformed(evt);
+            }
+        });
         jPanel7.add(txtIdProdCompra);
-        txtIdProdCompra.setBounds(749, 24, 64, 22);
+        txtIdProdCompra.setBounds(830, 70, 64, 22);
 
         lblEnterCompra.setText("Presione Enter para ver el nombre");
         jPanel7.add(lblEnterCompra);
-        lblEnterCompra.setBounds(267, 54, 177, 16);
+        lblEnterCompra.setBounds(240, 60, 177, 16);
         jPanel7.add(jLabel41);
         jLabel41.setBounds(456, 54, 9, 16);
 
@@ -2246,6 +2251,10 @@ event.numberDecimalKeyPress(evt, txtBuscarCodigoVenta);        // TODO add your 
                     txtIdProdCompra.setText("" + pro.getId());
                     txtNombreProductoCompra.setText("" + pro.getNombre());
                 } else {
+                                     lblNomProdCom.setVisible(false);
+                 txtNombreProductoCompra.setVisible(false);
+                    JOptionPane.showMessageDialog(null, "El producto no existe.");
+
                     LimpiarCompra();
                     txtCodProdCompra.requestFocus();
                 }
@@ -2579,6 +2588,10 @@ if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
     private void txtBuscarCodigoVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarCodigoVentaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarCodigoVentaActionPerformed
+
+    private void txtIdProdCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdProdCompraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdProdCompraActionPerformed
 
     /**
      * @param args the command line arguments
