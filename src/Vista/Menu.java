@@ -331,7 +331,7 @@ public final class Menu extends javax.swing.JFrame {
         LblEnterCodigo.setVisible(false);
         lblEnterCompra.setVisible(false);
         txtIdCliente.setVisible(false);
-        txtIdProdCompra.setVisible(true);
+        txtIdProdCompra.setVisible(false);
         txtIdPro.setVisible(false);
         LabelVendedor.setVisible(false);
         txtIdproducto.setVisible(false);
