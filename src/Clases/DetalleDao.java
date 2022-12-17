@@ -27,7 +27,7 @@ public class DetalleDao {
     
     public List ListarProdHis(int idventa){
         List<Detalle> Listaprhis = new ArrayList();
-        String sql = "SELECT d.id, d.id_pro,d.id_venta, d.precio, d.cantidad, p.id, p.nombre FROM detalle d INNER JOIN productos p ON d.id_pro = p.id WHERE d.id_venta = ?";
+        String sql = "SELECT d.id, d.id_pro,d.id_venta, d.precio, d.cantidad, p.id, p.nombre FROM detalle d INNER JOIN productos p ON d.id_pro = p.id WHERE d.id_venta = ? ";
 
         try {
             con = cn.getConnection();
@@ -38,6 +38,32 @@ public class DetalleDao {
                 Detalle de = new Detalle();
                 de.setNombre(rs.getString("nombre"));
                 de.setPrecio(rs.getInt("precio"));
+                de.setCantidad(rs.getInt("cantidad"));
+                Listaprhis.add(de);
+            }
+            
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return Listaprhis;
+        
+        
+    }
+    
+    
+        public List ListarProdHisCom(int idcompra){
+        List<Detalle> Listaprhis = new ArrayList();
+        String sql = "SELECT de.id_pro, p.nombre,de.cantidad from detalle_compra de, productos p where de.id_pro = p.codigo and de.id_compra = ? order by de.id_pro";
+
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, idcompra);
+            rs = ps.executeQuery();
+            while (rs.next()) {  
+                Detalle de = new Detalle();
+                de.setId_pro(rs.getInt("id_pro"));
+                de.setNombre(rs.getString("nombre"));
                 de.setCantidad(rs.getInt("cantidad"));
                 Listaprhis.add(de);
             }

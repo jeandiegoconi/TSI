@@ -24,17 +24,52 @@ InputStream empty = new InputStream() {
         return -1;  // end of stream
     }
 };
-
-    public int RegistrarCompra(Compra c){
-        String sql = "INSERT INTO compras (codigo_producto ,id_proveedor,cantidad ,precio_compra,fecha_compra) VALUES (?,?,?,?,?)";
+public int IdCompra(){
+        int id = 0;
+        String sql = "SELECT MAX(id) FROM compras";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setInt(1, c.getCodigoProducto());
-            ps.setInt(2,c.getIdProveedor());
-            ps.setInt(3, c.getCantidad());
-            ps.setInt(4,c.getPrecioCompra());
-            ps.setString(5,c.getFechaCompra());
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return id;
+    }
+
+
+    public int RegistrarDetalle(Detalle Dv){
+       String sql = "INSERT INTO detalle_compra (id_pro, cantidad, id_compra) VALUES (?,?,?)";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, Dv.getId_pro());
+            ps.setInt(2, Dv.getCantidad());
+            ps.setInt(3, Dv.getId());
+            ps.execute();
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }finally{
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            }
+        }
+        return r;
+    }
+
+    public int RegistrarCompra(Compra c){
+        String sql = "INSERT INTO compras (id_proveedor,precio_compra, fecha_compra) VALUES (?,?,?)";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1,c.getIdProveedor());
+            ps.setInt(2,c.getPrecioCompra());
+            ps.setString(3,c.getFechaCompra());
             ps.execute();
         } catch (SQLException e) {
             System.out.println(e.toString());
@@ -51,19 +86,15 @@ InputStream empty = new InputStream() {
     
         public List ListarCompras(){
        List<Compra> Listarcom = new ArrayList();
-       String sql = "SELECT pr.id AS id_proveedor, pr.nombre AS nombre_proveedor, p.* FROM proveedor pr INNER JOIN compras p ON pr.id = p.id_proveedor ORDER BY p.codigo_compra ASC;";
+       String sql = "SELECT c.id AS id_cli, c.nombre, v.* FROM proveedor c INNER JOIN compras v ON c.id = v.id_proveedor;";
        try {
            con = cn.getConnection();
            ps = con.prepareStatement(sql);
            rs = ps.executeQuery();
            while (rs.next()) {               
                Compra com = new Compra();
-               com.setCodigoCompra(rs.getInt("codigo_compra"));
-               com.setCodigoProducto(rs.getInt("codigo_producto"));
-               com.setIdProveedor(rs.getInt("id_proveedor"));
-               com.setProveedor(rs.getString("nombre_proveedor"));
-               com.setCantidad(rs.getInt("cantidad"));
-               com.setPrecioCompra(rs.getInt("precio_compra"));
+               com.setCodigoCompra(rs.getInt("id"));
+               com.setProveedor(rs.getString("nombre"));
                com.setFechaCompra(rs.getString("fecha_compra"));
                Listarcom.add(com);
            }
@@ -72,6 +103,26 @@ InputStream empty = new InputStream() {
        }
        return Listarcom;
    }
-    
+        
+        
+            public Compra BuscarCompra(int id){
+        Compra com = new Compra();
+        String sql = "SELECT * FROM compras WHERE id = ?";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                com.setCodigoCompra(rs.getInt("id"));
+                com.setIdProveedor(rs.getInt("id_proveedor"));
+                com.setPrecioCompra(rs.getInt("precio_compra"));
+                com.setFechaCompra(rs.getString("fecha_compra"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return com;
+    }
     
 }
