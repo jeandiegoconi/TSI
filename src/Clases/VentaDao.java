@@ -4,7 +4,6 @@
  */
 package Clases;
 
-
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -35,13 +34,14 @@ import java.util.Locale;
 import javax.swing.filechooser.FileSystemView;
 
 public class VentaDao {
+
     Connection con;
     Conexion cn = new Conexion();
     PreparedStatement ps;
     ResultSet rs;
     int r;
-    
-    public int IdVenta(){
+
+    public int IdVenta() {
         int id = 0;
         String sql = "SELECT MAX(id) FROM ventas";
         try {
@@ -56,8 +56,8 @@ public class VentaDao {
         }
         return id;
     }
-    
-    public int RegistrarVenta(Venta v){
+
+    public int RegistrarVenta(Venta v) {
         String sql = "INSERT INTO ventas (cliente, vendedor,pagado, total,vuelto, fecha) VALUES (?,?,?,?,?,?)";
         try {
             con = cn.getConnection();
@@ -71,7 +71,7 @@ public class VentaDao {
             ps.execute();
         } catch (SQLException e) {
             System.out.println(e.toString());
-        }finally{
+        } finally {
             try {
                 con.close();
             } catch (SQLException e) {
@@ -80,8 +80,8 @@ public class VentaDao {
         }
         return r;
     }
-    
-    public int RegistrarVentaRapida(Venta v){
+
+    public int RegistrarVentaRapida(Venta v) {
         String sql = "INSERT INTO ventas (cliente, vendedor,pagado, total,vuelto, fecha) VALUES (?,?,?,?,?,?)";
         try {
             con = cn.getConnection();
@@ -95,7 +95,7 @@ public class VentaDao {
             ps.execute();
         } catch (SQLException e) {
             System.out.println(e.toString());
-        }finally{
+        } finally {
             try {
                 con.close();
             } catch (SQLException e) {
@@ -104,11 +104,9 @@ public class VentaDao {
         }
         return r;
     }
-    
-    
-    
-    public int RegistrarDetalle(Detalle Dv){
-       String sql = "INSERT INTO detalle (id_pro, cantidad, precio, id_venta) VALUES (?,?,?,?)";
+
+    public int RegistrarDetalle(Detalle Dv) {
+        String sql = "INSERT INTO detalle (id_pro, cantidad, precio, id_venta) VALUES (?,?,?,?)";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
@@ -119,7 +117,7 @@ public class VentaDao {
             ps.execute();
         } catch (SQLException e) {
             System.out.println(e.toString());
-        }finally{
+        } finally {
             try {
                 con.close();
             } catch (SQLException e) {
@@ -128,13 +126,13 @@ public class VentaDao {
         }
         return r;
     }
-    
-    public boolean ActualizarStock(int cant, int id){
+
+    public boolean ActualizarStock(int cant, int id) {
         String sql = "UPDATE productos SET stock = ? WHERE id = ?";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setInt(1,cant);
+            ps.setInt(1, cant);
             ps.setInt(2, id);
             ps.execute();
             return true;
@@ -143,55 +141,73 @@ public class VentaDao {
             return false;
         }
     }
-    
-    public List Listarventas(){
-       List<Venta> ListaVenta = new ArrayList();
-       String sql = "SELECT c.id AS id_cli, c.nombre, v.* FROM clientes c INNER JOIN ventas v ON c.id = v.cliente";
-       try {
-           con = cn.getConnection();
-           ps = con.prepareStatement(sql);
-           rs = ps.executeQuery();
-           while (rs.next()) {  
 
-               Venta vent = new Venta();
-               vent.setId(rs.getInt("id"));
-               vent.setNombre_cli(rs.getString("nombre"));
-               vent.setVendedor(rs.getString("vendedor"));
-               vent.setTotal(rs.getInt("total"));
-               ListaVenta.add(vent);
-           }
-       } catch (SQLException e) {
-           System.out.println(e.toString());
-       }
-       return ListaVenta;
-   }
-    
-    
-        public List  BuscarListaVenta(int id){
-       List<Venta> ListaVenta = new ArrayList();
-       String IDSTRING = Integer.toString(id);
-       String sql = "SELECT c.id AS id_cli, c.nombre, v.* FROM clientes c INNER JOIN ventas v ON c.id = v.cliente where cast(v.id as varchar(11)) LIKE '%"+IDSTRING+ "%'  order by  v.id desc;";
-       try {
-           con = cn.getConnection();
-           ps = con.prepareStatement(sql);
-           rs = ps.executeQuery();
-           while (rs.next()) {               
-               Venta vent = new Venta();
-               vent.setId(rs.getInt("id"));
-               vent.setNombre_cli(rs.getString("nombre"));
-               vent.setVendedor(rs.getString("vendedor"));
-               vent.setTotal(rs.getInt("total"));
-               ListaVenta.add(vent);
-           }
-       } catch (SQLException e) {
-           System.out.println(e.toString());
-       }
-       return ListaVenta;
+    public List Listarventas() {
+        List<Venta> ListaVenta = new ArrayList();
+        String sql = "SELECT c.id AS id_cli, c.nombre, v.* FROM clientes c INNER JOIN ventas v ON c.id = v.cliente";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+
+                Venta vent = new Venta();
+                vent.setId(rs.getInt("id"));
+                vent.setNombre_cli(rs.getString("nombre"));
+                vent.setVendedor(rs.getString("vendedor"));
+                vent.setTotal(rs.getInt("total"));
+                ListaVenta.add(vent);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return ListaVenta;
     }
-    
-    
 
-    public Venta BuscarVenta(int id){
+    public List BuscarListaVenta(int id) {
+        List<Venta> ListaVenta = new ArrayList();
+        String IDSTRING = Integer.toString(id);
+        String sql = "SELECT c.id AS id_cli, c.nombre, v.* FROM clientes c INNER JOIN ventas v ON c.id = v.cliente where cast(v.id as varchar(11)) LIKE '%" + IDSTRING + "%'  order by  v.id desc;";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Venta vent = new Venta();
+                vent.setId(rs.getInt("id"));
+                vent.setNombre_cli(rs.getString("nombre"));
+                vent.setVendedor(rs.getString("vendedor"));
+                vent.setTotal(rs.getInt("total"));
+                ListaVenta.add(vent);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return ListaVenta;
+    }
+
+    public List BuscarListaVentaProd(String nombre) {
+        List<Venta> ListaVenta = new ArrayList();
+        String sql = "SELECT c.id AS id_cli, c.nombre, v.* FROM ventas v, clientes c,productos p, detalle d WHERE c.id = v.cliente AND d.id_venta = v.id and d.id_pro = p.id AND p.nombre  LIKE '%"+nombre+"%' order by  v.id asc;";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Venta vent = new Venta();
+                vent.setId(rs.getInt("id"));
+                vent.setNombre_cli(rs.getString("nombre"));
+                vent.setVendedor(rs.getString("vendedor"));
+                vent.setTotal(rs.getInt("total"));
+                ListaVenta.add(vent);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return ListaVenta;
+    }
+
+    public Venta BuscarVenta(int id) {
         Venta cl = new Venta();
         String sql = "SELECT * FROM ventas WHERE id = ?";
         try {
@@ -213,7 +229,8 @@ public class VentaDao {
         }
         return cl;
     }
-    public void pdfV(int idventa, int Cliente,int pago,int total, int vuelto, String usuario) {
+
+    public void pdfV(int idventa, int Cliente, int pago, int total, int vuelto, String usuario) {
         try {
             Date date = new Date();
             FileOutputStream archivo;
@@ -325,29 +342,29 @@ public class VentaDao {
                 ps.setInt(1, idventa);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    Locale chileLocale = new Locale("es","CL");
+                    Locale chileLocale = new Locale("es", "CL");
                     NumberFormat nf = NumberFormat.getNumberInstance(chileLocale);
-                    String FormattedPrecio ="$"+ nf.format(Integer.parseInt(rs.getString("precio")));
-        
+                    String FormattedPrecio = "$" + nf.format(Integer.parseInt(rs.getString("precio")));
+
                     int subTotal = rs.getInt("cantidad") * rs.getInt("precio");
                     tabla.addCell(rs.getString("cantidad"));
                     tabla.addCell(rs.getString("nombre"));
                     tabla.addCell(FormattedPrecio);
-                    String FormattedSubTotal ="$"+ nf.format(subTotal);
+                    String FormattedSubTotal = "$" + nf.format(subTotal);
                     tabla.addCell(FormattedSubTotal);
                 }
 
             } catch (SQLException e) {
                 System.out.println(e.toString());
             }
-            Locale chileLocale = new Locale("es","CL");
+            Locale chileLocale = new Locale("es", "CL");
             NumberFormat nf = NumberFormat.getNumberInstance(chileLocale);
             doc.add(tabla);
             Paragraph info = new Paragraph();
             info.add(Chunk.NEWLINE);
-            info.add("Pagado : $"+ nf.format(pago) +"\n");
-            info.add("Total : $" + nf.format(total)+"\n");
-            info.add("Vuelto : $"+ nf.format(vuelto));
+            info.add("Pagado : $" + nf.format(pago) + "\n");
+            info.add("Total : $" + nf.format(total) + "\n");
+            info.add("Vuelto : $" + nf.format(vuelto));
             info.setAlignment(Element.ALIGN_RIGHT);
             doc.add(info);
             Paragraph firma = new Paragraph();
@@ -370,5 +387,4 @@ public class VentaDao {
         }
     }
 
-    
 }
