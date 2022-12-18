@@ -27,7 +27,7 @@ public class DetalleDao {
     
     public List ListarProdHis(int idventa){
         List<Detalle> Listaprhis = new ArrayList();
-        String sql = "SELECT d.id, d.id_pro,d.id_venta, d.precio, d.cantidad, p.id, p.nombre FROM detalle d INNER JOIN productos p ON d.id_pro = p.id WHERE d.id_venta = ? ";
+        String sql = "SELECT d.id, d.id_pro,d.id_venta,d.nombre_prod, d.precio, d.cantidad FROM detalle d WHERE d.id_venta = ?";
 
         try {
             con = cn.getConnection();
@@ -36,7 +36,7 @@ public class DetalleDao {
             rs = ps.executeQuery();
             while (rs.next()) {  
                 Detalle de = new Detalle();
-                de.setNombre(rs.getString("nombre"));
+                de.setNombre(rs.getString("nombre_prod"));
                 de.setPrecio(rs.getInt("precio"));
                 de.setCantidad(rs.getInt("cantidad"));
                 Listaprhis.add(de);

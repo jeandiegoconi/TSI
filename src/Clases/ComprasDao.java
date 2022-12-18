@@ -86,7 +86,7 @@ public int IdCompra(){
     
         public List ListarCompras(){
        List<Compra> Listarcom = new ArrayList();
-       String sql = "SELECT c.id AS id_cli, c.nombre, v.* FROM proveedor c INNER JOIN compras v ON c.id = v.id_proveedor;";
+       String sql = "SELECT c.id AS id_cli, c.nombre, v.* FROM proveedor c INNER JOIN compras v ON c.id = v.id_proveedor";
        try {
            con = cn.getConnection();
            ps = con.prepareStatement(sql);
@@ -95,6 +95,7 @@ public int IdCompra(){
                Compra com = new Compra();
                com.setCodigoCompra(rs.getInt("id"));
                com.setProveedor(rs.getString("nombre"));
+               com.setPrecioCompra(rs.getInt("precio_compra"));
                com.setFechaCompra(rs.getString("fecha_compra"));
                Listarcom.add(com);
            }

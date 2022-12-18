@@ -9,21 +9,24 @@ package Clases;
  * @author Kherfa
  */
 public class Detalle {
+
     private int id;
     private int id_pro;
     private String nombre;
+    private String nombre_cliente;
     private int cantidad;
     private int precio;
     private int id_venta;
-    
-    public Detalle(){
-        
+
+    public Detalle() {
+
     }
 
-    public Detalle(int id, int id_pro, String nombre,int cantidad, int precio, int id_venta) {
+    public Detalle(int id, int id_pro, String nombre_cliente, String nombre, int cantidad, int precio, int id_venta) {
         this.id = id;
         this.id_pro = id_pro;
         this.nombre = nombre;
+        this.nombre_cliente = nombre_cliente;
         this.cantidad = cantidad;
         this.precio = precio;
         this.id_venta = id_venta;
@@ -44,7 +47,15 @@ public class Detalle {
     public void setId_pro(int id_pro) {
         this.id_pro = id_pro;
     }
-    
+
+    public String getNombreCliente() {
+        return nombre_cliente;
+    }
+
+    public void setNombreCliente(String nombre_cliente) {
+        this.nombre_cliente = nombre_cliente;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -52,7 +63,6 @@ public class Detalle {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
 
     public int getCantidad() {
         return cantidad;
@@ -77,6 +87,5 @@ public class Detalle {
     public void setId_venta(int id_venta) {
         this.id_venta = id_venta;
     }
-    
-        
+
 }

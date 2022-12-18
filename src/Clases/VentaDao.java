@@ -58,16 +58,17 @@ public class VentaDao {
     }
 
     public int RegistrarVenta(Venta v) {
-        String sql = "INSERT INTO ventas (cliente, vendedor,pagado, total,vuelto, fecha) VALUES (?,?,?,?,?,?)";
+        String sql = "INSERT INTO ventas (cliente, vendedor,metodo,pagado, total,vuelto, fecha) VALUES (?,?,?,?,?,?,?)";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1, v.getCliente());
             ps.setString(2, v.getVendedor());
-            ps.setInt(3, v.getPago());
-            ps.setInt(4, v.getTotal());
-            ps.setInt(5, v.getVuelto());
-            ps.setString(6, v.getFecha());
+            ps.setString(3,v.getMetodo());
+            ps.setInt(4, v.getPago());
+            ps.setInt(5, v.getTotal());
+            ps.setInt(6, v.getVuelto());
+            ps.setString(7, v.getFecha());
             ps.execute();
         } catch (SQLException e) {
             System.out.println(e.toString());
@@ -82,16 +83,17 @@ public class VentaDao {
     }
 
     public int RegistrarVentaRapida(Venta v) {
-        String sql = "INSERT INTO ventas (cliente, vendedor,pagado, total,vuelto, fecha) VALUES (?,?,?,?,?,?)";
+        String sql = "INSERT INTO ventas (cliente, vendedor,metodo,pagado, total,vuelto, fecha) VALUES (?,?,?,?,?,?,?)";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1, 0);
             ps.setString(2, v.getVendedor());
-            ps.setInt(3, v.getPago());
-            ps.setInt(4, v.getTotal());
-            ps.setInt(5, v.getVuelto());
-            ps.setString(6, v.getFecha());
+            ps.setString(3, v.getMetodo());
+            ps.setInt(4, v.getPago());
+            ps.setInt(5, v.getTotal());
+            ps.setInt(6, v.getVuelto());
+            ps.setString(7, v.getFecha());
             ps.execute();
         } catch (SQLException e) {
             System.out.println(e.toString());
@@ -106,14 +108,15 @@ public class VentaDao {
     }
 
     public int RegistrarDetalle(Detalle Dv) {
-        String sql = "INSERT INTO detalle (id_pro, cantidad, precio, id_venta) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO detalle (id_pro,nombre_prod, cantidad, precio, id_venta) VALUES (?,?,?,?,?)";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1, Dv.getId_pro());
-            ps.setInt(2, Dv.getCantidad());
-            ps.setInt(3, Dv.getPrecio());
-            ps.setInt(4, Dv.getId());
+            ps.setString(2,Dv.getNombre());
+            ps.setInt(3, Dv.getCantidad());
+            ps.setInt(4, Dv.getPrecio());
+            ps.setInt(5, Dv.getId());
             ps.execute();
         } catch (SQLException e) {
             System.out.println(e.toString());
@@ -167,7 +170,7 @@ public class VentaDao {
     public List BuscarListaVenta(int id) {
         List<Venta> ListaVenta = new ArrayList();
         String IDSTRING = Integer.toString(id);
-        String sql = "SELECT c.id AS id_cli, c.nombre, v.* FROM clientes c INNER JOIN ventas v ON c.id = v.cliente where cast(v.id as varchar(11)) LIKE '%" + IDSTRING + "%'  order by  v.id desc;";
+        String sql = "SELECT c.nombre, v.* FROM clientes c INNER JOIN ventas v ON c.id = v.cliente where cast(v.id as varchar(11)) LIKE '%" + IDSTRING + "%'  order by  v.id desc;";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
@@ -218,6 +221,7 @@ public class VentaDao {
             if (rs.next()) {
                 cl.setId(rs.getInt("id"));
                 cl.setCliente(rs.getInt("cliente"));
+                 cl.setMetodo(rs.getString("metodo"));
                 cl.setPago(rs.getInt("pagado"));
                 cl.setTotal(rs.getInt("total"));
                 cl.setVuelto(rs.getInt("vuelto"));
@@ -230,7 +234,7 @@ public class VentaDao {
         return cl;
     }
 
-    public void pdfV(int idventa, int Cliente, int pago, int total, int vuelto, String usuario) {
+    public void pdfV(int idventa, int Cliente, int pago, int total, int vuelto, String usuario, String metodo) {
         try {
             Date date = new Date();
             FileOutputStream archivo;
@@ -335,7 +339,7 @@ public class VentaDao {
             tabla.addCell(c2);
             tabla.addCell(c3);
             tabla.addCell(c4);
-            String product = "SELECT d.id, d.id_pro,d.id_venta, d.precio, d.cantidad, p.id, p.nombre FROM detalle d INNER JOIN productos p ON d.id_pro = p.id WHERE d.id_venta = ?";
+            String product = "SELECT d.id, d.id_pro,d.id_venta, d.nombre_prod, d.precio, d.cantidad FROM detalle d WHERE d.id_venta = ?";
             try {
 
                 ps = con.prepareStatement(product);
@@ -348,7 +352,7 @@ public class VentaDao {
 
                     int subTotal = rs.getInt("cantidad") * rs.getInt("precio");
                     tabla.addCell(rs.getString("cantidad"));
-                    tabla.addCell(rs.getString("nombre"));
+                    tabla.addCell(rs.getString("nombre_prod"));
                     tabla.addCell(FormattedPrecio);
                     String FormattedSubTotal = "$" + nf.format(subTotal);
                     tabla.addCell(FormattedSubTotal);
@@ -362,6 +366,7 @@ public class VentaDao {
             doc.add(tabla);
             Paragraph info = new Paragraph();
             info.add(Chunk.NEWLINE);
+            info.add("Metodo : " +metodo+"\n");
             info.add("Pagado : $" + nf.format(pago) + "\n");
             info.add("Total : $" + nf.format(total) + "\n");
             info.add("Vuelto : $" + nf.format(vuelto));
