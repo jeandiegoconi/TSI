@@ -2079,10 +2079,11 @@ public final class Menu extends javax.swing.JFrame {
         //archivo.setFileFilter(filtro);
         // Agregamos el Filtro pero cuidado se mostrara despues de todos los archivos
         archivo.addChoosableFileFilter(filtro);
+        archivo.setFileFilter(filtro);
         // Colocamos titulo a nuestra ventana de Seleccion
         archivo.setDialogTitle("Abrir Archivo");
         //Si deseamos que muestre una carpeta predetermina usa la siguiente linea
-        File ruta = new File("D:/Productos");
+        File ruta = new File("C:/");
         //Le implementamos a nuestro ventana de seleccion
         archivo.setCurrentDirectory(ruta);
         //Abrimos nuestra Ventana de Selccion
