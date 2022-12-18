@@ -125,5 +125,23 @@ public int IdCompra(){
         }
         return com;
     }
+            
+            
+                
+        public Compra BuscarProveedorCompra(int id) {
+        String sql = "SELECT p.nombre, com.* FROM proveedor p INNER JOIN compras com ON p.id = com.id_proveedor where id_proveedor = "+ id+ "  order by  com.id_proveedor desc;";
+        Compra com = new Compra();
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                com.setProveedor(rs.getString("nombre"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return com;
+    }
     
 }

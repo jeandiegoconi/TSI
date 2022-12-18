@@ -1691,6 +1691,8 @@ public final class Menu extends javax.swing.JFrame {
 
     private void btnEliminarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProveedorActionPerformed
         if (!"".equals(txtIdProveedor.getText())) {
+            com = comDao.BuscarProveedorCompra(Integer.parseInt(txtIdProveedor.getText().trim()));
+            if (com.getProveedor()== null){
             int pregunta = JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea eliminar este proveedor?\n Todos los productos con este proveedor seran eliminados tambien.", "Seleccione una opcion.", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
             if (pregunta == 0) {
                 int id = Integer.parseInt(txtIdProveedor.getText());
@@ -1703,6 +1705,9 @@ public final class Menu extends javax.swing.JFrame {
                 llenarProveedor();
                 LimpiarTablaProductos();
                 ListarProductos();
+            }
+            }else{
+                JOptionPane.showMessageDialog(null, "No se puede eliminar este proveedor porque tiene compras registradas.");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione una fila.");
@@ -2111,7 +2116,11 @@ public final class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNuevoClienteActionPerformed
 
     private void btnEliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarClienteActionPerformed
-        if (!"".equals(txtIdCliente.getText())) {
+        
+        
+        if (!"".equals(txtIdCliente.getText()) ) {
+            v = Vdao.BuscarClienteVenta(Integer.parseInt(txtIdCliente.getText().trim()));
+            if (v.getNombre_cli()== null){
             int pregunta = JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea eliminar este cliente?\nSu informacion y sus ventas seran borradas.", "Seleccione una opcion.", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
             if (pregunta == 0) {
                 int id = Integer.parseInt(txtIdCliente.getText());
@@ -2122,9 +2131,12 @@ public final class Menu extends javax.swing.JFrame {
                 LimpiarTablaHistorialVentas();
                 ListarHistorialVentas();
             }
-        } else {
+        }else{
+            JOptionPane.showMessageDialog(null, "No se puede eliminar este cliente porque tiene ventas registradas.");}
+        }else {
             JOptionPane.showMessageDialog(null, "Seleccione una fila.");
-        }    // TODO add your handling code here:
+        }
+            // TODO add your handling code here:
     }//GEN-LAST:event_btnEliminarClienteActionPerformed
 
     private void btnEditarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarClienteActionPerformed
@@ -3041,7 +3053,7 @@ public final class Menu extends javax.swing.JFrame {
 
         int id = comDao.IdCompra();
         com.setCodigoCompra(id);
-        Combo itemP = (Combo) cbxProveedorPro.getSelectedItem();
+        Combo itemP = (Combo) cbxProveedorCom.getSelectedItem();
         com.setIdProveedor(itemP.getId());
         com.setPrecioCompra(Integer.parseInt(txtPrecioCompra.getText().trim()));
         com.setFechaCompra(fechaCompraActual);
