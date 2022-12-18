@@ -453,6 +453,7 @@ public final class Menu extends javax.swing.JFrame {
         txtBuscarCodigoVenta = new javax.swing.JTextField();
         jLabel40 = new javax.swing.JLabel();
         txtBuscarVentaProd = new javax.swing.JTextField();
+        BtnEliminarVentasCompletas = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtIdproducto = new javax.swing.JTextField();
@@ -540,6 +541,7 @@ public final class Menu extends javax.swing.JFrame {
         lblEnterCantidadCompra = new javax.swing.JLabel();
         txtIdCompraHis = new javax.swing.JTextField();
         btnEliminarProductoCompra = new javax.swing.JButton();
+        btnEliminarCompra = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Inventario");
@@ -968,6 +970,16 @@ public final class Menu extends javax.swing.JFrame {
         });
         jPanel8.add(txtBuscarVentaProd);
         txtBuscarVentaProd.setBounds(160, 130, 90, 22);
+
+        BtnEliminarVentasCompletas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/delete.png"))); // NOI18N
+        BtnEliminarVentasCompletas.setText("Eliminar Venta");
+        BtnEliminarVentasCompletas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEliminarVentasCompletasActionPerformed(evt);
+            }
+        });
+        jPanel8.add(BtnEliminarVentasCompletas);
+        BtnEliminarVentasCompletas.setBounds(20, 600, 150, 31);
 
         jTabbedPane1.addTab("Ventas", new javax.swing.ImageIcon(getClass().getResource("/Img/history.png")), jPanel8); // NOI18N
 
@@ -1472,6 +1484,15 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         TablaCompra.getTableHeader().setReorderingAllowed(false);
+        TablaCompra.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                TablaCompraAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         TablaCompra.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TablaCompraMouseClicked(evt);
@@ -1486,7 +1507,7 @@ public final class Menu extends javax.swing.JFrame {
         }
 
         jPanel7.add(jScrollPane6);
-        jScrollPane6.setBounds(20, 390, 490, 260);
+        jScrollPane6.setBounds(20, 370, 490, 260);
 
         jPanel7.add(cbxProveedorCom);
         cbxProveedorCom.setBounds(80, 20, 174, 25);
@@ -1603,7 +1624,7 @@ public final class Menu extends javax.swing.JFrame {
         }
 
         jPanel7.add(jScrollPane9);
-        jScrollPane9.setBounds(520, 390, 390, 260);
+        jScrollPane9.setBounds(520, 370, 390, 260);
 
         TablaProductoCompraAgregar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1641,7 +1662,7 @@ public final class Menu extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel14.setText("Lista de compras");
         jPanel7.add(jLabel14);
-        jLabel14.setBounds(30, 360, 130, 20);
+        jLabel14.setBounds(30, 340, 130, 20);
 
         lblEnterCantidadCompra.setText("Presione Enter para agregar");
         jPanel7.add(lblEnterCantidadCompra);
@@ -1658,6 +1679,16 @@ public final class Menu extends javax.swing.JFrame {
         });
         jPanel7.add(btnEliminarProductoCompra);
         btnEliminarProductoCompra.setBounds(530, 140, 210, 30);
+
+        btnEliminarCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/delete.png"))); // NOI18N
+        btnEliminarCompra.setText("Eliminar Compra");
+        btnEliminarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarCompraActionPerformed(evt);
+            }
+        });
+        jPanel7.add(btnEliminarCompra);
+        btnEliminarCompra.setBounds(20, 640, 150, 30);
 
         jTabbedPane1.addTab("Compras", new javax.swing.ImageIcon(getClass().getResource("/Img/purchases.png")), jPanel7); // NOI18N
 
@@ -2121,7 +2152,7 @@ public final class Menu extends javax.swing.JFrame {
         if (!"".equals(txtIdCliente.getText()) ) {
             v = Vdao.BuscarClienteVenta(Integer.parseInt(txtIdCliente.getText().trim()));
             if (v.getNombre_cli()== null){
-            int pregunta = JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea eliminar este cliente?\nSu informacion y sus ventas seran borradas.", "Seleccione una opcion.", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
+            int pregunta = JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea eliminar este cliente?", "Seleccione una opcion.", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
             if (pregunta == 0) {
                 int id = Integer.parseInt(txtIdCliente.getText());
                 client.EliminarCliente(id);
@@ -2763,6 +2794,38 @@ public final class Menu extends javax.swing.JFrame {
         }          // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarVentaProdKeyReleased
 
+    private void BtnEliminarVentasCompletasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarVentasCompletasActionPerformed
+        if (!"".equals(txtIdVentaPdf.getText()) ) {
+            int pregunta = JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea eliminar esta venta?", "Seleccione una opcion.", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
+            if (pregunta == 0) {
+                int id = Integer.parseInt(txtIdVentaPdf.getText());
+                Vdao.EliminarVenta(id);
+                LimpiarTablaHistorialVentas();
+                LimpiarProductosHistorial();
+                ListarHistorialVentas();
+            }
+
+        }                // TODO add your handling code here:
+    }//GEN-LAST:event_BtnEliminarVentasCompletasActionPerformed
+
+    private void btnEliminarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCompraActionPerformed
+        if (!"".equals(txtIdCompraHis.getText()) ) {
+            int pregunta = JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea eliminar esta compra?", "Seleccione una opcion.", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
+            if (pregunta == 0) {
+                int id = Integer.parseInt(txtIdCompraHis.getText());
+                comDao.EliminarCompra(id);
+                LimpiarTablaCompra();
+                LimpiarTablaProductosComprasLista();
+                ListarCompras();
+            }
+
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarCompraActionPerformed
+
+    private void TablaCompraAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TablaCompraAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TablaCompraAncestorAdded
+
     /**
      * @param args the command line arguments
      */
@@ -2791,6 +2854,7 @@ public final class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnEliminarVentasCompletas;
     private com.toedter.calendar.JDateChooser DateCompra;
     private javax.swing.JLabel LabelTotal;
     private javax.swing.JLabel LabelVendedor;
@@ -2818,6 +2882,7 @@ public final class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btnEditarCliente;
     private javax.swing.JButton btnEditarProveedor;
     private javax.swing.JButton btnEliminarCliente;
+    private javax.swing.JButton btnEliminarCompra;
     private javax.swing.JButton btnEliminarProductoCompra;
     private javax.swing.JButton btnEliminarProveedor;
     private javax.swing.JButton btnEliminarVenta;

@@ -38,9 +38,34 @@ public class VentaDao {
     Connection con;
     Conexion cn = new Conexion();
     PreparedStatement ps;
+    PreparedStatement ps2;
     ResultSet rs;
     int r;
 
+    
+       public boolean EliminarVenta(int id){
+       String sql = "DELETE FROM ventas WHERE id = ?";
+       String sql2 = "DELETE FROM detalle WHERE id_venta = ?";
+       try {
+           ps = con.prepareStatement(sql);
+           ps2 = con.prepareStatement(sql2);
+           ps.setInt(1, id);
+           ps.execute();
+                      ps2.setInt(1, id);
+           ps2.execute();
+           return true;
+       } catch (SQLException e) {
+           System.out.println(e.toString());
+           return false;
+       }finally{
+           try {
+               con.close();
+           } catch (SQLException ex) {
+               System.out.println(ex.toString());
+           }
+       }
+   }
+    
     public int IdVenta() {
         int id = 0;
         String sql = "SELECT MAX(id) FROM ventas";

@@ -17,6 +17,7 @@ public class ComprasDao {
         Connection con;
     Conexion cn = new Conexion();
     PreparedStatement ps;
+    PreparedStatement ps2;
     ResultSet rs;
 InputStream empty = new InputStream() {
     @Override
@@ -40,6 +41,29 @@ public int IdCompra(){
         return id;
     }
 
+
+       public boolean EliminarCompra(int id){
+       String sql = "DELETE FROM compras WHERE id = ?";
+       String sql2 = "DELETE FROM detalle_compra WHERE id_compra = ?";
+       try {
+           ps = con.prepareStatement(sql);
+           ps2 = con.prepareStatement(sql2);
+           ps.setInt(1, id);
+           ps.execute();
+                      ps2.setInt(1, id);
+           ps2.execute();
+           return true;
+       } catch (SQLException e) {
+           System.out.println(e.toString());
+           return false;
+       }finally{
+           try {
+               con.close();
+           } catch (SQLException ex) {
+               System.out.println(ex.toString());
+           }
+       }
+   }
 
     public int RegistrarDetalle(Detalle Dv){
        String sql = "INSERT INTO detalle_compra (id_pro, cantidad, id_compra) VALUES (?,?,?)";
