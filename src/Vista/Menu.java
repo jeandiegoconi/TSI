@@ -3088,6 +3088,7 @@ btnAddCompra.setEnabled(false);
         txtCantPro.setText("");
         txtPrecioPro.setText("");
         txtBuscarProducto.setText("");
+        lblAlerta.setText("");
     }
 
     private void TotalPagar() {
