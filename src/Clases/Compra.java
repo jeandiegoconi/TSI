@@ -17,18 +17,20 @@ public class Compra {
     private String proveedor;
     private int cantidad;
     private int precio_compra;
+    private String metodo;
     private String fecha_compra;
     
     public Compra(){
     }
     
-    public Compra(int codigo_compra, int codigo_producto,int id_proveedor,String proveedor,int cantidad, int precio_compra,String fecha_compra){
+    public Compra(int codigo_compra, int codigo_producto,int id_proveedor,String proveedor,int cantidad, int precio_compra,String metodo,String fecha_compra){
         
         this.codigo_compra = codigo_compra;
         this.codigo_producto = codigo_producto;
         this.id_proveedor = id_proveedor;
         this.proveedor = proveedor;
         this.precio_compra = precio_compra;
+        this.metodo = metodo;
         this.cantidad = cantidad;
         this.fecha_compra = fecha_compra;
     }
@@ -90,6 +92,12 @@ public class Compra {
         this.id_proveedor = id_proveedor;
     }
     
+         public String getMetodo(){
+        return metodo;
+    }
     
+    public void setMetodo (String metodo) {
+        this.metodo = metodo;
+    }
     
 }

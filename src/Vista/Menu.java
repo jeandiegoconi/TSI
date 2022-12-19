@@ -222,7 +222,7 @@ public final class Menu extends javax.swing.JFrame {
     public void ListarCompras() {
         List<Compra> ListarPro = comDao.ListarCompras();
         modelo = (DefaultTableModel) TablaCompra.getModel();
-        Object[] ob = new Object[6];
+        Object[] ob = new Object[5];
         for (int i = 0; i < ListarPro.size(); i++) {
             Locale chileLocale = new Locale("es", "CL");
             NumberFormat nf = NumberFormat.getNumberInstance(chileLocale);
@@ -230,7 +230,8 @@ public final class Menu extends javax.swing.JFrame {
             ob[0] = ListarPro.get(i).getCodigoCompra();
             ob[1] = ListarPro.get(i).getProveedor();
             ob[2] = FormattedPrecio;
-            ob[3] = ListarPro.get(i).getFechaCompra();
+            ob[3] = ListarPro.get(i).getMetodo();
+            ob[4] = ListarPro.get(i).getFechaCompra();
 
             modelo.addRow(ob);
         }
@@ -345,6 +346,7 @@ public final class Menu extends javax.swing.JFrame {
         lblEnterNombre.setVisible(false);
         LblEnterCodigo.setVisible(false);
         lblEnterCompra.setVisible(false);
+        btnAddCompra.setEnabled(false);     
         txtIdCliente.setVisible(false);
         txtIdProdCompra.setVisible(false);
         txtIdPro.setVisible(false);
@@ -542,6 +544,8 @@ public final class Menu extends javax.swing.JFrame {
         txtIdCompraHis = new javax.swing.JTextField();
         btnEliminarProductoCompra = new javax.swing.JButton();
         btnEliminarCompra = new javax.swing.JButton();
+        jLabel46 = new javax.swing.JLabel();
+        cmbMetodoCom = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Inventario");
@@ -1466,17 +1470,17 @@ public final class Menu extends javax.swing.JFrame {
 
         TablaCompra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "CODIGO COMPRA", "PROVEEDOR", "PRECIO", "FECHA"
+                "CODIGO COMPRA", "PROVEEDOR", "PRECIO", "Metodo", "FECHA"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1504,10 +1508,11 @@ public final class Menu extends javax.swing.JFrame {
             TablaCompra.getColumnModel().getColumn(1).setResizable(false);
             TablaCompra.getColumnModel().getColumn(2).setResizable(false);
             TablaCompra.getColumnModel().getColumn(3).setResizable(false);
+            TablaCompra.getColumnModel().getColumn(4).setResizable(false);
         }
 
         jPanel7.add(jScrollPane6);
-        jScrollPane6.setBounds(20, 370, 490, 260);
+        jScrollPane6.setBounds(20, 370, 520, 260);
 
         jPanel7.add(cbxProveedorCom);
         cbxProveedorCom.setBounds(80, 20, 174, 25);
@@ -1520,7 +1525,7 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jPanel7.add(btnAddCompra);
-        btnAddCompra.setBounds(740, 20, 160, 30);
+        btnAddCompra.setBounds(750, 180, 160, 30);
 
         jLabel34.setText("Codigo Producto:");
         jPanel7.add(jLabel34);
@@ -1560,18 +1565,21 @@ public final class Menu extends javax.swing.JFrame {
 
         jLabel36.setText("Precio a pagar:");
         jPanel7.add(jLabel36);
-        jLabel36.setBounds(576, 27, 78, 16);
+        jLabel36.setBounds(570, 180, 78, 16);
 
         txtPrecioCompra.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtPrecioCompraKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPrecioCompraKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtPrecioCompraKeyTyped(evt);
             }
         });
         jPanel7.add(txtPrecioCompra);
-        txtPrecioCompra.setBounds(660, 20, 50, 22);
+        txtPrecioCompra.setBounds(660, 180, 50, 22);
 
         lblNomProdCom.setText("Nombre Producto:");
         jPanel7.add(lblNomProdCom);
@@ -1624,7 +1632,7 @@ public final class Menu extends javax.swing.JFrame {
         }
 
         jPanel7.add(jScrollPane9);
-        jScrollPane9.setBounds(520, 370, 390, 260);
+        jScrollPane9.setBounds(570, 370, 350, 260);
 
         TablaProductoCompraAgregar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1646,6 +1654,11 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         TablaProductoCompraAgregar.getTableHeader().setReorderingAllowed(false);
+        TablaProductoCompraAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaProductoCompraAgregarMouseClicked(evt);
+            }
+        });
         jScrollPane10.setViewportView(TablaProductoCompraAgregar);
         if (TablaProductoCompraAgregar.getColumnModel().getColumnCount() > 0) {
             TablaProductoCompraAgregar.getColumnModel().getColumn(0).setMinWidth(0);
@@ -1664,11 +1677,14 @@ public final class Menu extends javax.swing.JFrame {
         jPanel7.add(jLabel14);
         jLabel14.setBounds(30, 340, 130, 20);
 
+        lblEnterCantidadCompra.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblEnterCantidadCompra.setText("Presione Enter para agregar");
         jPanel7.add(lblEnterCantidadCompra);
-        lblEnterCantidadCompra.setBounds(470, 60, 160, 16);
+        lblEnterCantidadCompra.setBounds(460, 60, 160, 16);
+
+        txtIdCompraHis.setEditable(false);
         jPanel7.add(txtIdCompraHis);
-        txtIdCompraHis.setBounds(820, 210, 64, 22);
+        txtIdCompraHis.setBounds(850, 260, 30, 22);
 
         btnEliminarProductoCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/delete.png"))); // NOI18N
         btnEliminarProductoCompra.setText("Eliminar producto de la lista");
@@ -1678,7 +1694,7 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jPanel7.add(btnEliminarProductoCompra);
-        btnEliminarProductoCompra.setBounds(530, 140, 210, 30);
+        btnEliminarProductoCompra.setBounds(310, 320, 210, 30);
 
         btnEliminarCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/delete.png"))); // NOI18N
         btnEliminarCompra.setText("Eliminar Compra");
@@ -1689,6 +1705,14 @@ public final class Menu extends javax.swing.JFrame {
         });
         jPanel7.add(btnEliminarCompra);
         btnEliminarCompra.setBounds(20, 640, 150, 30);
+
+        jLabel46.setText("Metodo de pago:");
+        jPanel7.add(jLabel46);
+        jLabel46.setBounds(570, 120, 100, 16);
+
+        cmbMetodoCom.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Debito/Credito", "Factura" }));
+        jPanel7.add(cmbMetodoCom);
+        cmbMetodoCom.setBounds(670, 120, 110, 22);
 
         jTabbedPane1.addTab("Compras", new javax.swing.ImageIcon(getClass().getResource("/Img/purchases.png")), jPanel7); // NOI18N
 
@@ -2291,6 +2315,7 @@ public final class Menu extends javax.swing.JFrame {
                 LimpiarCompra();
                 LimpiarTablaCompra();
                 ListarCompras();
+                btnAddCompra.setEnabled(false);
             } else {
                 JOptionPane.showMessageDialog(null, "Algunos campos estan vacios.");
             }
@@ -2306,7 +2331,7 @@ public final class Menu extends javax.swing.JFrame {
     private void txtBuscarProductoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarProductoKeyReleased
         if (!"".equals(txtBuscarProducto.getText().trim())) {
             LimpiarTablaProductos();
-            BuscarProductos();
+            BuscarProductos();  
         } else {
             LimpiarTablaProductos();
             ListarProductos();
@@ -2721,9 +2746,11 @@ public final class Menu extends javax.swing.JFrame {
                         txtIdProdCompra.setText("");
                         txtIdProdCompra.setText("" + pro.getId());
                         txtNombreProductoCompra.setText("" + pro.getNombre());
+                        lblEnterCantidadCompra.setVisible(false);
                     } else {
                         lblNomProdCom.setVisible(false);
                         txtNombreProductoCompra.setVisible(false);
+                        lblEnterCantidadCompra.setVisible(false);
                         JOptionPane.showMessageDialog(null, "El producto no existe.");
                     }
                     int id = Integer.parseInt(txtIdProdCompra.getText().trim());
@@ -2732,9 +2759,11 @@ public final class Menu extends javax.swing.JFrame {
                     int cant = Integer.parseInt(txtCantidadCompra.getText().trim());
                     item2 = item2 + 1;
                     tmp = (DefaultTableModel) TablaProductoCompraAgregar.getModel();
+                    lblEnterCantidadCompra.setVisible(false);
                     for (int i = 0; i < TablaProductoCompraAgregar.getRowCount(); i++) {
 
                         if (TablaProductoCompraAgregar.getValueAt(i, 1).equals(txtNombreProductoCompra.getText().trim())) {
+                            lblEnterCantidadCompra.setVisible(false);
                             JOptionPane.showMessageDialog(null, "El producto ya esta registrado");
                             return;
                         }
@@ -2755,10 +2784,13 @@ public final class Menu extends javax.swing.JFrame {
                     LimpiarCompra();
                     txtIdProdCompra.setText("");
                     txtCodProdCompra.requestFocus();
+                    lblEnterCantidadCompra.setVisible(false);
                 } else {
+                    lblEnterCantidadCompra.setVisible(false);
                     JOptionPane.showMessageDialog(null, "Ingrese Cantidad mayor a 0.");
                 }
             } else {
+                lblEnterCantidadCompra.setVisible(false);
                 JOptionPane.showMessageDialog(null, "Ingrese Cantidad");
             }
         }        // TODO add your handling code here:
@@ -2775,11 +2807,13 @@ public final class Menu extends javax.swing.JFrame {
 
     private void btnEliminarProductoCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProductoCompraActionPerformed
         if (TablaProductoCompraAgregar.getRowCount() > 0) {
+            
             modelo = (DefaultTableModel) TablaProductoCompraAgregar.getModel();
             modelo.removeRow(TablaProductoCompraAgregar.getSelectedRow());
             txtCodProdCompra.requestFocus();
         } else {
             JOptionPane.showMessageDialog(null, "La compra esta vacia.");
+            btnEliminarProductoCompra.setEnabled(false);
             txtCodProdCompra.requestFocus();
         }        // TODO add your handling code here:
     }//GEN-LAST:event_btnEliminarProductoCompraActionPerformed
@@ -2826,6 +2860,18 @@ public final class Menu extends javax.swing.JFrame {
     private void TablaCompraAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TablaCompraAncestorAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_TablaCompraAncestorAdded
+
+    private void TablaProductoCompraAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaProductoCompraAgregarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TablaProductoCompraAgregarMouseClicked
+
+    private void txtPrecioCompraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioCompraKeyReleased
+  if (!"".equals(txtPrecioCompra.getText().trim())) {
+            btnAddCompra.setEnabled(true);
+        } else {
+btnAddCompra.setEnabled(false);
+        }         // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecioCompraKeyReleased
 
     /**
      * @param args the command line arguments
@@ -2898,6 +2944,7 @@ public final class Menu extends javax.swing.JFrame {
     private javax.swing.JComboBox<Object> cbxProveedorCom;
     private javax.swing.JComboBox<Object> cbxProveedorPro;
     private javax.swing.JComboBox<String> cmbMetodo;
+    private javax.swing.JComboBox<String> cmbMetodoCom;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2938,6 +2985,7 @@ public final class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -3122,6 +3170,7 @@ public final class Menu extends javax.swing.JFrame {
         Combo itemP = (Combo) cbxProveedorCom.getSelectedItem();
         com.setIdProveedor(itemP.getId());
         com.setPrecioCompra(Integer.parseInt(txtPrecioCompra.getText().trim()));
+        com.setMetodo(cmbMetodoCom.getSelectedItem().toString());
         com.setFechaCompra(fechaCompraActual);
         comDao.RegistrarCompra(com);
     }

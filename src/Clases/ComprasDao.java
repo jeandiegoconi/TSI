@@ -87,13 +87,14 @@ public int IdCompra(){
     }
 
     public int RegistrarCompra(Compra c){
-        String sql = "INSERT INTO compras (id_proveedor,precio_compra, fecha_compra) VALUES (?,?,?)";
+        String sql = "INSERT INTO compras (id_proveedor,precio_compra,metodo, fecha_compra) VALUES (?,?,?,?)";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1,c.getIdProveedor());
             ps.setInt(2,c.getPrecioCompra());
-            ps.setString(3,c.getFechaCompra());
+            ps.setString(3,c.getMetodo());
+            ps.setString(4,c.getFechaCompra());
             ps.execute();
         } catch (SQLException e) {
             System.out.println(e.toString());
@@ -120,6 +121,7 @@ public int IdCompra(){
                com.setCodigoCompra(rs.getInt("id"));
                com.setProveedor(rs.getString("nombre"));
                com.setPrecioCompra(rs.getInt("precio_compra"));
+               com.setMetodo(rs.getString("metodo"));
                com.setFechaCompra(rs.getString("fecha_compra"));
                Listarcom.add(com);
            }
