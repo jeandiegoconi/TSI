@@ -1738,7 +1738,7 @@ public final class Menu extends javax.swing.JFrame {
                 ListarProductos();
             }
             }else{
-                JOptionPane.showMessageDialog(null, "No se puede eliminar este proveedor porque tiene compras registradas.");
+                JOptionPane.showMessageDialog(null, "No se puede eliminar este proveedor porque tiene compras registradas.","Error",JOptionPane.WARNING_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione una fila.");
@@ -2164,7 +2164,7 @@ public final class Menu extends javax.swing.JFrame {
                 ListarHistorialVentas();
             }
         }else{
-            JOptionPane.showMessageDialog(null, "No se puede eliminar este cliente porque tiene ventas registradas.");}
+            JOptionPane.showMessageDialog(null, "No se puede eliminar este cliente porque tiene ventas registradas.","Error",JOptionPane.WARNING_MESSAGE);}
         }else {
             JOptionPane.showMessageDialog(null, "Seleccione una fila.");
         }
