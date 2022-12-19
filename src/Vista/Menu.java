@@ -1135,15 +1135,15 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jPanel2.add(txtCantPro);
-        txtCantPro.setBounds(80, 80, 50, 30);
+        txtCantPro.setBounds(110, 90, 50, 20);
 
         jLabel24.setText("Cantidad:");
         jPanel2.add(jLabel24);
-        jLabel24.setBounds(6, 88, 51, 16);
+        jLabel24.setBounds(40, 90, 51, 16);
         jPanel2.add(lblFoto);
         lblFoto.setBounds(351, 142, 92, 82);
 
-        jLabel2.setText("Imagen :");
+        jLabel2.setText("Imagen:");
         jPanel2.add(jLabel2);
         jLabel2.setBounds(6, 193, 51, 16);
 
@@ -2060,7 +2060,17 @@ public final class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNuevoProveedorActionPerformed
 
     private void bt_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_EliminarActionPerformed
-
+                        
+        for (int i = 0; i < TablaVenta.getRowCount(); i++) {
+                            if (TablaVenta.getValueAt(i, 1).equals(txtNombreProducto.getText().trim())) {
+                                JOptionPane.showMessageDialog(null, "El producto esta actualmente en la nueva venta.");
+                                return;
+                            }
+                        }
+        if(txtDescripcionVenta.getText().trim().equals(txtNombreProducto.getText().trim())){
+        JOptionPane.showMessageDialog(null, "El producto esta actualmente en la nueva venta.");
+        return;
+        }
         if (!"".equals(txtIdproducto.getText())) {
             int pregunta = JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar");
             if (pregunta == 0) {
