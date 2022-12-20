@@ -662,7 +662,7 @@ public final class Menu extends javax.swing.JFrame {
 
         jLabel3.setText("Buscar por Nombre:");
         jPanel3.add(jLabel3);
-        jLabel3.setBounds(10, 40, 106, 35);
+        jLabel3.setBounds(10, 100, 106, 35);
 
         jLabel6.setText("Nombre:");
         jPanel3.add(jLabel6);
@@ -685,7 +685,7 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jPanel3.add(txtCodigoVenta);
-        txtCodigoVenta.setBounds(130, 100, 51, 22);
+        txtCodigoVenta.setBounds(120, 50, 51, 22);
 
         txtDescripcionVenta.setEditable(false);
         jPanel3.add(txtDescripcionVenta);
@@ -713,14 +713,14 @@ public final class Menu extends javax.swing.JFrame {
         txtCantidadVenta.setBounds(610, 200, 42, 35);
 
         btnEliminarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/delete.png"))); // NOI18N
-        btnEliminarVenta.setText("Eliminar Venta");
+        btnEliminarVenta.setText("Eliminar Producto");
         btnEliminarVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarVentaActionPerformed(evt);
             }
         });
         jPanel3.add(btnEliminarVenta);
-        btnEliminarVenta.setBounds(760, 320, 140, 30);
+        btnEliminarVenta.setBounds(747, 320, 153, 30);
 
         LabelTotal.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         LabelTotal.setText("----");
@@ -791,7 +791,7 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jPanel3.add(txtNombreVenta);
-        txtNombreVenta.setBounds(130, 50, 96, 22);
+        txtNombreVenta.setBounds(120, 110, 96, 22);
 
         txtCodigoVentaMostrar.setEditable(false);
         txtCodigoVentaMostrar.addActionListener(new java.awt.event.ActionListener() {
@@ -812,7 +812,7 @@ public final class Menu extends javax.swing.JFrame {
 
         jLabel30.setText("Buscar por Codigo:");
         jPanel3.add(jLabel30);
-        jLabel30.setBounds(10, 100, 101, 22);
+        jLabel30.setBounds(10, 50, 101, 22);
 
         jLabel32.setText("PAGO CLIENTE:");
         jPanel3.add(jLabel32);
@@ -846,11 +846,11 @@ public final class Menu extends javax.swing.JFrame {
 
         lblEnterNombre.setText("Presione Enter para aceptar.");
         jPanel3.add(lblEnterNombre);
-        lblEnterNombre.setBounds(80, 20, 146, 16);
+        lblEnterNombre.setBounds(70, 80, 146, 16);
 
         LblEnterCodigo.setText("Presione Enter para aceptar.");
         jPanel3.add(LblEnterCodigo);
-        LblEnterCodigo.setBounds(80, 80, 146, 16);
+        LblEnterCodigo.setBounds(80, 30, 146, 16);
         jPanel3.add(jLabel45);
         jLabel45.setBounds(50, 80, 16, 16);
         jPanel3.add(jLabel42);
@@ -1930,7 +1930,16 @@ public final class Menu extends javax.swing.JFrame {
 
     private void bt_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_ActualizarActionPerformed
         String sqlDuplicate = "select codigo from productos where codigo = " + txtCodigoProducto.getText().trim() + " and id <> " + Integer.parseInt(txtIdproducto.getText()) + " ";
-
+                for (int i = 0; i < TablaVenta.getRowCount(); i++) {
+                            if (TablaVenta.getValueAt(i, 1).equals(txtNombreProducto.getText().trim())) {
+                                JOptionPane.showMessageDialog(null, "El producto esta actualmente en la nueva venta.");
+                                return;
+                            }
+                        }
+                        if(txtDescripcionVenta.getText().trim().equals(txtNombreProducto.getText().trim())){
+        JOptionPane.showMessageDialog(null, "El producto esta actualmente en la nueva venta.");
+        return;
+        }
         if ("".equals(txtIdproducto.getText())) {
             JOptionPane.showMessageDialog(null, "Seleccione una fila.");
         } else if ("".equals(txtBuscarProducto.getText().trim())) {
@@ -2025,8 +2034,14 @@ public final class Menu extends javax.swing.JFrame {
         txtCantPro.setText("" + pro.getStock());
         txtPrecioPro.setText("" + pro.getPrecio());
         txtNomImagen.setText(pro.getNomimagen());
-        cbxProveedorPro.setSelectedIndex(pro.getProveedor()-1);
-
+for (int i=0; i<cbxProveedorPro.getModel().getSize(); i++)
+{
+    if (cbxProveedorPro.getItemAt(i).toString().equals(pro.getProveedorPro()))
+    {
+        cbxProveedorPro.setSelectedIndex(i);
+        break;
+    }
+}
         try {
             // TODO add your handling code here:
 

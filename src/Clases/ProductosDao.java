@@ -232,7 +232,7 @@ InputStream empty = new InputStream() {
                 pro.setId(rs.getInt("id"));
                 pro.setCodigo(rs.getString("codigo"));
                 pro.setNombre(rs.getString("nombre"));
-                pro.setProveedor(rs.getInt("proveedor"));
+                pro.setProveedor(rs.getInt("id_proveedor"));
                 pro.setProveedorPro(rs.getString("nombre_proveedor"));
                 pro.setStock(rs.getInt("stock"));
                 pro.setPrecio(rs.getInt("precio"));
