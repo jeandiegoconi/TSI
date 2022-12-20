@@ -54,12 +54,15 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setOpaque(true);
         jLabel2.setPreferredSize(new java.awt.Dimension(144, 300));
 
+        txtUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtUsuario.setToolTipText("");
         txtUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsuarioActionPerformed(evt);
             }
         });
+
+        txtPass.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         btnIngresar.setBackground(new java.awt.Color(0, 171, 197));
         btnIngresar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
