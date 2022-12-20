@@ -242,7 +242,7 @@ public final class Menu extends javax.swing.JFrame {
     public boolean validarRutCliente() {
         if (!Pattern.matches("^[0-9]+-[0-9kK]{1}$", TxtRutCliente.getText().strip()) || !(TxtRutCliente.getText().strip().length() >= 9)) {
             if (!(TxtRutCliente.getText().strip().equals(""))) {
-                JOptionPane.showMessageDialog(null, "Ingrese el RUT sin puntos y con guion.");
+                JOptionPane.showMessageDialog(null, "Ingrese el RUT sin puntos y con guion.","Error",JOptionPane.WARNING_MESSAGE);
             }
             return false;
         }
@@ -269,7 +269,7 @@ public final class Menu extends javax.swing.JFrame {
                 digitoV += '0';
         }
         if (rut.charAt(rut.length() - 1) != digitoV) {
-            JOptionPane.showMessageDialog(null, "Rut no valido.");
+            JOptionPane.showMessageDialog(null, "Rut no valido.","Error",JOptionPane.WARNING_MESSAGE);
             return false;
         }
         return true;
@@ -278,7 +278,7 @@ public final class Menu extends javax.swing.JFrame {
     public boolean validarRutProveedores() {
         if (!Pattern.matches("^[0-9]+-[0-9kK]{1}$", txtRutProveedor.getText().strip()) || !(txtRutProveedor.getText().strip().length() >= 9)) {
             if (!(txtRutProveedor.getText().strip().equals(""))) {
-                JOptionPane.showMessageDialog(null, "Ingrese el RUT sin puntos y con guion.");
+                JOptionPane.showMessageDialog(null, "Ingrese el RUT sin puntos y con guion.","Error",JOptionPane.WARNING_MESSAGE);
             }
             return false;
         }
@@ -305,7 +305,7 @@ public final class Menu extends javax.swing.JFrame {
                 digitoV += '0';
         }
         if (rut.charAt(rut.length() - 1) != digitoV) {
-            JOptionPane.showMessageDialog(null, "Rut no valido.");
+            JOptionPane.showMessageDialog(null, "Rut no valido.","Error",JOptionPane.WARNING_MESSAGE);
             return false;
         }
         return true;
@@ -1847,7 +1847,7 @@ public final class Menu extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "No se puede eliminar este proveedor porque tiene compras registradas.","Error",JOptionPane.WARNING_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Seleccione una fila.");
+            JOptionPane.showMessageDialog(null, "Seleccione una fila.","Error",JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarProveedorActionPerformed
 
@@ -1887,13 +1887,13 @@ public final class Menu extends javax.swing.JFrame {
                 ResultSet rs2 = stmt2.executeQuery(sqlDuplicate2);
                 int precio = Integer.parseInt(txtPrecioPro.getText().trim());
                 if (rs.next() == true) {
-                    JOptionPane.showMessageDialog(null, "Codigo ya en uso.");
+                    JOptionPane.showMessageDialog(null, "Codigo ya en uso.","Error",JOptionPane.WARNING_MESSAGE);
                 } else {
                     if (rs2.next() == true) {
-                        JOptionPane.showMessageDialog(null, "Nombre ya en uso.");
+                        JOptionPane.showMessageDialog(null, "Nombre ya en uso.","Error",JOptionPane.WARNING_MESSAGE);
                     } else {
                         if (precio == 0) {
-                            JOptionPane.showMessageDialog(null, "El Precio debe ser mayor a 0.");
+                            JOptionPane.showMessageDialog(null, "El Precio debe ser mayor a 0.","Error",JOptionPane.WARNING_MESSAGE);
                         } else {
 
                             pro.setCodigo(txtCodigoProducto.getText().trim());
@@ -1908,7 +1908,7 @@ public final class Menu extends javax.swing.JFrame {
                             } catch (SQLException ex) {
                                 Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                            JOptionPane.showMessageDialog(null, "Productos Registrado");
+                            JOptionPane.showMessageDialog(null, "Productos Registrado","Error",JOptionPane.WARNING_MESSAGE);
                             LimpiarTablaProductos();
                             ListarProductos();
                             cbxProveedorPro.removeAllItems();
@@ -1932,16 +1932,16 @@ public final class Menu extends javax.swing.JFrame {
         String sqlDuplicate = "select codigo from productos where codigo = " + txtCodigoProducto.getText().trim() + " and id <> " + Integer.parseInt(txtIdproducto.getText()) + " ";
                 for (int i = 0; i < TablaVenta.getRowCount(); i++) {
                             if (TablaVenta.getValueAt(i, 1).equals(txtNombreProducto.getText().trim())) {
-                                JOptionPane.showMessageDialog(null, "El producto esta actualmente en la nueva venta.");
+                                JOptionPane.showMessageDialog(null, "El producto esta actualmente en la nueva venta.","Error",JOptionPane.WARNING_MESSAGE);
                                 return;
                             }
                         }
                         if(txtDescripcionVenta.getText().trim().equals(txtNombreProducto.getText().trim())){
-        JOptionPane.showMessageDialog(null, "El producto esta actualmente en la nueva venta.");
+        JOptionPane.showMessageDialog(null, "El producto esta actualmente en la nueva venta.","Error",JOptionPane.WARNING_MESSAGE);
         return;
         }
         if ("".equals(txtIdproducto.getText())) {
-            JOptionPane.showMessageDialog(null, "Seleccione una fila.");
+            JOptionPane.showMessageDialog(null, "Seleccione una fila.","Error",JOptionPane.WARNING_MESSAGE);
         } else if ("".equals(txtBuscarProducto.getText().trim())) {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
@@ -1949,7 +1949,7 @@ public final class Menu extends javax.swing.JFrame {
                 Statement stmt = con.createStatement();
                 ResultSet rs = stmt.executeQuery(sqlDuplicate);
                 if (rs.next() == true) {
-                    JOptionPane.showMessageDialog(null, "Codigo ya en uso.");
+                    JOptionPane.showMessageDialog(null, "Codigo ya en uso.","Error",JOptionPane.WARNING_MESSAGE);
                 } else {
                     if (!"".equals(txtCodigoProducto.getText().trim()) || !"".equals(txtNombreProducto.getText().trim()) || !"".equals(txtCantPro.getText().trim()) || !"".equals(txtPrecioPro.getText().trim())) {
                         pro.setCodigo(txtCodigoProducto.getText().trim());
@@ -1986,7 +1986,7 @@ public final class Menu extends javax.swing.JFrame {
                 Statement stmt = con.createStatement();
                 ResultSet rs = stmt.executeQuery(sqlDuplicate);
                 if (rs.next() == true) {
-                    JOptionPane.showMessageDialog(null, "Codigo ya en uso.");
+                    JOptionPane.showMessageDialog(null, "Codigo ya en uso.","Error",JOptionPane.WARNING_MESSAGE);
                 } else {
                     if (!"".equals(txtCodigoProducto.getText().trim()) || !"".equals(txtNombreProducto.getText().trim()) || !"".equals(txtCantPro.getText().trim()) || !"".equals(txtPrecioPro.getText().trim())) {
                         pro.setCodigo(txtCodigoProducto.getText().trim());
@@ -2087,7 +2087,7 @@ for (int i=0; i<cbxProveedorPro.getModel().getSize(); i++)
 
     private void btnEditarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProveedorActionPerformed
         if ("".equals(txtIdProveedor.getText())) {
-            JOptionPane.showMessageDialog(null, "Selecione una fila.");
+            JOptionPane.showMessageDialog(null, "Selecione una fila.","Error",JOptionPane.WARNING_MESSAGE);
         } else {
             if (!"".equals(txtRutProveedor.getText().trim()) || !"".equals(txtNombreProveedor.getText().trim()) || !"".equals(txtTelefonoProveedor.getText().trim()) || !"".equals(txtDireccionProveedor.getText().trim())) {
                 pr.setRut(txtRutProveedor.getText().trim());
@@ -2120,7 +2120,7 @@ for (int i=0; i<cbxProveedorPro.getModel().getSize(); i++)
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sqlDuplicate);
             if (rs.next() == true) {
-                JOptionPane.showMessageDialog(null, "El RUT ya esta registrado.");
+                JOptionPane.showMessageDialog(null, "El RUT ya esta registrado.","Error",JOptionPane.WARNING_MESSAGE);
             } else {
 
                 if (!"".equals(txtRutProveedor.getText()) && !"".equals(txtNombreProveedor.getText().trim()) && !"".equals(txtTelefonoProveedor.getText().trim()) && !"".equals(txtDireccionProveedor.getText().trim())) {
@@ -2161,12 +2161,12 @@ for (int i=0; i<cbxProveedorPro.getModel().getSize(); i++)
                         
         for (int i = 0; i < TablaVenta.getRowCount(); i++) {
                             if (TablaVenta.getValueAt(i, 1).equals(txtNombreProducto.getText().trim())) {
-                                JOptionPane.showMessageDialog(null, "El producto esta actualmente en la nueva venta.");
+                                JOptionPane.showMessageDialog(null, "El producto esta actualmente en la nueva venta.","Error",JOptionPane.WARNING_MESSAGE);
                                 return;
                             }
                         }
         if(txtDescripcionVenta.getText().trim().equals(txtNombreProducto.getText().trim())){
-        JOptionPane.showMessageDialog(null, "El producto esta actualmente en la nueva venta.");
+        JOptionPane.showMessageDialog(null, "El producto esta actualmente en la nueva venta.","Error",JOptionPane.WARNING_MESSAGE);
         return;
         }
         if (!"".equals(txtIdproducto.getText())) {
@@ -2183,7 +2183,7 @@ for (int i=0; i<cbxProveedorPro.getModel().getSize(); i++)
                 bt_Guardar.setEnabled(true);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Selecciona una fila.");
+            JOptionPane.showMessageDialog(null, "Selecciona una fila.","Error",JOptionPane.WARNING_MESSAGE);
         }      // TODO add your handling code here:
     }//GEN-LAST:event_bt_EliminarActionPerformed
 
@@ -2310,14 +2310,14 @@ for (int i=0; i<cbxProveedorPro.getModel().getSize(); i++)
         }else{
             JOptionPane.showMessageDialog(null, "No se puede eliminar este cliente porque tiene ventas registradas.","Error",JOptionPane.WARNING_MESSAGE);}
         }else {
-            JOptionPane.showMessageDialog(null, "Seleccione una fila.");
+            JOptionPane.showMessageDialog(null, "Seleccione una fila.","Error",JOptionPane.WARNING_MESSAGE);
         }
             // TODO add your handling code here:
     }//GEN-LAST:event_btnEliminarClienteActionPerformed
 
     private void btnEditarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarClienteActionPerformed
         if ("".equals(txtIdCliente.getText())) {
-            JOptionPane.showMessageDialog(null, "Seleccione una fila.");
+            JOptionPane.showMessageDialog(null, "Seleccione una fila.","Error",JOptionPane.WARNING_MESSAGE);
         } else {
 
             if (!"".equals(TxtRutCliente.getText().trim()) || !"".equals(TxtNombreCliente.getText().trim()) || !"".equals(TxtTelefonoCliente.getText().trim())) {
@@ -2332,7 +2332,7 @@ for (int i=0; i<cbxProveedorPro.getModel().getSize(); i++)
                 LimpiarTablaCliente();
                 ListarCliente();
             } else {
-                JOptionPane.showMessageDialog(null, "Los campos estan vacios");
+                JOptionPane.showMessageDialog(null, "Los campos estan vacios","Error",JOptionPane.WARNING_MESSAGE);
             }
         }        // TODO add your handling code here:
     }//GEN-LAST:event_btnEditarClienteActionPerformed
@@ -2346,7 +2346,7 @@ for (int i=0; i<cbxProveedorPro.getModel().getSize(); i++)
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sqlDuplicate);
             if (rs.next() == true) {
-                JOptionPane.showMessageDialog(null, "El RUT ya esta registrado.");
+                JOptionPane.showMessageDialog(null, "El RUT ya esta registrado.","Error",JOptionPane.WARNING_MESSAGE);
             } else {
 
                 if (!"".equals(TxtRutCliente.getText()) && !"".equals(TxtNombreCliente.getText()) && !"".equals(TxtTelefonoCliente.getText()) && !"".equals(TxtDirecionCliente.getText())) {
@@ -2392,7 +2392,7 @@ for (int i=0; i<cbxProveedorPro.getModel().getSize(); i++)
 
     private void btnPdfVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPdfVentaActionPerformed
         if (txtIdVentaPdf.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Seleccione una fila.");
+            JOptionPane.showMessageDialog(null, "Seleccione una fila.","Error",JOptionPane.WARNING_MESSAGE);
         } else {
             v = Vdao.BuscarVenta(Integer.parseInt(txtIdVentaPdf.getText()));
             Vdao.pdfV(v.getId(), v.getCliente(), v.getPago(), v.getTotal(), v.getVuelto(), v.getVendedor(), v.getMetodo());
@@ -2441,7 +2441,7 @@ for (int i=0; i<cbxProveedorPro.getModel().getSize(); i++)
                 JOptionPane.showMessageDialog(null, "Algunos campos estan vacios.","Error",JOptionPane.WARNING_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "La compra esta vacia.");
+            JOptionPane.showMessageDialog(null, "La compra esta vacia.","Error",JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnAddCompraActionPerformed
 
@@ -2498,13 +2498,13 @@ for (int i=0; i<cbxProveedorPro.getModel().getSize(); i++)
                 } else {
                     lblNomProdCom.setVisible(false);
                     txtNombreProductoCompra.setVisible(false);
-                    JOptionPane.showMessageDialog(null, "El producto no existe.");
+                    JOptionPane.showMessageDialog(null, "El producto no existe.","Error",JOptionPane.WARNING_MESSAGE);
 
                     LimpiarCompra();
                     txtCodProdCompra.requestFocus();
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Ingrese el codigo del producto.");
+                JOptionPane.showMessageDialog(null, "Ingrese el codigo del producto.","Error",JOptionPane.WARNING_MESSAGE);
                 txtCodProdCompra.requestFocus();
             }
         }// TODO add your handling code here:
@@ -2531,12 +2531,12 @@ for (int i=0; i<cbxProveedorPro.getModel().getSize(); i++)
 
                     VueltoTotal();
                 } else {
-                    JOptionPane.showMessageDialog(null, "El Valor es menor que el total.");
+                    JOptionPane.showMessageDialog(null, "El Valor es menor que el total.","Error",JOptionPane.WARNING_MESSAGE);
 
                 }
 
             } else {
-                JOptionPane.showMessageDialog(null, "No hay productos en la venta");
+                JOptionPane.showMessageDialog(null, "No hay productos en la venta","Error",JOptionPane.WARNING_MESSAGE);
             }
         }
         // TODO add your handling code here:
@@ -2586,11 +2586,11 @@ for (int i=0; i<cbxProveedorPro.getModel().getSize(); i++)
                     }
                 } else {
                     LimpiarVenta();
-                    JOptionPane.showMessageDialog(null, "El producto no existe.");
+                    JOptionPane.showMessageDialog(null, "El producto no existe.","Error",JOptionPane.WARNING_MESSAGE);
                     txtNombreVenta.requestFocus();
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Ingrese el nombre del producto.");
+                JOptionPane.showMessageDialog(null, "Ingrese el nombre del producto.","Error",JOptionPane.WARNING_MESSAGE);
                 txtNombreVenta.requestFocus();
             }
         }        // TODO add your handling code here:              // TODO add your handling code here:
@@ -2605,7 +2605,7 @@ for (int i=0; i<cbxProveedorPro.getModel().getSize(); i++)
         if (TablaVenta.getRowCount() > 0) {
             int TmpTotal = Integer.parseInt(LabelTotal.getText().trim());
             if ("".equals(txtPagoCliente.getText().trim())) {
-                JOptionPane.showMessageDialog(null, "Pago del cliente esta vacio.");
+                JOptionPane.showMessageDialog(null, "Pago del cliente esta vacio.","Error",JOptionPane.WARNING_MESSAGE);
             } else {
                 int TmpPago = Integer.parseInt(txtPagoCliente.getText().trim());
                 if (TmpPago >= TmpTotal) {
@@ -2642,12 +2642,12 @@ for (int i=0; i<cbxProveedorPro.getModel().getSize(); i++)
                         txtCantidadVenta.setEnabled(false);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "El Valor es menor que el total.");
+                    JOptionPane.showMessageDialog(null, "El Valor es menor que el total.","Error",JOptionPane.WARNING_MESSAGE);
 
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(null, "La venta esta vacia.");
+            JOptionPane.showMessageDialog(null, "La venta esta vacia.","Error",JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnGenerarVentaActionPerformed
 
@@ -2658,7 +2658,7 @@ for (int i=0; i<cbxProveedorPro.getModel().getSize(); i++)
             TotalPagar();
             txtCodigoVenta.requestFocus();
         } else {
-            JOptionPane.showMessageDialog(null, "La venta esta vacia.");
+            JOptionPane.showMessageDialog(null, "La venta esta vacia.","Error",JOptionPane.WARNING_MESSAGE);
             txtCodigoVenta.requestFocus();
         }
         // TODO add your handling code here:
@@ -2684,7 +2684,7 @@ for (int i=0; i<cbxProveedorPro.getModel().getSize(); i++)
                         tmp = (DefaultTableModel) TablaVenta.getModel();
                         for (int i = 0; i < TablaVenta.getRowCount(); i++) {
                             if (TablaVenta.getValueAt(i, 1).equals(txtDescripcionVenta.getText().trim())) {
-                                JOptionPane.showMessageDialog(null, "El producto ya esta registrado");
+                                JOptionPane.showMessageDialog(null, "El producto ya esta registrado","Error",JOptionPane.WARNING_MESSAGE);
                                 return;
                             }
                         }
@@ -2707,13 +2707,13 @@ for (int i=0; i<cbxProveedorPro.getModel().getSize(); i++)
                         LimpiarVenta();
                         txtCodigoVenta.requestFocus();
                     } else {
-                        JOptionPane.showMessageDialog(null, "Stock no disponible");
+                        JOptionPane.showMessageDialog(null, "Stock no disponible","Error",JOptionPane.WARNING_MESSAGE);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Ingrese Cantidad mayor a 0.");
+                    JOptionPane.showMessageDialog(null, "Ingrese Cantidad mayor a 0.","Error",JOptionPane.WARNING_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Ingrese Cantidad");
+                JOptionPane.showMessageDialog(null, "Ingrese Cantidad","Error",JOptionPane.WARNING_MESSAGE);
             }
         }
         // TODO add your handling code here:
@@ -2755,11 +2755,11 @@ for (int i=0; i<cbxProveedorPro.getModel().getSize(); i++)
                     }
                 } else {
                     LimpiarVenta();
-                    JOptionPane.showMessageDialog(null, "El producto no existe.");
+                    JOptionPane.showMessageDialog(null, "El producto no existe.","Error",JOptionPane.WARNING_MESSAGE);
                     txtCodigoVenta.requestFocus();
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Ingrese el codigo del producto.");
+                JOptionPane.showMessageDialog(null, "Ingrese el codigo del producto.","Error",JOptionPane.WARNING_MESSAGE);
                 txtCodigoVenta.requestFocus();
             }
         }        // TODO add your handling code here:
@@ -2788,7 +2788,7 @@ for (int i=0; i<cbxProveedorPro.getModel().getSize(); i++)
                     txtIdCV.setText("" + cl.getId());
                 } else {
                     txtRutVenta.setText("");
-                    JOptionPane.showMessageDialog(null, "El cliente no existe");
+                    JOptionPane.showMessageDialog(null, "El cliente no existe","Error",JOptionPane.WARNING_MESSAGE);
                 }
             }
         }        // TODO add your handling code here:
@@ -2804,7 +2804,7 @@ for (int i=0; i<cbxProveedorPro.getModel().getSize(); i++)
                     txtIdCV.setText("" + cl.getId());
                 } else {
                     txtRutVenta.setText("");
-                    JOptionPane.showMessageDialog(null, "El cliente no existe");
+                    JOptionPane.showMessageDialog(null, "El cliente no existe","Error",JOptionPane.WARNING_MESSAGE);
                 }
             }
         }        // TODO add your handling code here:
@@ -2872,7 +2872,7 @@ for (int i=0; i<cbxProveedorPro.getModel().getSize(); i++)
                         lblNomProdCom.setVisible(false);
                         txtNombreProductoCompra.setVisible(false);
                         lblEnterCantidadCompra.setVisible(false);
-                        JOptionPane.showMessageDialog(null, "El producto no existe.");
+                        JOptionPane.showMessageDialog(null, "El producto no existe.","Error",JOptionPane.WARNING_MESSAGE);
                     }
                     int id = Integer.parseInt(txtIdProdCompra.getText().trim());
                     int id_prod = Integer.parseInt(txtCodProdCompra.getText().trim());
@@ -2885,7 +2885,7 @@ for (int i=0; i<cbxProveedorPro.getModel().getSize(); i++)
 
                         if (TablaProductoCompraAgregar.getValueAt(i, 1).equals(txtNombreProductoCompra.getText().trim())) {
                             lblEnterCantidadCompra.setVisible(false);
-                            JOptionPane.showMessageDialog(null, "El producto ya esta registrado");
+                            JOptionPane.showMessageDialog(null, "El producto ya esta registrado","Error",JOptionPane.WARNING_MESSAGE);
                             return;
                         }
                     }
@@ -2908,11 +2908,11 @@ for (int i=0; i<cbxProveedorPro.getModel().getSize(); i++)
                     lblEnterCantidadCompra.setVisible(false);
                 } else {
                     lblEnterCantidadCompra.setVisible(false);
-                    JOptionPane.showMessageDialog(null, "Ingrese Cantidad mayor a 0.");
+                    JOptionPane.showMessageDialog(null, "Ingrese Cantidad mayor a 0.","Error",JOptionPane.WARNING_MESSAGE);
                 }
             } else {
                 lblEnterCantidadCompra.setVisible(false);
-                JOptionPane.showMessageDialog(null, "Ingrese Cantidad");
+                JOptionPane.showMessageDialog(null, "Ingrese Cantidad","Error",JOptionPane.WARNING_MESSAGE);
             }
         }        // TODO add your handling code here:
     }//GEN-LAST:event_txtCantidadCompraKeyPressed
@@ -2934,7 +2934,7 @@ for (int i=0; i<cbxProveedorPro.getModel().getSize(); i++)
             txtCodProdCompra.requestFocus();
             btnEliminarProductoCompra.setEnabled(false);
         } else {
-            JOptionPane.showMessageDialog(null, "La compra esta vacia.");
+            JOptionPane.showMessageDialog(null, "La compra esta vacia.","Error",JOptionPane.WARNING_MESSAGE);
             btnEliminarProductoCompra.setEnabled(false);
             txtCodProdCompra.requestFocus();
         }        // TODO add your handling code here:
@@ -3265,11 +3265,11 @@ btnAddCompra.setEnabled(false);
             if (TmpPago >= TmpTotal) {
                 VueltoTotal();
             } else {
-                JOptionPane.showMessageDialog(null, "El Valor es menor que el total.");
+                JOptionPane.showMessageDialog(null, "El Valor es menor que el total.","Error",JOptionPane.WARNING_MESSAGE);
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "No hay productos en la venta");
+            JOptionPane.showMessageDialog(null, "No hay productos en la venta","Error",JOptionPane.WARNING_MESSAGE);
         }
 
     }
