@@ -1908,7 +1908,7 @@ public final class Menu extends javax.swing.JFrame {
                             } catch (SQLException ex) {
                                 Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                            JOptionPane.showMessageDialog(null, "Productos Registrado","Error",JOptionPane.WARNING_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Productos Registrado");
                             LimpiarTablaProductos();
                             ListarProductos();
                             cbxProveedorPro.removeAllItems();
