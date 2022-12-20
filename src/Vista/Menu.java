@@ -336,6 +336,12 @@ public final class Menu extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         DateCompra.setDate(fechaCompra);
         Midate.setDate(fechaVenta);
+        lblRutProv.setText("");
+        lblNombreProv.setText("");
+        lblTelefonoProv.setText("");
+        lblDireccionProv.setText("");
+        BtnEliminarVentasCompletas.setEnabled(false);
+        lblProdDetalle.setText("");
         lblEnterCantidadCompra.setVisible(false);
         lblNomProdCom.setVisible(false);
         txtNombreProductoCompra.setVisible(false);
@@ -358,6 +364,16 @@ public final class Menu extends javax.swing.JFrame {
         bt_Actualizar.setEnabled(false);
         bt_Eliminar.setEnabled(false);
         bt_Guardar.setEnabled(true);
+                lblClienteDetalle.setText("");
+        lblRutCliente.setText("");
+        lblNombreCliente.setText("");
+        lblTelefonoCliente.setText("");
+        lblDireccionCliente.setText("");
+        btnEliminarCliente.setEnabled(false);
+        btnEditarProveedor.setEnabled(false);
+        btnEliminarProveedor.setEnabled(false);
+        btnEliminarProductoCompra.setEnabled(false);
+        btnEditarCliente.setEnabled(false);
         txtCantidadVenta.setEnabled(false);
         cbxProveedorPro.removeAllItems();
         cbxProveedorCom.removeAllItems();
@@ -498,6 +514,11 @@ public final class Menu extends javax.swing.JFrame {
         TxtDirecionCliente = new javax.swing.JTextField();
         btnEditarCliente = new javax.swing.JButton();
         TxtTelefonoCliente = new javax.swing.JTextField();
+        lblClienteDetalle = new javax.swing.JLabel();
+        lblRutCliente = new javax.swing.JLabel();
+        lblNombreCliente = new javax.swing.JLabel();
+        lblTelefonoCliente = new javax.swing.JLabel();
+        lblDireccionCliente = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         TablaProveedor = new javax.swing.JTable();
@@ -516,6 +537,11 @@ public final class Menu extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         txtRutProveedor = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
+        lblProdDetalle = new javax.swing.JLabel();
+        lblNombreProv = new javax.swing.JLabel();
+        lblRutProv = new javax.swing.JLabel();
+        lblTelefonoProv = new javax.swing.JLabel();
+        lblDireccionProv = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
         DateCompra = new com.toedter.calendar.JDateChooser();
@@ -994,9 +1020,9 @@ public final class Menu extends javax.swing.JFrame {
         });
         jPanel2.setLayout(null);
 
-        jLabel1.setText("Nombre :");
+        jLabel1.setText("Nombre:");
         jPanel2.add(jLabel1);
-        jLabel1.setBounds(205, 43, 50, 16);
+        jLabel1.setBounds(180, 40, 47, 16);
 
         txtIdproducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1006,7 +1032,7 @@ public final class Menu extends javax.swing.JFrame {
         jPanel2.add(txtIdproducto);
         txtIdproducto.setBounds(831, 94, 40, 40);
         jPanel2.add(txtNombreProducto);
-        txtNombreProducto.setBounds(267, 40, 106, 22);
+        txtNombreProducto.setBounds(240, 40, 160, 22);
 
         lblCodProd.setText("Codigo Producto:");
         jPanel2.add(lblCodProd);
@@ -1018,7 +1044,7 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jPanel2.add(txtCodigoProducto);
-        txtCodigoProducto.setBounds(110, 40, 50, 22);
+        txtCodigoProducto.setBounds(110, 42, 40, 20);
 
         TablaProducto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1111,11 +1137,11 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jPanel2.add(cbxProveedorPro);
-        cbxProveedorPro.setBounds(477, 36, 143, 30);
+        cbxProveedorPro.setBounds(500, 40, 160, 30);
 
         jLabel26.setText("Proveedor:");
         jPanel2.add(jLabel26);
-        jLabel26.setBounds(408, 43, 57, 16);
+        jLabel26.setBounds(440, 40, 57, 16);
 
         txtPrecioPro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -1123,7 +1149,7 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jPanel2.add(txtPrecioPro);
-        txtPrecioPro.setBounds(739, 36, 97, 30);
+        txtPrecioPro.setBounds(730, 40, 97, 20);
 
         jLabel25.setText("Precio:");
         jPanel2.add(jLabel25);
@@ -1135,13 +1161,13 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jPanel2.add(txtCantPro);
-        txtCantPro.setBounds(110, 90, 50, 20);
+        txtCantPro.setBounds(100, 90, 50, 20);
 
         jLabel24.setText("Cantidad:");
         jPanel2.add(jLabel24);
         jLabel24.setBounds(40, 90, 51, 16);
         jPanel2.add(lblFoto);
-        lblFoto.setBounds(351, 142, 92, 82);
+        lblFoto.setBounds(340, 130, 140, 120);
 
         jLabel2.setText("Imagen:");
         jPanel2.add(jLabel2);
@@ -1221,7 +1247,7 @@ public final class Menu extends javax.swing.JFrame {
         }
 
         jPanel1.add(jScrollPane4);
-        jScrollPane4.setBounds(354, 25, 540, 402);
+        jScrollPane4.setBounds(264, 25, 630, 450);
 
         TxtRutCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1264,7 +1290,7 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txtIdCliente);
-        txtIdCliente.setBounds(90, 430, 16, 22);
+        txtIdCliente.setBounds(90, 450, 16, 22);
 
         btnNuevoCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/blank.png"))); // NOI18N
         btnNuevoCliente.setText("Nuevo Cliente");
@@ -1274,7 +1300,7 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnNuevoCliente);
-        btnNuevoCliente.setBounds(170, 350, 150, 40);
+        btnNuevoCliente.setBounds(30, 280, 150, 40);
 
         btnEliminarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/delete.png"))); // NOI18N
         btnEliminarCliente.setText("Eliminar Cliente");
@@ -1284,7 +1310,7 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnEliminarCliente);
-        btnEliminarCliente.setBounds(11, 350, 150, 40);
+        btnEliminarCliente.setBounds(740, 490, 150, 40);
 
         btnGuardarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/save.png"))); // NOI18N
         btnGuardarCliente.setText("Guardar Cliente");
@@ -1294,7 +1320,7 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnGuardarCliente);
-        btnGuardarCliente.setBounds(10, 300, 150, 37);
+        btnGuardarCliente.setBounds(30, 400, 150, 37);
         jPanel1.add(TxtDirecionCliente);
         TxtDirecionCliente.setBounds(70, 210, 153, 22);
 
@@ -1306,7 +1332,7 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnEditarCliente);
-        btnEditarCliente.setBounds(170, 300, 150, 37);
+        btnEditarCliente.setBounds(30, 340, 150, 37);
 
         TxtTelefonoCliente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -1315,6 +1341,31 @@ public final class Menu extends javax.swing.JFrame {
         });
         jPanel1.add(TxtTelefonoCliente);
         TxtTelefonoCliente.setBounds(70, 170, 151, 22);
+
+        lblClienteDetalle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblClienteDetalle.setText("Informacion del Cliente Seleccionado:");
+        jPanel1.add(lblClienteDetalle);
+        lblClienteDetalle.setBounds(250, 490, 270, 20);
+
+        lblRutCliente.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lblRutCliente.setText("Test");
+        jPanel1.add(lblRutCliente);
+        lblRutCliente.setBounds(260, 530, 460, 22);
+
+        lblNombreCliente.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lblNombreCliente.setText("Test");
+        jPanel1.add(lblNombreCliente);
+        lblNombreCliente.setBounds(260, 560, 470, 20);
+
+        lblTelefonoCliente.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lblTelefonoCliente.setText("Test");
+        jPanel1.add(lblTelefonoCliente);
+        lblTelefonoCliente.setBounds(260, 590, 480, 22);
+
+        lblDireccionCliente.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lblDireccionCliente.setText("Test");
+        jPanel1.add(lblDireccionCliente);
+        lblDireccionCliente.setBounds(260, 620, 460, 22);
 
         jTabbedPane1.addTab("Clientes", new javax.swing.ImageIcon(getClass().getResource("/Img/clients.png")), jPanel1); // NOI18N
 
@@ -1348,24 +1399,29 @@ public final class Menu extends javax.swing.JFrame {
         jScrollPane5.setViewportView(TablaProveedor);
         if (TablaProveedor.getColumnModel().getColumnCount() > 0) {
             TablaProveedor.getColumnModel().getColumn(0).setResizable(false);
+            TablaProveedor.getColumnModel().getColumn(0).setPreferredWidth(10);
             TablaProveedor.getColumnModel().getColumn(1).setResizable(false);
+            TablaProveedor.getColumnModel().getColumn(1).setPreferredWidth(10);
             TablaProveedor.getColumnModel().getColumn(2).setResizable(false);
+            TablaProveedor.getColumnModel().getColumn(2).setPreferredWidth(100);
             TablaProveedor.getColumnModel().getColumn(3).setResizable(false);
+            TablaProveedor.getColumnModel().getColumn(3).setPreferredWidth(15);
             TablaProveedor.getColumnModel().getColumn(4).setResizable(false);
+            TablaProveedor.getColumnModel().getColumn(4).setPreferredWidth(15);
         }
 
         jPanel5.add(jScrollPane5);
-        jScrollPane5.setBounds(389, 23, 523, 470);
+        jScrollPane5.setBounds(250, 20, 660, 460);
 
         jLabel33.setText("(Ej: 123456789-9)");
         jPanel5.add(jLabel33);
-        jLabel33.setBounds(97, 55, 88, 16);
+        jLabel33.setBounds(80, 60, 88, 16);
 
         LabelVendedor.setText("Vendedor");
         jPanel5.add(LabelVendedor);
-        LabelVendedor.setBounds(78, 409, 51, 16);
+        LabelVendedor.setBounds(60, 530, 51, 16);
         jPanel5.add(txtIdProveedor);
-        txtIdProveedor.setBounds(186, 230, 28, 22);
+        txtIdProveedor.setBounds(170, 230, 28, 22);
 
         btnNuevoProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/blank.png"))); // NOI18N
         btnNuevoProveedor.setText("Nuevo Proveedor");
@@ -1375,7 +1431,7 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jPanel5.add(btnNuevoProveedor);
-        btnNuevoProveedor.setBounds(190, 330, 160, 40);
+        btnNuevoProveedor.setBounds(20, 280, 170, 40);
 
         btnEliminarProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/delete.png"))); // NOI18N
         btnEliminarProveedor.setText("Eliminar Proveedor");
@@ -1385,7 +1441,7 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jPanel5.add(btnEliminarProveedor);
-        btnEliminarProveedor.setBounds(13, 330, 170, 40);
+        btnEliminarProveedor.setBounds(740, 490, 170, 40);
 
         btnEditarProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/edit.png"))); // NOI18N
         btnEditarProveedor.setText("Editar Proveedor");
@@ -1395,7 +1451,7 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jPanel5.add(btnEditarProveedor);
-        btnEditarProveedor.setBounds(190, 280, 160, 37);
+        btnEditarProveedor.setBounds(20, 340, 170, 37);
 
         btnguardarProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/save.png"))); // NOI18N
         btnguardarProveedor.setText("Guardar Proveedor");
@@ -1405,7 +1461,7 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jPanel5.add(btnguardarProveedor);
-        btnguardarProveedor.setBounds(13, 280, 170, 37);
+        btnguardarProveedor.setBounds(20, 390, 170, 37);
 
         txtDireccionProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1413,11 +1469,11 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jPanel5.add(txtDireccionProveedor);
-        txtDireccionProveedor.setBounds(97, 192, 125, 20);
+        txtDireccionProveedor.setBounds(70, 200, 140, 20);
 
         jLabel18.setText("Direccion:");
         jPanel5.add(jLabel18);
-        jLabel18.setBounds(32, 194, 53, 16);
+        jLabel18.setBounds(10, 200, 53, 16);
 
         txtTelefonoProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -1425,17 +1481,17 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jPanel5.add(txtTelefonoProveedor);
-        txtTelefonoProveedor.setBounds(97, 158, 125, 22);
+        txtTelefonoProveedor.setBounds(70, 160, 120, 22);
 
         jLabel17.setText("Telefono:");
         jPanel5.add(jLabel17);
-        jLabel17.setBounds(30, 161, 49, 16);
+        jLabel17.setBounds(10, 160, 49, 16);
         jPanel5.add(txtNombreProveedor);
-        txtNombreProveedor.setBounds(97, 120, 125, 22);
+        txtNombreProveedor.setBounds(70, 120, 170, 22);
 
         jLabel16.setText("Nombre:");
         jPanel5.add(jLabel16);
-        jLabel16.setBounds(32, 123, 47, 16);
+        jLabel16.setBounds(10, 120, 47, 16);
 
         txtRutProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1448,11 +1504,36 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jPanel5.add(txtRutProveedor);
-        txtRutProveedor.setBounds(97, 81, 125, 22);
+        txtRutProveedor.setBounds(70, 80, 120, 22);
 
         jLabel15.setText("RUT:");
         jPanel5.add(jLabel15);
-        jLabel15.setBounds(32, 77, 24, 31);
+        jLabel15.setBounds(20, 80, 24, 31);
+
+        lblProdDetalle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblProdDetalle.setText("Informacion del Proveedor Seleccionado:");
+        jPanel5.add(lblProdDetalle);
+        lblProdDetalle.setBounds(250, 490, 270, 20);
+
+        lblNombreProv.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lblNombreProv.setText("Test");
+        jPanel5.add(lblNombreProv);
+        lblNombreProv.setBounds(260, 560, 470, 16);
+
+        lblRutProv.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lblRutProv.setText("Test");
+        jPanel5.add(lblRutProv);
+        lblRutProv.setBounds(260, 530, 460, 22);
+
+        lblTelefonoProv.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lblTelefonoProv.setText("Test");
+        jPanel5.add(lblTelefonoProv);
+        lblTelefonoProv.setBounds(260, 590, 480, 22);
+
+        lblDireccionProv.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lblDireccionProv.setText("Test");
+        jPanel5.add(lblDireccionProv);
+        lblDireccionProv.setBounds(260, 620, 460, 22);
 
         jTabbedPane1.addTab("Proveedores", new javax.swing.ImageIcon(getClass().getResource("/Img/supplier.png")), jPanel5); // NOI18N
 
@@ -1515,7 +1596,7 @@ public final class Menu extends javax.swing.JFrame {
         jScrollPane6.setBounds(20, 370, 520, 260);
 
         jPanel7.add(cbxProveedorCom);
-        cbxProveedorCom.setBounds(80, 20, 174, 25);
+        cbxProveedorCom.setBounds(80, 20, 250, 25);
 
         btnAddCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/save.png"))); // NOI18N
         btnAddCompra.setText("Añadir Compra");
@@ -1529,7 +1610,7 @@ public final class Menu extends javax.swing.JFrame {
 
         jLabel34.setText("Codigo Producto:");
         jPanel7.add(jLabel34);
-        jLabel34.setBounds(282, 27, 94, 16);
+        jLabel34.setBounds(350, 30, 94, 16);
 
         txtCodProdCompra.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1543,11 +1624,11 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jPanel7.add(txtCodProdCompra);
-        txtCodProdCompra.setBounds(390, 20, 37, 25);
+        txtCodProdCompra.setBounds(460, 20, 37, 25);
 
         jLabel35.setText("Cantidad:");
         jPanel7.add(jLabel35);
-        jLabel35.setBounds(458, 27, 51, 16);
+        jLabel35.setBounds(530, 30, 51, 16);
 
         txtCantidadCompra.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1561,7 +1642,7 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jPanel7.add(txtCantidadCompra);
-        txtCantidadCompra.setBounds(520, 20, 34, 22);
+        txtCantidadCompra.setBounds(590, 20, 34, 22);
 
         jLabel36.setText("Precio a pagar:");
         jPanel7.add(jLabel36);
@@ -1600,7 +1681,7 @@ public final class Menu extends javax.swing.JFrame {
 
         lblEnterCompra.setText("Presione Enter para ver el nombre");
         jPanel7.add(lblEnterCompra);
-        lblEnterCompra.setBounds(240, 60, 177, 16);
+        lblEnterCompra.setBounds(310, 60, 177, 16);
         jPanel7.add(jLabel41);
         jLabel41.setBounds(456, 54, 9, 16);
 
@@ -1612,7 +1693,7 @@ public final class Menu extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "CODIGO PRODUCTO", "NOMBRE", "CANTIDAD"
+                "COD PROD", "NOMBRE", "CANTIDAD"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -1627,12 +1708,13 @@ public final class Menu extends javax.swing.JFrame {
         jScrollPane9.setViewportView(TablaProductosComprasLista);
         if (TablaProductosComprasLista.getColumnModel().getColumnCount() > 0) {
             TablaProductosComprasLista.getColumnModel().getColumn(0).setResizable(false);
+            TablaProductosComprasLista.getColumnModel().getColumn(0).setPreferredWidth(5);
             TablaProductosComprasLista.getColumnModel().getColumn(1).setResizable(false);
             TablaProductosComprasLista.getColumnModel().getColumn(2).setResizable(false);
         }
 
         jPanel7.add(jScrollPane9);
-        jScrollPane9.setBounds(570, 370, 350, 260);
+        jScrollPane9.setBounds(570, 370, 340, 260);
 
         TablaProductoCompraAgregar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1680,7 +1762,7 @@ public final class Menu extends javax.swing.JFrame {
         lblEnterCantidadCompra.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblEnterCantidadCompra.setText("Presione Enter para agregar");
         jPanel7.add(lblEnterCantidadCompra);
-        lblEnterCantidadCompra.setBounds(460, 60, 160, 16);
+        lblEnterCantidadCompra.setBounds(530, 60, 160, 16);
 
         txtIdCompraHis.setEditable(false);
         jPanel7.add(txtIdCompraHis);
@@ -1784,7 +1866,8 @@ public final class Menu extends javax.swing.JFrame {
 
     private void btnNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoProductoActionPerformed
         LimpiarProductos();
-
+        bt_Actualizar.setEnabled(false);
+        bt_Eliminar.setEnabled(false);
         bt_Guardar.setEnabled(true);
         TablaProducto.getSelectionModel().clearSelection();
         LimpiarTablaProductos();
@@ -1841,7 +1924,7 @@ public final class Menu extends javax.swing.JFrame {
                 Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Algunos campos estan vacios");
+            JOptionPane.showMessageDialog(null, "Algunos campos estan vacios","Error",JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_bt_GuardarActionPerformed
 
@@ -1942,7 +2025,7 @@ public final class Menu extends javax.swing.JFrame {
         txtCantPro.setText("" + pro.getStock());
         txtPrecioPro.setText("" + pro.getPrecio());
         txtNomImagen.setText(pro.getNomimagen());
-        cbxProveedorPro.setSelectedItem(new Combo(pro.getProveedor(), pro.getProveedorPro()));
+        cbxProveedorPro.setSelectedIndex(pro.getProveedor()-1);
 
         try {
             // TODO add your handling code here:
@@ -2044,7 +2127,7 @@ public final class Menu extends javax.swing.JFrame {
                         btnguardarProveedor.setEnabled(true);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Algunos campos esta vacios.");
+                    JOptionPane.showMessageDialog(null, "Algunos campos esta vacios.","Error",JOptionPane.WARNING_MESSAGE);
                 }
             }
         } catch (ClassNotFoundException | SQLException ex) {
@@ -2102,7 +2185,14 @@ public final class Menu extends javax.swing.JFrame {
         TxtRutCliente.setText(TablaCliente.getValueAt(fila, 1).toString());
         TxtNombreCliente.setText(TablaCliente.getValueAt(fila, 2).toString());
         TxtTelefonoCliente.setText(TablaCliente.getValueAt(fila, 3).toString());
-        TxtDirecionCliente.setText(TablaCliente.getValueAt(fila, 4).toString());        // TODO add your handling code here:
+        TxtDirecionCliente.setText(TablaCliente.getValueAt(fila, 4).toString());
+
+        lblClienteDetalle.setText("Informacion del Cliente Seleccionado:");
+        lblRutCliente.setText("RUT: "+TablaCliente.getValueAt(fila, 1).toString());
+        lblNombreCliente.setText("Nombre: "+TablaCliente.getValueAt(fila, 2).toString());
+        lblTelefonoCliente.setText("Telefono: "+TablaCliente.getValueAt(fila, 3).toString());
+        lblDireccionCliente.setText("Direccion: "+TablaCliente.getValueAt(fila, 4).toString());
+// TODO add your handling code here:
     }//GEN-LAST:event_TablaClienteMouseClicked
 
     private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
@@ -2146,7 +2236,12 @@ public final class Menu extends javax.swing.JFrame {
         txtRutProveedor.setText(TablaProveedor.getValueAt(fila, 1).toString());
         txtNombreProveedor.setText(TablaProveedor.getValueAt(fila, 2).toString());
         txtTelefonoProveedor.setText(TablaProveedor.getValueAt(fila, 3).toString());
-        txtDireccionProveedor.setText(TablaProveedor.getValueAt(fila, 4).toString());        // TODO add your handling code here:
+        txtDireccionProveedor.setText(TablaProveedor.getValueAt(fila, 4).toString());
+        lblProdDetalle.setText("Informacion del Proveedor Seleccionado:");
+        lblRutProv.setText("RUT: "+TablaProveedor.getValueAt(fila, 1).toString());
+        lblNombreProv.setText("Nombre: "+TablaProveedor.getValueAt(fila, 2).toString());
+        lblTelefonoProv.setText("Telefono: "+TablaProveedor.getValueAt(fila, 3).toString());
+        lblDireccionProv.setText("Direccion: "+TablaProveedor.getValueAt(fila, 4).toString());
     }//GEN-LAST:event_TablaProveedorMouseClicked
 
     private void txtCodigoProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoProductoKeyTyped
@@ -2255,7 +2350,7 @@ public final class Menu extends javax.swing.JFrame {
                         btnGuardarCliente.setEnabled(true);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Algunos campos estan vacios");
+                    JOptionPane.showMessageDialog(null, "Algunos campos estan vacios","Error",JOptionPane.WARNING_MESSAGE);
                 }
             }
         } catch (ClassNotFoundException | SQLException ex) {
@@ -2290,6 +2385,7 @@ public final class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPdfVentaActionPerformed
 
     private void TablaHistorialVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaHistorialVentaMouseClicked
+        BtnEliminarVentasCompletas.setEnabled(true);
         int fila = TablaHistorialVenta.rowAtPoint(evt.getPoint());
         txtIdVentaPdf.setText(TablaHistorialVenta.getValueAt(fila, 0).toString());
         v = Vdao.BuscarVenta(Integer.parseInt(txtIdVentaPdf.getText()));
@@ -2327,7 +2423,7 @@ public final class Menu extends javax.swing.JFrame {
                 ListarCompras();
                 btnAddCompra.setEnabled(false);
             } else {
-                JOptionPane.showMessageDialog(null, "Algunos campos estan vacios.");
+                JOptionPane.showMessageDialog(null, "Algunos campos estan vacios.","Error",JOptionPane.WARNING_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(null, "La compra esta vacia.");
@@ -2821,6 +2917,7 @@ public final class Menu extends javax.swing.JFrame {
             modelo = (DefaultTableModel) TablaProductoCompraAgregar.getModel();
             modelo.removeRow(TablaProductoCompraAgregar.getSelectedRow());
             txtCodProdCompra.requestFocus();
+            btnEliminarProductoCompra.setEnabled(false);
         } else {
             JOptionPane.showMessageDialog(null, "La compra esta vacia.");
             btnEliminarProductoCompra.setEnabled(false);
@@ -2848,6 +2945,7 @@ public final class Menu extends javax.swing.JFrame {
                 LimpiarTablaHistorialVentas();
                 LimpiarProductosHistorial();
                 ListarHistorialVentas();
+                BtnEliminarVentasCompletas.setEnabled(false);
             }
 
         }                // TODO add your handling code here:
@@ -2872,7 +2970,7 @@ public final class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_TablaCompraAncestorAdded
 
     private void TablaProductoCompraAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaProductoCompraAgregarMouseClicked
-        // TODO add your handling code here:
+btnEliminarProductoCompra.setEnabled(true);        // TODO add your handling code here:
     }//GEN-LAST:event_TablaProductoCompraAgregarMouseClicked
 
     private void txtPrecioCompraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioCompraKeyReleased
@@ -3019,13 +3117,23 @@ btnAddCompra.setEnabled(false);
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblAlerta;
+    private javax.swing.JLabel lblClienteDetalle;
     private javax.swing.JLabel lblCodProd;
+    private javax.swing.JLabel lblDireccionCliente;
+    private javax.swing.JLabel lblDireccionProv;
     private javax.swing.JLabel lblEnterCantidadCompra;
     private javax.swing.JLabel lblEnterCompra;
     private javax.swing.JLabel lblEnterNombre;
     private javax.swing.JLabel lblFoto;
     private javax.swing.JLabel lblFotoVenta;
     private javax.swing.JLabel lblNomProdCom;
+    private javax.swing.JLabel lblNombreCliente;
+    private javax.swing.JLabel lblNombreProv;
+    private javax.swing.JLabel lblProdDetalle;
+    private javax.swing.JLabel lblRutCliente;
+    private javax.swing.JLabel lblRutProv;
+    private javax.swing.JLabel lblTelefonoCliente;
+    private javax.swing.JLabel lblTelefonoProv;
     private javax.swing.JLabel lblTotal;
     private javax.swing.JLabel lblVuelto;
     private javax.swing.JTextField txtBuscarCodigoVenta;
@@ -3069,6 +3177,11 @@ btnAddCompra.setEnabled(false);
         TxtNombreCliente.setText("");
         TxtTelefonoCliente.setText("");
         TxtDirecionCliente.setText("");
+                        lblClienteDetalle.setText("");
+        lblRutCliente.setText("");
+        lblNombreCliente.setText("");
+        lblTelefonoCliente.setText("");
+        lblDireccionCliente.setText("");
     }
 
     private void LimpiarProveedor() {
@@ -3077,6 +3190,11 @@ btnAddCompra.setEnabled(false);
         txtNombreProveedor.setText("");
         txtTelefonoProveedor.setText("");
         txtDireccionProveedor.setText("");
+                lblRutProv.setText("");
+        lblNombreProv.setText("");
+        lblTelefonoProv.setText("");
+        lblDireccionProv.setText("");
+        lblProdDetalle.setText("");
     }
 
     private void LimpiarProductos() {
@@ -3088,6 +3206,7 @@ btnAddCompra.setEnabled(false);
         txtCantPro.setText("");
         txtPrecioPro.setText("");
         txtBuscarProducto.setText("");
+        txtNomImagen.setText("");
         lblAlerta.setText("");
     }
 
