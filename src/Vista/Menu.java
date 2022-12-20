@@ -472,6 +472,8 @@ public final class Menu extends javax.swing.JFrame {
         jLabel40 = new javax.swing.JLabel();
         txtBuscarVentaProd = new javax.swing.JTextField();
         BtnEliminarVentasCompletas = new javax.swing.JButton();
+        jLabel47 = new javax.swing.JLabel();
+        jLabel48 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtIdproducto = new javax.swing.JTextField();
@@ -497,6 +499,7 @@ public final class Menu extends javax.swing.JFrame {
         jLabel37 = new javax.swing.JLabel();
         txtBuscarProducto = new javax.swing.JTextField();
         lblAlerta = new javax.swing.JLabel();
+        jLabel49 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         TablaCliente = new javax.swing.JTable();
@@ -968,7 +971,7 @@ public final class Menu extends javax.swing.JFrame {
 
         jLabel38.setText("Buscar por Codigo Venta:");
         jPanel8.add(jLabel38);
-        jLabel38.setBounds(20, 60, 134, 16);
+        jLabel38.setBounds(50, 70, 134, 16);
 
         txtBuscarCodigoVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -987,11 +990,11 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jPanel8.add(txtBuscarCodigoVenta);
-        txtBuscarCodigoVenta.setBounds(160, 60, 91, 22);
+        txtBuscarCodigoVenta.setBounds(190, 70, 91, 22);
 
         jLabel40.setText("Buscar por Producto:");
         jPanel8.add(jLabel40);
-        jLabel40.setBounds(40, 130, 120, 16);
+        jLabel40.setBounds(50, 130, 120, 16);
 
         txtBuscarVentaProd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -999,7 +1002,7 @@ public final class Menu extends javax.swing.JFrame {
             }
         });
         jPanel8.add(txtBuscarVentaProd);
-        txtBuscarVentaProd.setBounds(160, 130, 90, 22);
+        txtBuscarVentaProd.setBounds(190, 130, 90, 22);
 
         BtnEliminarVentasCompletas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/delete.png"))); // NOI18N
         BtnEliminarVentasCompletas.setText("Eliminar Venta");
@@ -1010,6 +1013,14 @@ public final class Menu extends javax.swing.JFrame {
         });
         jPanel8.add(BtnEliminarVentasCompletas);
         BtnEliminarVentasCompletas.setBounds(20, 600, 150, 31);
+
+        jLabel47.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/search.png"))); // NOI18N
+        jPanel8.add(jLabel47);
+        jLabel47.setBounds(10, 120, 32, 30);
+
+        jLabel48.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/search.png"))); // NOI18N
+        jPanel8.add(jLabel48);
+        jLabel48.setBounds(10, 60, 32, 30);
 
         jTabbedPane1.addTab("Ventas", new javax.swing.ImageIcon(getClass().getResource("/Img/history.png")), jPanel8); // NOI18N
 
@@ -1205,6 +1216,10 @@ public final class Menu extends javax.swing.JFrame {
         lblAlerta.setForeground(new java.awt.Color(255, 51, 51));
         jPanel2.add(lblAlerta);
         lblAlerta.setBounds(10, 130, 140, 20);
+
+        jLabel49.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/search.png"))); // NOI18N
+        jPanel2.add(jLabel49);
+        jLabel49.setBounds(560, 200, 30, 30);
 
         jTabbedPane1.addTab("Productos", new javax.swing.ImageIcon(getClass().getResource("/Img/products.png")), jPanel2); // NOI18N
 
@@ -3109,6 +3124,9 @@ btnAddCompra.setEnabled(false);
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
