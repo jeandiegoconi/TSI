@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-12-2022 a las 01:52:13
+-- Tiempo de generación: 20-12-2022 a las 02:22:13
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 7.4.30
 
@@ -67,13 +67,14 @@ CREATE TABLE `clientes` (
 INSERT INTO `clientes` (`id`, `rut`, `nombre`, `telefono`, `direccion`) VALUES
 (0, '000000000', 'Venta Rapida', '--------', 'Cafeteria'),
 (1, '21226349-4', 'Diego Felipe Jorquera Flores', '936495562', 'Calle Gloria'),
-(2, '21230602-9', 'Facundo Aguillon Arevalo', '999999999', 'Los Pinos'),
-(3, '21311405-0', 'Jetro Jose Vasquez Pasten', '999999999', 'Av Altamarino'),
+(2, '21230602-9', 'Facundo Aguillon Arevalo', '930090168', 'Los Pinos'),
+(3, '21311405-0', 'Jetro Jose Vasquez Pasten', '976011773', 'Av Altamarino'),
 (4, '21162304-7', 'Jaime Ignacio Victoriano Peña', '959663506', 'Eloy Caviedes'),
 (5, '21141733-1', 'Nicolas Ignacio Meneses Saavedra', '999999999', 'Undurraga'),
-(6, '21231559-1', 'Joaquin Eduardo Puga Salvo', '999999999', 'Los Gladiolos'),
-(7, '21279020-6', 'Lucas Matias Ossandon Geve', '999999999', 'El Hierro'),
-(8, '21068317-8', 'Eduardo Andres Maturana Caceres', '999999999', 'Miraflores');
+(6, '21231559-1', 'Joaquin Eduardo Puga Salvo', '932605683', 'Los Gladiolos'),
+(7, '21279020-6', 'Lucas Matias Ossandon Geve', '945114144', 'El Hierro'),
+(8, '21068317-8', 'Eduardo Andres Maturana Caceres', '999999999', 'Miraflores'),
+(9, '20984256-4', 'Esteban Exequiel Rojas Lagos', '999999999', 'Miraflores');
 
 -- --------------------------------------------------------
 
@@ -321,7 +322,7 @@ ALTER TABLE `ventas`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `compras`
