@@ -2118,6 +2118,8 @@ for (int i=0; i<cbxProveedorPro.getModel().getSize(); i++)
                 ListarProveedor();
                 LimpiarProveedor();
                 llenarProveedor();
+                LimpiarTablaCompra();
+                ListarCompras();
                 btnEditarProveedor.setEnabled(false);
                 btnEliminarProveedor.setEnabled(false);
                 btnguardarProveedor.setEnabled(true);
